@@ -1,3 +1,7 @@
+Program creat in C care cripteaza / decripteaza o imagine .bmp
+
+*********************************************
+
 In fisierul "imagini_criptare.txt" vor aparea:
  -numele imaginii care trebuie criptata
  -numele final al imaginii, in forma criptata
@@ -11,5 +15,3 @@ In fisierul "imagini_decriptare.txt" vor aparea:
  -numele fisierului unde exista cheia secreta 
 
 *********************************************
-
-Program i made in C that encrypts and decrypts a .bmp image 
