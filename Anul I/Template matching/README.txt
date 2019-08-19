@@ -1,4 +1,6 @@
 
+Program creat in C de recunoastere a unor pattern-uri peste o imagine .bmp
+
 **********************************************
 
 In fisierul "imagini.txt" vor aparea:
