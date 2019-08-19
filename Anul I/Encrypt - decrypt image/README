@@ -1,1 +1,15 @@
+In fisierul "imagini_criptare.txt" vor aparea:
+ -numele imaginii care trebuie criptata
+ -numele final al imaginii, in forma criptata
+ -numele fisierului unde exista cheia secreta
+
+*********************************************
+
+In fisierul "imagini_decriptare.txt" vor aparea:
+ -numele imaginii in forma criptata
+ -numele final al imaginii, in forma decriptata
+ -numele fisierului unde exista cheia secreta 
+
+*********************************************
+
 Program i made in C that encrypts and decrypts a .bmp image 
