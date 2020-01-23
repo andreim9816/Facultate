@@ -7,5 +7,5 @@ The app lets you choose a specific date and play. For the option you selected, i
 
 <br>
 Data for the plays is stored on the *spectacole.json* file as an array of json elements.
-<br><br>
+<br>
 Data for the people that subscribed is stored on the *abonati.json* file as an array of json elements.
