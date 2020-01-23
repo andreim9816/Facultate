@@ -10,5 +10,7 @@ Data for the plays is stored on the *spectacole.json* file as an array of json e
 Data for the people that subscribed is stored on the *abonati.json* file as an array of json elements.
 <br>
 <br>
-* Project is postponed until March-April
-* Be sure the install the 'express' module first
+
+Project is postponed until March-April
+<br>
+Be sure the install the 'express' module first
