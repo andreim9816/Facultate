@@ -1,0 +1,28 @@
+#include"criptare.h"
+#include"decriptare.h" 
+#include"multiple_use.h"
+#include<string.h>
+
+/* main function, that encrypts / decrypts a file
+int main(int argc, char**argv)
+{
+  if(argc < 5)
+  {
+    printf("Prea putine argumente\n");
+    return 0;
+  }
+
+  if(strcmp("criptare" , argv[1]) == 0)
+   criptare(argv[2], argv[3], argv[4]);
+  
+  else if(strcmp("decriptare" , argv[1]) == 0)
+   decriptare(argv[2], argv[3], argv[4]);
+  
+  else
+  {
+    printf("Primul argument trebuie sa fie 'criptare' sau 'decriptare' \n");
+    return 0;
+  }
+
+return 0;
+}
