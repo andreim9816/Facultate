@@ -1,4 +1,7 @@
 
+var numarComanda = 0;
+var existaMesaj = false;
+
 window.onload = function()
 {
     // pentru afisarea acelui mesaj cu aboneaza-te
@@ -113,8 +116,6 @@ function languageChange()
         
     }
 }
-
-var existaMesaj = false;
 
 function afisMesajAbonare()
 {   
@@ -322,7 +323,8 @@ function rezerva(elem)
         else 
         {
             // daca era rosu, rezervam si adaugam in cos
-            
+            numarComanda++;
+
             let totalCost = document.getElementById('pretTotal').value;
 
             let totalCostInt = parseInt(totalCost);
@@ -362,32 +364,42 @@ function rezerva(elem)
             
             // creaza un select cu optiunile adult, elev, pensionar
             let mySelect = document.createElement('SELECT');
-            mySelect.setAttribute('id' , noOfRows);
+            mySelect.setAttribute('id' , numarComanda);
             mySelect.onchange = function(event)
             {
-                console.log(event, event.target);
                 let id = event.target.id;
                 let tipPersoana = event.target.value;
+                let myTable = document.getElementsByClassName("tableCosCumparaturi")[0];
 
-                for(let i = 1 ; i < 4 ; i++)
+                let stop = 1;
+
+                for(let i = 1 ; i < 4 && stop ; i++)
                  {
-                     if(tablePret.rows[i].cells[0].innerText == tipPersoana)
+                     if(tablePret.rows[i].cells[0].innerText == tipPersoana && stop)
                     {
-                        console.log(tablePret.rows[i].cells[0].innerText);
-                        console.log(tipPersoana);
-
                         let pretCorect = parseInt(tablePret.rows[i].cells[1].innerText);
-                        let fostPret = parseInt(myTable.rows[parseInt(id)].cells[3].innerText);
-                        
-                        console.log(pretCorect , fostPret);
-                        // updatez pretul
-                        totalCostInt = totalCostInt + pretCorect - fostPret;
+                        let fostPret;
+                       
+                       // cautam locul respectiv in cosul de cumparaturi, dupa id
+                       for(let j = 0 ; j < myTable.rows.length && stop ; j++)
+                        {
+                            if(id == myTable.rows[j].cells[2].getElementsByTagName('SELECT')[0].id)
+                            {
+                                fostPret = parseInt(myTable.rows[j].cells[3].innerText);
 
-                        // pun pretul corect in tabela
-                        myTable.rows[parseInt(id)].cells[3].innerText = pretCorect;
+                                totalCostInt = parseInt(document.getElementById('pretTotal').value);
+                                
+                                // updatez pretul in cosul de cumparaturi pentru locul respectiv
+                                totalCostInt = totalCostInt + pretCorect - fostPret;
+                                myTable.rows[j].cells[3].innerText = pretCorect;
+                                
+                                // updatez pretul total din cosul de cumparaturi
+                                document.getElementById('pretTotal').value = totalCostInt;
 
-                        document.getElementById('pretTotal').value = totalCostInt;
-                        break;
+                                stop = 0;
+                                break;
+                            }
+                        }
                     }
 
                 }
@@ -409,7 +421,6 @@ function rezerva(elem)
             mySelect.appendChild(myOption);
 
             
-
             // cati lei costa un bilet
             cell4.innerText = tablePret.rows[1].cells[1].innerText;
         }
@@ -434,7 +445,6 @@ function Submit()
     let name = document.getElementsByName('Name')[0].value;
     let mail = document.getElementsByName('Mail')[0].value;
 
-
     fetch("http://localhost:3000/abonare", {
         method: 'POST',
         mode: 'cors', // no-cors, *cors, same-origin
@@ -448,6 +458,54 @@ function Submit()
         referrerPolicy: 'no-referrer', // no-referrer, *client
         body: JSON.stringify({name: name, mail: mail})
     }).then((data) => 
+    {
+        console.log(data);
+        return data.json()
+    })
+    .then((json) =>
+    {
+
+    })
+}
+
+function cumpara()
+{
+    let obj = [], i ;
+    let tabel = document.getElementsByTagName('TABLE')[0];
+    
+    let piesa = document.getElementsByClassName('selectNume')[0].value;
+    let data = document.getElementsByClassName('selectData')[0].value;
+
+    obj.push( JSON.stringify({piesa : piesa , data : data}) );
+
+    for(i = 0 ; i < tabel.rows.length ; i++)
+       {
+           let row , col;
+
+           row = tabel.rows[i].cells[0].innerText.length;
+           row = tabel.rows[i].cells[0].innerText[row - 1];
+
+           col = tabel.rows[i].cells[1].innerText.length;
+           col = tabel.rows[i].cells[1].innerText[col - 1];
+
+           obj.push( JSON.stringify({row : row , col : col}));
+       }
+    
+    console.log(obj , typeof(obj));
+
+    fetch("http://localhost:3000/cumpara", {
+        method: 'POST',
+        mode: 'no-cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+            'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *client
+        body: obj
+    }).then((data) =>  
     {
         console.log(data);
         return data.json()
