@@ -32,34 +32,15 @@ app.post('/abonare', function(req, res)
     res.send({state:"OK"});
 })
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-/*
-http.createServer(function(req , res)
+app.post('/cumpara' , (req , res) =>
 {
-    var url_parts = url.parse(req.url, true);
-    var query = url_parts.query;
-    
-    console.log(query.Name);
+    let date = fs.readFileSync('./spectacole.json');
+  //  let ob = JSON.parse(date);
+   
+    console.log(req);
+    console.log("BODY",req.body); 
 
-    let date = 
-    {
-        nume : query.Name,
-        mail : query.Mail
-    };
+    res.send({state : "OK"});
+})
 
-    let json = JSON.stringify(date);
-
-    fs.appendFile('abonati.json', json, function(err, result)
-     {
-        if(err) 
-         console.log('error', err);
-     }  );
-
-     res.writeHead(200 , {"Content-Type" : "text/html"});
-     res.end();
-
-}).listen(port,()=>{console.log("Serverul merge la portul " + port)});
-
-*/
+app.listen(port, () => console.log(`Serverul merge la portul ${port}!`))
