@@ -1,0 +1,28 @@
+#repartitia geometrica
+p <- 0.5
+
+#rezultatul ol pun  in vector
+set.seed(34) # seed-ul de la care pleaca si astfel voi obtine aceeasi valoare ca toti din laborator 
+x <- rgeom(100,p) #10000 de valori, pe pozitia 2 pune p=probabilitatea de succes
+rgeom(1,p)
+
+############# histograme
+
+hist(x)
+
+length(x[x==0])
+
+y <- rgeom(100,p)
+hist(x,col = "magenta")
+hist(y,col = "blue",add = TRUE) # parametrul inseamna ca a 2a histrograma va fi reprezentata peste prima 
+
+g <- 0:100
+plot(g,dgeom(g,p),col="magenta",xlim=c(20,40),ylim=c(0,0.000001)) # 2 argumente obligatorii. vectorul 0:100 si functia de masa
+
+g1 <- seq(0,100,0.001) # de la 0 la 100 cu pasul 0,001
+plot(g1,pgeom(g1,p),col="green",xlim=c(0,10)) # functia de repartitie
+
+t <- sample(c(-1,5,11),10000,prob=c(1/6,1/2,1/3),replace=TRUE) # simulez valori dintr-o variabila aleatoare. 10000 de valori din multimea{-1,5,11} cu probabilitatile {1/6,1/2,1/3}
+length(t[t==-1])/10000 # probabilitatea
+length(t[t==5])/10000 # probabilitatea
+length(t[t==11])/10000 # probabilitatea

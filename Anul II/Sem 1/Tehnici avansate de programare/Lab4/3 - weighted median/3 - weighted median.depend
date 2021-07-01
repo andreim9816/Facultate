@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1573772201 source:d:\andrei\facultate\an 2\tehnici avansate de programare\lab4\3 - weighted median\main.cpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<stdlib.h>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1578427304 source:d:\andrei\facultate\an 2\tehnici avansate de programare\colocvii\iarna 2018\main.cpp
+	<iostream>
+	<fstream>
+	<cmath>
+

@@ -1,0 +1,36 @@
+#container{
+	border:1px solid black;
+	display:grid;
+	grid-template-columns: auto auto auto;
+	width:70%;
+	padding:2px;
+
+}
+#container div{
+	border:1px solid blue;
+}
+
+#d1,#d2
+{
+	grid-row:1/4;
+}
+
+@media screen and (max-width:500px)
+{
+	#container 
+	{
+		display: block;
+	}
+
+	#d1,#d2,#d4,#d5
+	{
+		width:50vh;
+	}
+
+	#d3
+	{
+		display: none;width:50vh;
+	}
+
+
+}

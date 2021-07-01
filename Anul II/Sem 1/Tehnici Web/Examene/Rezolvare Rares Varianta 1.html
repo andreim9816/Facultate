@@ -1,0 +1,206 @@
+<!-- Rezolvarea pentru Varianta 1 din modelele de examen -->
+<!-- Nu e neaparat rezolvarea optima, dar cred ca face tot ce cer cerintele -->
+<!-- Daca gasiti o problema, sa mi-o semnalati sa o corectez :) -->
+<html>
+    <head>
+        <style>
+            .celula > div{
+                transition: background-color 1s;
+            }
+
+            .celula > div:hover {
+                background-attachment: blue;
+            }
+
+            @media screen and (min-width: 900px) {
+                #parinte{
+                    width: 800px;
+                    height: 800px;
+                    border: 1px solid black;
+                }
+
+                .celula{
+                    /* am pus dimensiunile astea aici, ca sa vedem si noi ceva cand se genereaza javasciptul :)  */
+                    width: 20px;
+                    height: 20px;
+                    background-color: pink;
+                }
+
+                .celula > div:nth-child(even) {
+                    border: 1px solid purple;
+                }
+
+                .celula > div:nth-child(odd) {
+                    border: 1px solid red;
+                }
+            }
+
+            @media screen and (max-width: 900px){
+                .celula{
+                    display:none;
+                }
+
+                #parinte{
+                    background-color: green;
+                    border: 0px;
+                    width: 100%;
+                    /* aici poate fi si 100vw. Diferenta e urmatoarea: 100% te face cat parintele divului "parinte", ori daca acesta se intampla sa fie body, te face cat body-ul */
+                    /* Problema este ca body, by default are un margin de 8px, deci tehnic, a fi cat body =/= a fi cat pagina. */
+                    /* 100vw inseamna 100% din width-ul window-ului, adica - intr-un fel - 100% din width-ul html. */
+                    /* Poate merita intrebat la examen */
+                }
+            }
+        </style>
+
+        <script>
+            let firstPress = true;
+            let counter = 0;
+            let partyVariable;
+            let N;
+
+            // Incepe sa citesti de aici. Incepem cu subpunctul 1
+            window.onload = function () {
+
+                // Creez elementul parinte si ii dau atributele. 
+                let parinte = document.createElement('DIV');
+                parinte.setAttribute('id', 'parinte')
+                parinte.setAttribute('style', 'height:100px')
+
+                //Pentru subpunctul 3
+                parinte.setAttribute('onClick', 'genereazaTimeout()')
+
+
+                // NU UIT SA PUN NODUL CREAT IN ARBORELE DOM!!!!
+                document.getElementsByTagName('body')[0].appendChild(parinte);
+
+                // Un div in care imi voi pune butoanele radio.
+                // Nu imi cere in cerinta dar imi este mai util mai in colo.
+                // Plus ca e bine sa avem lucrurile similare grupate
+                radioGroup = document.createElement('DIV')
+                radioGroup.setAttribute('id', 'grupRadio');
+
+                for (let i = 4; i <= 8; i++){
+                    someButton = document.createElement('INPUT')
+                    someButton.setAttribute('type', 'radio')
+                    someButton.setAttribute('name', 'grupRadio')
+                    someButton.setAttribute('value', i);
+                    someButton.setAttribute('id', 'buttonul'+i);
+                    someButton.setAttribute('onClick', 'radioSelected(this)')
+
+                    // Aici 6 va fi intotdeauna butonul din mijloc, deci default acesta e selectat
+                    // Testul cu localStorage face parte din subpunctul 2. 
+                    if(localStorage.getItem('valoareN') === null && i === 6){
+                        someButton.checked = true;
+                    }
+
+                    // Doar doi de egal pentru ca din local storage imi vine un string, iar i-ul meu e un int.
+                    if(localStorage.getItem('valoareN') == i){
+                        someButton.checked = true;
+                    }
+                    radioGroup.appendChild(someButton);
+                }
+
+                document.getElementsByTagName('body')[0].appendChild(radioGroup);
+
+                // Cam aici se termina subpunctele 1 si 2.
+
+                // Codul de aici pana la sfarsitul lui on load este pentru subpunctul 4.
+
+                document.getElementsByTagName('body')[0].onkeypress = function (event){                    
+                    if(event.keyCode === 99 && firstPress === true){
+                        firstPress = false;
+                        
+                        partyVariable = setInterval(colorParty, 3000);
+                    }
+                    if(event.keyCode === 115){
+                        clearInterval(partyVariable);
+                        let copii = document.getElementsByClassName('celula');
+                        for(let copil of copii){
+                            copil.style.backgroundColor = '';
+                        }
+                    }
+                }
+            };
+
+            // Subpunctul 4
+            function colorParty(){
+                let copii = document.getElementsByClassName('celula');
+                copii[counter % (N*N)].style.backgroundColor = getRandomColor();
+                counter = counter + 1;
+            }
+
+            // O functie care genereaza o culoare hexa gen #A25F4E random. Gasit pe net, nu memorati :) 
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+
+            function radioSelected(e){
+                localStorage.setItem('valoareN', e.value);
+                document.getElementsByTagName('body')[0].removeChild(document.getElementById('grupRadio'));
+            }
+
+            // Cand va zice sa faceti o functie "dupa/la" un anumit timp, creati o functie care
+            // creaza setTimeout sau setIntervalul. E recomandabil.
+            function genereazaTimeout(){
+                setTimeout(genereaza, 5000);
+            }
+
+            // Aici generez celulele de la subpuctul 3
+            function genereaza(){
+                let parinte = document.getElementById('parinte');
+                N = localStorage.getItem('valoareN');
+                for(let i = 0; i < N; i++){
+                    for (let j = 0; j < N; j++){
+                        let someDiv = document.createElement('DIV')
+                        someDiv.setAttribute('class', 'celula');
+
+                        // Fac o smecherie, in care, in id pastrez un string de tipul (0,1)
+                        // care este exact pozitia in grid a patratului, si e unica.
+                        someDiv.setAttribute('id','(' + i + ',' + j + ')');
+
+                        // Ii dau inline-block pentru ca patratele sa se aseze in linie
+                        // Pentru a trece pe urmatorul rand, la finalul generarii unui rand, 
+                        // vezi ca adaug si un BR care vine de la break line
+                        someDiv.setAttribute('style', 'display:inline-block');
+
+                        // Cand se da click se apeleaza functia. Are doi parametrii
+                        // Event - despre eveniment (de a clickui) din care iau propagarea
+                        // This - despre patrat, adica div id, innerText s.a.
+                        someDiv.setAttribute('onclick', 'afiseaza(event,this)');
+
+                        parinte.appendChild(someDiv);
+                    }
+                    parinte.appendChild(document.createElement('BR'));
+                }
+            }
+
+            //Atentie, dublul-click pe un div copil nu trebuie  sa genereze click si asupra divului parinte.
+            // Lucrul asta inseamna ca atunci cand tu vei da click pe un div roz, acesta va insemna in mod normal
+            // si click pe parinte. Vrem sa nu se intample asta. Deci avem stop propagation. (Event Propagation, Bubbling)
+            function afiseaza(e,t){
+
+                //Adaug la finalul body-ului coordonatele.
+                // Nu imi e clar daca e ok faptul ca le las pe cele vechi acolo, ca nu dispar cand vin coordonate noi :-??
+                t.innerText = t.id;
+                let coordonate = document.createElement('P');
+                coordonate.innerText = t.id;
+                document.getElementsByTagName('body')[0].appendChild(coordonate);
+
+                // Adica ok, am facut ce imi zicea click-ul de la acest div,
+                // In mod normal tu acum ai face onClick-ul parintelui. Nu-l fa prin linia asta: 
+                e.stopPropagation();
+            }
+
+
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+</html>

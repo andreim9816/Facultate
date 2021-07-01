@@ -1,0 +1,104 @@
+#include <iostream>
+#include<fstream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+ofstream fout("acoperire.out");
+
+struct interval
+{
+    int start, finish;
+};
+
+int cmpCresc(interval x, interval y)
+{
+    return (x.start < y.start || (x.start == y.start && x.finish < y.finish));
+}
+
+vector<interval>v;
+vector<interval>solutie;
+int n;
+int a,b;
+
+void citire()
+{
+    int i;
+    ifstream fin("acoperire.in");
+
+    fin >> a >> b;
+    fin >> n;
+
+    for(i= 0 ; i < n ; i++)
+    {
+        interval x;
+        fin >> x.start >> x.finish;
+        v.push_back(x);
+    }
+
+    fin.close();
+}
+
+void sortare(vector<interval>&v, int n)
+{
+    sort(v.begin(), v.end(), cmpCresc);
+}
+
+void greedy()
+{
+    int i = 0;
+    int poz;
+
+    while( a < b && i < n)
+    {
+      int maxim = v[i].finish;
+      poz = i;
+
+      while(v[i].start <= a && i < n)
+      {
+          if(v[i].finish > maxim)
+          {
+              maxim = v[i].finish;
+              poz = i;
+          }
+          i++;
+      }
+
+      if(i != poz)
+       solutie.push_back({v[poz].start , v[poz].finish});
+
+      else
+      {
+          fout<< -1 ;
+          solutie.clear();
+          return ;
+      }
+      a = maxim;
+    }
+}
+
+int main()
+{
+    citire();
+    sortare(v, n);
+
+    if(v[0].start > a)
+     fout<< -1;
+    else
+    {
+        int maxim = v[0].finish;
+        for(auto elem : v)
+         if(maxim < elem.finish)
+          maxim = elem.finish;
+
+        if(maxim < b)
+            fout << -1;
+        else greedy();
+    }
+
+    if(!solutie.empty())
+        fout<<solutie.size();
+        //for(auto T : solutie)
+        //fout<<T.start << " " << T.finish<<"\n";
+    return 0;
+}

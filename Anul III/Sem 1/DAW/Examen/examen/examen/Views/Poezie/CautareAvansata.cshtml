@@ -1,0 +1,24 @@
+﻿@model examen.Models.PoezieVolumViewModel
+
+@{
+    ViewBag.Title = "Introduceti substringurile pt titlu poezie si titlu volum";
+}
+
+<h3>CautareAvansata</h3>
+
+@using (Html.BeginForm(actionName: "AfiseazaRezultate", controllerName: "Poezie", method: FormMethod.Post))
+
+{
+    @Html.Label("Nume", "Substring nume poezie:")
+    <br />
+    @Html.TextBoxFor(b => b.Titlu, null, new { placeholder = "Introdu substringul poeziei", @class = "form-control" })
+    <br />
+
+    @Html.Label("Autor", "Autor:")
+    <br />
+    @Html.TextBoxFor(b => b.DenumireVolum, null, new { placeholder = "Introdu prenumele", @class = "form-control" })
+    <br />
+
+
+    <button class="btn btn-primary" type="submit">Cauta</button>
+}

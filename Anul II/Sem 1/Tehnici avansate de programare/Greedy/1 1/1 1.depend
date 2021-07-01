@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1578518267 source:d:\andrei\facultate\an 2\tehnici avansate de programare\greedy\1 1\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<algorithm>
+

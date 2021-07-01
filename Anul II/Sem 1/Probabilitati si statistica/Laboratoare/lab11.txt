@@ -1,0 +1,61 @@
+# Repartitia uniforma pe (a,b)
+
+# incepe cu d pt densitate si functie de masa 
+
+t <- seq(-5 , 15 , 0.001)
+
+# graficul arata cum arata pentru ca ia valori doar intre 0 si 10, in rest functia e 0
+# r valori aleatoare
+# p probabilitate 
+
+plot(t , dunif(t,2 ,7) , col = "magenta")
+
+plot(t , punif(t,2 ,7) , col = "magenta") # functia de repartitie la uniforma ( in capatul la -inf e 0 si la + inf e 1)
+
+# Repartitia exponentiala de parametru lambda
+
+lambda <- 1/10
+
+plot(t, dexp(t, lambda) , col = "red") # pana in 0 e constant egal cu 0 (ca in formula) si dupa scade constant
+
+t1 <- seq(-5,100,0.01)
+
+plot(t1,dexp(t1,lambda), col = "red" , xlim = c(90,100) , ylim = c(0,0.00009))
+
+# functia de repartitie
+
+plot(t1, pexp(t1,lambda), col = "magenta")
+
+#Repartitia normala ( z table)
+
+pnorm(1.96) # parametrii impliciti sunt 0 si 1 
+
+t2 <-  seq( -5 ,5 , 0.001)
+plot(t2 , dnorm(t2))
+
+#desenez peste fostul grafic
+# in momentul in care se modifica media, are loc o translatare de la stanga la dreapta ( sau invers)
+lines(t2,dnorm(t2,2,1) , col = "magenta")
+lines(t2,dnorm(t2,-3,1) , col = "yellow")
+
+
+
+#########################
+
+plot(t2 , dnorm(t2,0,0.5))
+
+lines(t2,dnorm(t2,0,2) , col = "magenta")
+lines(t2,dnorm(t2,0,1) , col = "yellow")
+
+##########################
+
+
+plot(t2 , pnorm(t2,0,0.5))
+
+lines(t2,pnorm(t2,0,2) , col = "magenta")
+lines(t2,pnorm(t2,0,1) , col = "yellow")
+
+
+
+
+

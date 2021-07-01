@@ -1,0 +1,820 @@
+html,body
+{
+    margin:0px;
+    height:100%;
+    display:flex;
+    flex-direction: column;
+}
+
+a
+{
+    color:black;
+    text-decoration: none;
+}
+
+h2:nth-of-type(even)
+{
+    color:brown;
+}
+
+body
+{
+  background-image: url("../images/poza2.jpg");
+  background-size:cover;
+}
+nav
+{
+    position : fixed;
+    background-color:rgba(238, 229, 233, 0.7); 
+    width:100%;
+    z-index:100; /* Descrierea de la poze aparea peste nav-bar */
+}
+
+ul
+{
+    padding-left: 0px;
+    list-style-type: none;
+}
+
+#list
+{
+    list-style-type: none;
+    display:  flex;
+    width:100%; 
+    height: 100%;
+    margin:0px;
+}
+
+.listaButoane
+{
+    list-style-type: none;
+    display:flex;
+    height:100%;
+    align-items: center;
+}
+
+.linknav
+{
+  margin-right:35px;
+  margin-left:10px;
+  padding: 5px 6px 4px 5px; 
+
+  font-size:20px;
+  text-align: center ;
+
+  border: 1px solid brown;
+  text-decoration: none;
+}
+
+.linknav:hover
+{
+    background-color: #ddd;
+}
+.logo
+{
+    height:16vh;
+    margin-right: auto; /* magia */
+}
+
+.dropdown-content
+{
+    display:none;
+    margin-left:11px;
+    margin-top:0px;
+    position: absolute;
+    background-color: rgba(238, 229, 233, 0.7);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 100;  
+}
+
+.dropdownButton
+{
+    position:relative;
+}
+
+.dropdown-content a 
+{
+
+    color: black;
+    padding: 12px 12px;
+    font-size:16px;
+    text-decoration: none;
+    display: block;
+    
+  }
+
+  .dropdown-content a:hover {
+    background-color: rgba(238, 229, 233, 0.7);
+  }
+  
+  .dropdownButton:hover
+  .dropdown-content
+  {
+    display: block;
+    
+    background-color: rgba(238, 229, 233, 0.7);
+  }
+  
+.Slideshow
+{     
+    width: 100%;
+    margin-top:26vh;
+    display: flex;
+    align-items: center;
+    justify-content: center
+   
+}
+
+.Slideshow_img
+{
+    height:100%;
+    width:30%;
+    margin-right:1%;
+    margin-left:1%;
+    transition:transform 1s;
+   
+}
+
+.Slideshow > .Slideshow_img
+{
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+}
+
+.Slideshow_img img
+{
+    height:100%;
+    width:98%;
+    border: 2px solid brown;
+}
+
+.Slideshow_img:hover
+{
+    transform: scale(1.2);
+    z-index:50;
+}
+
+.galerie
+{
+    margin-top: 18vh;
+    text-align:center;
+    width:100%;
+}
+
+.pozaDescript
+{
+    display:inline-block;
+    width:40%;
+    margin-left:20px;
+    margin-right:50px;
+}
+
+.pozaGalerie
+{
+    width:100%;
+    height:auto;
+    border: 2px solid brown;
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+    display:block;
+}
+
+.descript
+{
+  /*  text-align: center;
+    display:block;
+  */
+    position: relative;
+    bottom:65px;
+
+    background: rgba(0, 0, 0,0.5); 
+    transition: 1.5s ease;
+    opacity:0;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+    display:block;
+}
+
+.pozaDescript:hover
+.descript
+{
+    opacity: 1;
+}
+
+/* Pentru a face footer-ul fixed jos   */
+.space  
+{
+    flex:1 0 auto;
+}
+
+footer 
+{   
+    margin-top:auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0);
+    color: white;
+    display: flex; /* ca footer-ul sa cuprinda ambele div-uri */
+
+}
+
+.SocialMedia
+{
+    display:inline-block;
+    width:50%;
+    margin-left:5%;
+}
+
+.NewsLetter
+{
+    height:100%; 
+    margin-left:auto;
+    text-align: right;
+    float: right;
+    margin-right:5%;
+}
+
+.Despre
+{
+    text-align:justify;
+    width:80%;
+ 
+    margin:auto;
+    margin-top:20vh;
+    margin-bottom:2%;
+
+    background-color: rgba(172, 172, 177, 0.719);
+    padding:0px 5px 0px 5px;
+    border: 2px solid brown;
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+
+}
+.Despre p
+{
+   text-indent: 10%;
+   color:black;
+   font-size: 16px;
+}
+
+.Vizita
+{  
+    margin:auto;
+    margin-top : 20vh;
+    text-align: center;
+    background-color: rgba(238, 229, 233, 0.7);
+    width:90%;
+    margin-bottom:2%;
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+    border:2px solid brown;
+}
+
+.map
+{   
+    display: inline-block;
+    height:95%;
+    width:50%;
+    margin-right:2%;
+    margin-top:1%;
+    border-style: outset;
+}
+
+.Info
+{
+    display:inline-block;
+    text-align:left;
+    width:40%;
+    margin-left:2%;
+}
+
+.CumAjung
+{  
+    margin:auto;
+    margin-top : 20vh;
+    text-align: center;
+    background-color: rgba(238, 229, 233, 0.7);
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+    width:90%;
+    margin-bottom:2%;
+    border:2px solid brown; 
+}
+
+.Rezervare
+{
+    width:90%;
+ 
+    margin:auto;
+    margin-top:20vh;
+    margin-bottom:2%;
+
+    background-color: rgba(172, 172, 177, 0.719);
+    border: 2px solid brown;
+    box-shadow: 6px 4px rgba(0, 0, 0, 0.2);
+    
+}
+
+.Sala
+{
+    width:100%;
+    display: flex;
+}
+
+.Scena
+{
+    width:88%;
+    background-color: brown;
+    font-size:40px;
+    text-align: center;
+    margin:auto;
+    margin-bottom:30px;
+    margin-top:10px;
+    border-radius:5px;
+}
+
+.Rezervare_stanga
+{
+    flex:50%;
+    margin-left:6%;
+    margin-right:3%;
+}
+
+.Rezervare_dreapta
+{
+    flex:50%;   
+}
+
+.Loc
+{
+    display: inline-block;
+    width:15%;
+    height:70px;
+    background-color: brown;
+    margin:5px 5px 2px 2px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.7);
+    border-radius:10px;
+}
+
+.Loc:hover
+{
+    background-color: rgba(238, 229, 233, 0.7);
+}
+
+.Legenda
+{  
+    display: flex;
+    vertical-align: top;
+}
+.cosCumparaturi, .Legenda
+{
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.cosCumparaturi
+{
+    margin-left: 15%;
+}
+.numeSpectacol
+{
+    margin-left: 6%;
+    padding-right: 6%;
+    width: 40%;
+    text-align: center;
+    margin-top: 2%
+}
+
+.Legenda table
+{
+    width: 300px;
+    margin-left: 40%; 
+    border-collapse: collapse;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border: 1px solid brown;
+}
+
+
+.cosCumparaturi table
+{
+    width: 300px;
+    /* margin-left: 60%; */
+    border-collapse: collapse;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid brown;
+}
+
+.Legenda table tr, .cosCumparaturi table tr
+{
+    width:300px;
+}
+.Legenda table tr,th, .cosCumparaturi table tr, th
+{
+    text-align:left;
+}
+
+.Legenda table tr:nth-child(odd), .cosCumparaturi table tr:nth-child(odd) {
+    background-color: #dddddd;
+  }
+/* ------------------------------------------------------------------------------------------------ */
+
+@media (max-width:1024px)
+{
+    nav 
+    {
+        position : fixed;
+        background-color:rgba(238, 229, 233, 0.7); 
+        width:100%;
+        z-index:100;
+    }
+
+    .linknav
+    {
+    
+      margin-right:20px;
+      margin-left:5px; 
+    
+      font-size:24px;
+      color: black;
+    }
+
+    .logo
+    {   
+        height:12vh;
+    }
+
+    .galerie
+    {
+        margin-top:20vh;
+        text-align:center;
+    }
+
+    .Despre
+    {
+        width:90%;
+    }
+
+    .pozaDescript
+    {
+        display:inline-block;
+        margin-left:15px;
+        margin-right:15px;
+        margin-top:20px;
+        width:40%;
+
+    }
+
+    .pozaGalerie
+    {
+        width:100%;
+        height:auto;
+        border: 2px solid brown;
+        margin-bottom: 10px;
+        display:block;
+    }
+
+    .descript
+    {
+        position: relative;
+        bottom:65px;
+
+        background: rgba(0, 0, 0,0.5); 
+        transition: 1.5s ease;
+        opacity:0;
+        color: white;
+        font-size: 20px;
+        padding: 20px;
+            
+    }
+    
+    .pozaDescript:hover .descript
+    {
+        opacity: 1;
+    }
+
+    .Slideshow
+    {
+        display: block;
+        margin-top:20vh; /* inaltimea logo-ului */
+        
+    }
+
+    .Slideshow_img
+    {
+        display: block;
+        width:70%;
+        height:auto;
+        margin:auto;
+        margin-top:20px;
+        margin-bottom:90px;
+    }
+
+
+    .Slideshow_img img
+    {
+        height:60%;
+        width:100%; 
+        border:2px solid brown;  
+    }
+
+    .Slideshow_img:hover
+    {
+        width:73%;
+        height:auto;
+    }
+
+    .dropdown-content
+    {
+        margin-left:6px;
+    }
+
+    .dropdown-content a
+    {
+        padding:12px 6px;
+    }
+
+    .Vizita
+    {
+        margin-top: 20vh;
+        width:90%;
+        font-size:18px;
+        height:70%;
+
+    }
+
+    .map
+   {   
+        margin-right:1%;
+        margin-top:2%;
+
+    }
+
+    .Info
+    {
+        vertical-align: top;
+        margin-top:20%;
+    }
+}
+
+/* ---------------------------------------------------------------------------------------------------------- */
+
+@media (max-width:768px)
+{
+
+    nav 
+    {
+        position : fixed;
+        background-color:rgba(238, 229, 233, 0.7); 
+        width:100%;
+        z-index:100;
+        padding-bottom: 10px;
+    }
+
+    .logo
+    {
+        height:12vh;
+        width:auto;
+    }
+
+    #list
+    {
+        display: inline-block;
+        text-align: center;        
+    }   
+
+    .listaButoane
+    {
+        display: inline-block;
+    }
+
+    .linknav
+    {
+        display: inline-block;
+        margin-top:8px;
+        margin-bottom:0px;
+        margin-right:20px;
+        margin-left:31px;
+        
+        font-size:20px;
+        width: 80px;
+    }
+
+    .Slideshow
+    {
+        margin-top:250px;
+    }
+
+    .Despre
+    {
+        margin-top:260px;
+    }
+
+    .galerie
+    {
+        margin-top: 24vh;
+        text-align:center;
+    }
+
+    .pozaDescript
+    {
+        display:inline-block;
+        margin-left:15px;
+        margin-right:15px;
+        margin-top:20px;
+        width:40%;
+    }
+
+    .pozaGalerie
+    {
+        width:100%;
+        height:auto;
+        border: 2px solid brown;
+        margin-bottom: 10px;
+        display:block;
+    }
+
+    .descript
+    {
+      /*  text-align: center;
+        display:block;
+      */
+        position: relative;
+        bottom:65px;
+
+        background: rgba(0, 0, 0,0.5); 
+        transition: 1.5s ease;
+        opacity:0;
+        color: white;
+        font-size: 20px;
+        padding: 20px;
+        text-align: center; 
+    }
+    
+    .pozaDescript:hover .descript
+    {
+       opacity: 1;
+    }
+
+    .dropdown-content
+    {
+        margin-left:254px;
+        margin-top:0px;
+    }
+
+    .Vizita
+    {
+        margin-top: 24vh;
+        font-size:16px;
+    }
+
+    .Info
+    {
+        margin-top:10%;
+    }
+
+    .CumAjung
+    {
+        margin-top:24vh;
+    }
+
+    .Rezervare
+    {
+        margin-top:24vh;
+    }
+
+    .Loc
+    {
+        height:60px;
+        border-radius: 12px;
+    }
+}
+
+@media (max-width:735px)
+{
+    .descript
+    {
+        font-size:16px;
+    }
+}
+
+@media(max-width:439px)
+{   
+    .linknav
+    {
+        font-size:18px;
+    }
+
+    .listaButoane
+    {
+        display: inline-block;
+    }
+    .galerie
+    {
+        text-align:center;
+        margin-top:260px;
+    }
+
+    .Despre
+    {
+        margin-top:270px;
+    }
+    
+    .pozaDescript
+    {
+        width:90%;
+        display:block;
+        margin-left:15px;
+        margin-right:15px;
+        margin-top:20px;
+    }
+
+
+    .pozaGalerie
+    {   
+        width:100%;
+        height:auto;
+        border: 2px solid brown;
+        margin-bottom: 10px;
+        display:block;
+    }
+
+    .descript
+    {
+        font-size:16px;
+    }
+
+    .dropdown-content
+    {
+        margin-left:148px;
+        margin-top:0px;
+    }
+
+    
+    
+    .Vizita
+    {  
+        margin-top : 250px;
+        text-align: center;
+        background-color: rgba(238, 229, 233, 0.7);
+        width:90%;
+        height:350%;
+        padding-bottom:2%;
+    }
+
+    .map
+    {   
+        display: block;
+        height:400px;
+        width:90%;
+        border-style: outset;
+        margin:auto;
+    }
+
+    .Info
+    {
+        text-align:center;
+        width:90%;
+        margin-left:0px;
+    }
+    
+    .CumAjung
+    {
+        margin-top:30vh;
+    }
+
+    .Rezervare
+    {
+        margin-top:30vh;
+    }   
+
+    .Rezervare_stanga
+    {
+        flex:50%;
+        margin-left:2%;
+        margin-right:3%;
+    }
+
+    .Scena
+    {
+        font-size:28px;
+    }
+
+    .Legenda
+    {
+        font-size:16px;
+    }
+
+    .Loc
+    {
+        display: inline-block;
+        width:16%;
+        height:30px;
+        background-color: brown;
+        margin:1px 1px 4px 1px;
+        border-radius: 8px;
+    }
+
+
+
+}
+

@@ -1,0 +1,110 @@
+<html>
+    <head>
+        <style>
+         .somepatrat
+         {
+             width:100px;
+             height:100px;    
+             background-color: blue;
+         }
+        </style>
+
+        <script>
+            
+            let mySelect;
+
+            window.onload = function()
+            {
+                mySelect = document.createElement('SELECT');
+                mySelect.setAttribute('onchange' , 'functieSelectare(this.value)')
+                mySelect.setAttribute('id' , 'mySelect');
+
+                for(let i = 4 ; i <= 10 ; i+=2)
+                {
+                    let someOption = document.createElement('OPTION');
+                    someOption.setAttribute('value' , i); // atributul pe care as putea sa l accesez din cod
+                    someOption.innerText = i; // ce o sa se vada
+
+                  /*  if(i == 10)
+                     someOption.setAttribute('selected' , true);
+
+                     vezi mai jos
+                  */ 
+                    mySelect.appendChild(someOption);
+                }
+                
+                let N = localStorage.getItem('N');
+                
+                if(N)
+                {
+                    mySelect.value = N;
+                }
+                else mySelect.value = 10;  
+            
+                document.getElementsByTagName('body')[0].appendChild(mySelect);
+            }
+
+            function functieSelectare(event)
+            {
+                let parinte = document.createElement('DIV');
+                parinte.setAttribute('id' , 'parinte');
+                document.getElementsByTagName('body')[0].appendChild(parinte);
+                document.getElementsByTagName('body')[0].removeChild(mySelect); // stergem din arborele DOM
+                
+                localStorage.setItem('N' , event);
+    
+                setTimeout(generare , 1500); // ar fi bine sa apelez functia asta dupa ce se pune N in localStorage
+            }
+            
+            function generare()
+            {
+                let parinte = document.getElementById('parinte');
+                let N = JSON.parse(localStorage.getItem('N'));
+
+                for(let i = 0 ; i < N ; i++)
+                {
+                    let somePatrat = document.createElement('DIV');
+                    somePatrat.setAttribute('class' , 'somepatrat');
+                    somePatrat.setAttribute('style' , 'margin-left:' + i * 100 + 'px');
+                    somePatrat.innerText = i;
+  
+                    let originalColor = somePatrat.style.backgroundColor;
+
+                    somePatrat.addEventListener('mouseover',()=>
+                    {
+                        let newColor = 'rgb(' + Math.floor(Math.random *256) + ',' + Math.floor(Math.random *256) +',' + Math.floor(Math.random *256) + ')';
+                  
+                        somePatrat.style.backgroundColor = newColor;
+
+                        somePatrat.classList.add('selectat');
+                    })
+
+                    somePatrat.addEventListener('mouseout' , ()=>
+                    {
+                     somePatrat.style.backgroundColor = originalColor;
+                     somePatrat.classList.remove('selectat');
+                    })
+
+                    parinte.appendChild(somePatrat);
+                }
+
+                parinte.setAttribute('style' , 'width:' + N * 100 +'px');
+
+            }
+            
+            let pNou = document.createElement('p');
+            document.getElementsByTagName('body')[0].appendChild(pNou);
+
+            document.addEventListener('keydown' , (e) =>
+            {
+             //   console.log(e.code); // afiseaza in consola ce am tastat
+             pNou.innerText += ''.charCodeAt(e.keyCode);
+            })
+        </script>
+    </head>
+
+    <body>
+            <!--  orice option are o valoare --> 
+        
+    </body>
+</html>

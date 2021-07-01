@@ -1,0 +1,63 @@
+﻿2.3
+
+In mod evident, pt a obtine un profit maxim, este necesar sa avem cat mai multe
+activititati ( caci pi >=0 i=1,n). De aceea, pt fiecare a i-a activitate posibila,
+trebuie sa o alegem pe cea cu p maxim ( dar care sa respecte cerinta sa fie executata
+cel tarziu la momentul de timp respectiv t).
+
+----- Cum alegem activitatea pt slotul i ? -----
+
+Este evident ca prima activitate aleasa va fi cea cu t max (si p max). Urmatoarea 
+activitate aleasa va trebui sa aiba deadline-ul mai mic sau egal cu cel al 
+activitatii precedente. Dar, pentru a obtiune o maximizare a profitului, este
+necesar ca t[2] sa fie cat mai apropiat de t[1], dar cu conditia t[1] >=t[2], altfel,
+am risca sa omitem anumite activitati care ar putea fi repartizate in slotul
+respectiv, dar pe urmatoarele pozitii nu. Daca sunt mai multe cu acelasi t, o vom 
+alege pe cea cu p maxim. Astfel,activitatea de pe slotul "i" va fi cea cu pt care 
+t[i-1]-t[i]= min{t[i-1] -t[k] | k∈{multimea indicilor activitatilor inca neselectate}
+
+--
+
+In final, vom obtine N activitati, unde cea de-a N-a va fi de fapt prima activitate,
+avand t =min{t[i] | i=1,n}, activitatea N-1 va fi a 2a, indeplinind conditia ca 
+t[N-1]<=t[N], dar N-i+1<=t[N-1] etc.
+
+
+1.2
+
+Definim o inversiune (i,j) daca i < j, dar t[i] > t[j] 
+t[x] - deadline-ul lui x
+l[x] - lungimea lui x
+
+Th: Exista o planificare optima astfel incat aceasta sa nu contina nicio inversiune.
+Dem: Fie Opt solutia optima. Daca Opt are o inversiune, fie aceasta (i,j)
+|_____|i|...|j|____| cu  t[i]>[j]. Daca interschimbam i si j, obtinem o planficare cu 
+o inversiune mai putin. Cum j se termina mai repede acum decat in OPT, cu siguranta
+intarzierea maxima nu va creste. In noua forma ( OPT'), job-ul i se va termina la F[j]- 
+cand se termina job-ul j in solutia OPT, iar job-ul j la F[i] ( F[Xi]=sum(lk) k=1,i ). 
+Intarzierea job-ului i este F[j]-T[i] < F[j] - T[j] ( intarzierea jobului j in OPT). Deci, 
+prin interschimbarea joburilor i si j, intarzierea maxima a unei planificari nu va creste.
+
+Th: Orice planificare fara inversiuni are aceeasi intarziere
+Dem:
+
+Pot exista mai multe planificari ( diferite ) fara inversiuni daca job-urile cu acelasi deadline (t)
+sunt permutate intre ele ( ex. 5-3 5-4 6-2 si 5-4 5-3 6-2).
+
+Fara a pierde din generalitate, luam doar "inversiunea" (i,j) |____|i|j|_____| cu t[i]=t[j].
+Intarzierea este max{ F[i]=x+L[i]-t[i] , F[j]=x+L[i]+L[j]-t[j]} .Daca interschimbam obtinem intarzierea 
+maxima max{F[j]=x+L[j]-t[j], F[i]=x+L[j]+L[i]-t[i]}. Cum t[i]=t[j], inseamna ca intarzierea maxima va fi
+a ultimului job ( j), si nu depinde de o eventuala ordine a joburilor cu deadline-ul egal.
+
+Cum Algorimtul greedy va genera o solutie fara inversiuni, si cum exista o planficare optima ai aceasta nu contine 
+nicio inversiune si cum orice planficare fara inversiuni are aceeasi intarziere, inseamna ca algoritmul greedy
+produce solutia optima.
+ 
+
+3.2
+
+--||--
+
+In continuare, pe baza acestei proprietati vom construi submultimea G care sa aiba proprietatea Q. Fie v o frunza a arborelui T. Fie v-v' muchia adiacenta
+si v' - v'' Aplicand proprietatea demonstrata, adaugam la multimea G frunza v, iar v' nu va mai putea face parte din aceasta. Stergem si noul nod v'
+si muchia v' - v'', iar v'' devine frunza. In continuare, aplicam algoritmul pana cand ajungem la un nod, pe care il adaugam in G. 

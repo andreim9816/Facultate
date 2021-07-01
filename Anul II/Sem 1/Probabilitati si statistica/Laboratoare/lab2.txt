@@ -1,0 +1,127 @@
+#functii
+#  "." e separator preferat (alaturi de _ )
+
+functie.smechera <- function()
+{
+  print("Joia e urat la ore!")
+}
+
+functie.smechera()
+
+#####################
+
+f1 <- function()
+{
+  sqrt(pi)
+}
+
+f1()
+
+#####################
+
+f2 <- function(x)
+{
+  x^2
+}
+
+f2(4)
+
+integrate(f2,0,1)
+integrate(f2,0,Inf) # eroare ca e divergenta functia si am limita la infinit 
+
+# Inf 
+
+f3 <- function(x)
+{
+  1/(x+1)
+}
+
+integrate(f3,0,Inf) # eroare ca a atins nr maxim de subdiviziuni <-> are asimptote si la OX si la OY
+
+#####################
+
+x <- seq(0,100,0.1) # generez o multime de puncte <-> simulare interval
+
+plot(x,1/(x+1))
+
+#####################
+
+#pracma
+
+integral(f3,0,Inf)
+?integral
+
+#####################
+
+f5 <- function(x)
+{
+  
+}
+
+gama <- function(a)
+{
+  # gama function
+  f <- function(x)
+  {x^(a-1)*exp(-x)}
+  
+  integrate(f,0,Inf)
+  
+}
+
+gama(5)
+
+?gamma
+
+functie_tema <- function(a)
+{
+  if()
+}
+
+#########
+
+#Facut acasa
+
+Jacks.Money <- function(a,b,c)
+{
+  a*b-324*c+log(a);
+}
+
+Jacks.Money(1000,30,7);
+
+
+x <- runif(1,0,10)
+
+if(x>3){
+  print("DA")
+} else { print("NU")
+}
+
+number1 <- 30
+number2 <- 20
+
+
+for(i in 1:10)
+  print(i)
+
+a <- 12223
+
+x <- a/2
+
+while(abs(x^2-a)>10^(-10)){
+  x=(x+a/x)/2
+}
+print(x)
+
+
+functie <- function(x)
+{
+  if(x>0){
+    return (sin(x)*sin(x)*log(x))
+  } else{
+    return (sin(x)*sin(x)*x)
+  }
+}
+
+x <- seq(-pi, pi, 0.001)
+plot(x, functie(x))
+

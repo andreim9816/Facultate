@@ -1,0 +1,89 @@
+-- Partial 1
+
+-- Sa se afiseze cate tipuri de vehicule si cate locuri au in total acestea care au fost achitizionate dupa o anumita data calendaristica
+-- data ca parametru
+
+CREATE OR REPLACE PROCEDURE p1(data DATE, nr OUT NUMBER, nr_locuri OUT NUMBER)
+IS
+v_nr_locuri NUMBER := 0;
+v_nr NUMBER := 0;
+
+CURSOR c(data DATE) IS 
+    SELECT sum(nr_locuri) nr_locuri
+    FROM vehicul
+    JOIN parcurge USING(nr_inmatriculare)
+    WHERE data_achizitie > data
+    GROUP by tip_vehicul;
+BEGIN
+   FOR i in c(data) LOOP
+     v_nr := v_nr + 1;
+     v_nr_locuri := v_nr_locuri + i.nr_locuri;
+   END LOOP;
+   
+   nr_locuri := v_nr_locuri;
+   nr := v_nr;
+END p1;
+/
+
+DECLARE
+    v_nr NUMBER;
+    v_nr_locuri NUMBER;
+    v_data DATE := to_date('1-01-1990', 'dd-mm-yyyy');
+BEGIN 
+    p1(v_data, v_nr, v_nr_locuri);
+    DBMS_OUTPUT.PUT_LINE('Sunt ' || v_nr || ' vehicule care au in total ' || v_nr_locuri || ' locuri si care circula dupa data de ' || v_data );
+END;
+/
+-- ex 2
+-- Am creat tipul orar care spune de la ce ora la ce ora functioneaza vehiculele pe traseul respectvi (ex 9 45 23 10)
+-- h start = ora de start
+-- m start = minutul de start
+-- analog pt h_stop m_stop
+CREATE OR REPLACE TYPE t_orar_traseu AS OBJECT(h_start NUMBER, m_start NUMBER, h_stop NUMBER, m_stop NUMBER );
+/
+-- Am creat tipul tip_traseu care are 2 variab: tip traseu ('turistic', 'navetist' etc) si pret_traseu( pretul traseului)
+CREATE OR REPLACE TYPE t_detalii_traseu AS OBJECT(tip_traseu VARCHAR(20), pret_traseu NUMBER);
+/
+-- Am creat tipul info_traseu care va fi adaugat in tabela Traseu
+CREATE OR REPLACE TYPE t_info_traseu AS OBJECT(detalii t_detalii_traseu, orar t_orar_traseu);
+/
+
+-- adaugam coloana
+ALTER TABLE traseu
+ADD info_traseu t_info_traseu;
+/
+
+-- adaugarea se face astfel:
+-- t_detalii_traseu : daca are mai mult de 18 statii, e turistic, altfel e 'navetist'. Pretul este numarul numarul de statii * 1.5 pt turistic sau numarul de statii * 1.05 
+-- t_orar_traseu : daca are mai mult de 18 statii, deci e turistic, atunci incepe la 11 00 si se termina la 21 00, altfel 6 45 -> 19 00
+
+CREATE OR REPLACE PROCEDURE p2 
+IS 
+    v_orar_traseu t_orar_traseu;
+    v_detalii_traseu t_detalii_traseu;
+    v_info_traseu t_info_traseu;
+BEGIN
+    FOR tr IN (SELECT * FROM traseu) LOOP
+        IF tr.nr_statii > 18 -- turistic
+            THEN 
+                 v_orar_traseu := t_orar_traseu(11, 0, 21, 0);
+                 v_detalii_traseu := t_detalii_traseu('turistic', tr.nr_statii * 1.5);     
+        ELSE 
+             v_orar_traseu := t_orar_traseu(6, 45, 19, 0); -- navetist
+             v_detalii_traseu := t_detalii_traseu('navetist', tr.nr_statii * 1.05);     
+        END IF;
+        
+        v_info_traseu := t_info_traseu(v_detalii_traseu, v_orar_traseu);
+        
+        UPDATE traseu
+        SET info_traseu = v_info_traseu
+        WHERE nr_traseu = tr.nr_traseu;
+   
+    END LOOP;
+END;
+/
+
+BEGIN 
+ p2;
+END;
+/

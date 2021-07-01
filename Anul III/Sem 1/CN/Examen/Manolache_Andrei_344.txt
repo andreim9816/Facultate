@@ -1,0 +1,174 @@
+import numpy as np
+# Manolache Andrei 344
+
+# ex 1
+"""Metoda substitutiei descdendente"""
+def subs_desc_fast(a, b):
+    """ (Optionala) Verfica daca matricea 'a' este patratica + compatibitatea cu vectorul 'b' """
+    assert a.shape[0] == a.shape[1], 'Matricea sistemului nu este patratica!'
+    assert a.shape[0] == b.shape[0], 'Matricea sistemului si vectorul b nu se potrivesc!'
+
+    """ Initalizeaza vectorul solutiei numerice. """
+    n = b.shape[0] - 1
+    x_num = np.zeros(shape=n+1)
+
+    """ Determina solutia numerica. """
+    x_num[n] = b[n] / a[n, n]  # Scrie ultima componenta a solutiei numerice
+    for k in range(n-1, -1, -1):
+        """ Suma produselor dintre coeficienti si solutiile deja calculate """
+        s = np.dot(a[k, k+1:], x_num[k+1:])
+        """ Calculeaza solutia xk """
+        x_num[k] = (b[k] - s) / a[k, k]
+
+    return x_num
+
+"""Metoda subsituiei ascendente"""
+def subs_asc_fast(a, b):
+    assert a.shape[0] == a.shape[1], 'Matricea sistemului nu este patratica!'
+    assert a.shape[0] == b.shape[0], 'Matricea sistemului si vectorul b nu se potrivesc!'
+
+    """ Initalizeaza vectorul solutiei numerice. """
+    n = b.shape[0]
+    x_num = np.zeros(shape=n)
+
+    """ Determina solutia numerica, pas cu pas. """
+    x_num[0] = b[0] / a[0, 0]  # Scrie prima componenta a solutiei numerice
+    for k in range(1, n):
+        s = np.dot(a[k, :k], x_num[:k])
+        x_num[k] = (b[k] - s) / a[k, k]
+
+    return x_num
+
+"""Functie care calculeaza factorizarea Cholesky a unei matrice"""
+def FactLLT(a):
+    assert a.shape[0] == a.shape[1], 'Matricea sistemului nu este patratica!'
+
+    n = a.shape[0]
+
+    for i in range(1, n):
+        if np.linalg.det(a[:i, :i]) <= 0:
+            raise AssertionError('Matricea nu admite factorizare Cholesky pentru ca nu este pozitiv definita!')
+
+    """Verifica ca matricea sa fie simetrica. Aveam probleme cu """
+    if not np.array_equal(a, np.transpose(a)):
+        raise AssertionError('Matricea nu admite factorizare Cholesky pentru ca nu este simetrica!!')
+
+    """Matricea L pe care trebuie sa o aflam a.i. L * Lt = a"""
+    L = np.zeros((n, n))
+
+    """ Initializam primul element al matricei """
+    L[0, 0] = np.sqrt(a[0, 0])
+
+    """Complementul Schur"""
+    S =np.zeros((n, n))
+    for i in range(n):
+        for j in range(n):
+            S[i, j] = a[i, j]
+
+    """Pasul 3"""
+    for k in range(n-1):
+        """Elem de pe diag principala"""
+        L[k, k] = np.sqrt(S[0, 0])
+
+        """Coloana k a matricei"""
+        for i in range(k + 1, n):
+            """Elementele de pe coloana k"""
+            L[i, k] = (S[i - k, 0]) / (np.sqrt(S[0, 0]))
+
+            """Generam complementul schur"""
+            for j in range(k+1, n):
+                S[i - k, j - k] = S[i - k, j - k] - (S[i - k, 0] * S[0, j - k])/S[0, 0]
+
+        # """ Transforma complementul schur, micsorandu-l"""
+        # """ Ia submatricile"""
+        # s11 = S[0, 0]
+        # S21 = S[1:, 0]
+        # S22 = S[1:, 1:]
+        #
+        # S = S22 - np.matmul(S21, np.transpose(S21)) / s11
+
+    # L[n-1, n-1] = np.sqrt(np.abs(S[0,0]))
+    L[n-1, n-1] = np.sqrt(S[0, 0])
+    return L
+
+"""Matricea"""
+A = np.array([
+    [25.0, 15.0, -5.0],
+    [15.0, 18.0, 0.0],
+    [-5.0, 0.0, 11.0]
+])
+
+b = np.array([1.0, 2.0, 3.0])
+# Apeleaza functia
+L = FactLLT(A)# print(np.matmul(L, np.transpose(L)))
+
+# Ly = b. Rezolva cu metoda ascendenta
+y = subs_asc_fast(L, b)
+
+# L.t * x = y
+x = subs_desc_fast(np.transpose(L), y)
+print("Solutia este ",x )
+
+# ex 2
+"""Functia data"""
+def func(x):
+    return x ** 3 + 13 * x * x + 47 * x + 35
+
+"""Derivata pt functia data"""
+
+def func_df(x):
+    return 3 * x * x + 26 * x + 47 * x
+
+
+"""
+Conditii teorema de convergenta
+
+f(x) = x^3+13x^2+47x+35
+f'(x) = 3x^2+26x+47
+f''(x) = 6x + 26
+f'(x) = 0 => x1= -13/3 - 2sqrt(7)/3 
+             x2 = 2sqrt(7)/3 - 13/3
+ Intervalele pe care f'(x) nu se anuleaza :
+ (-inf, -13/3 - 2sqrt(7)/3 ) U ( -13/3 - 2sqrt(7)/3 , 2sqrt(7)/3 - 13/3) U (2sqrt(7)/3 - 13/3, inf)
+ 
+ Intervale pe care f"(x) nu se anuleaza: R \ {-13/3}. Obtinem intervalele ( cu tot cu cele de mai sus):
+  (-inf, -13/3 - 2sqrt(7)/3 ) U ( -13/3 - 2sqrt(7)/3 , -13/3) U (-13/3, 2sqrt(7)/3 - 13/3) U (2sqrt(7)/3 - 13/3, inf)
+  
+  Verificam f(a) * f(b) < 0 pt fiecare interval.
+  f(-inf) = -inf
+  f(-13/3 - 2sqrt(7)/3) = 5.04 >0
+  f(-13/3) = -5.925925925925924 < 0
+  
+  f(-13/3 + 2sqrt(7)/3) = -16.90089432737905 < 0
+  f(inf) = inf
+  
+  Cum f(a)* f(b) < 0 pt oricare interval, raman intervalele:
+  (-inf, -13/3 - 2sqrt(7)/3 ) U ( -13/3 - 2sqrt(7)/3 , -13/3) U (-13/3 - 2sqrt(7)/3, inf)
+    
+  In fiecare itnerval alegem punctele de pornire (valorile intiale) a.i. f(x)*f"(x) > 0
+  Avem punctele: -9 -6 -3
+"""
+
+""" Metoda newton raphson """
+def newton_raphson(f, df, x0, eps):
+    N = 1 # nr de pasi
+    xAprox = x0 - f(x0) / df(x0) # Aproximam
+    while True:
+        if np.abs(f(xAprox)) < eps:  # Verifica daca am gasit o solutie suficient de buna
+            break
+        x0 = xAprox  # Update la valoare
+        xAprox = x0 - f(x0) / df(x0)  # Noua aproximare
+        N += 1  # Creste contorul
+
+    return xAprox, N
+
+eps = 10 ** (-3)
+
+c1 = newton_raphson(func, func_df, -9, eps)
+print("X = ", c1[0], " obtinut in ", c1[1], " pasi")
+
+c2 = newton_raphson(func, func_df, -6, eps)
+print("X = ", c2[0], " obtinut in ", c2[1], " pasi")
+
+c3 = newton_raphson(func, func_df, -3, eps)
+print("X = ", c3[0], " obtinut in ", c3[1], " pasi")

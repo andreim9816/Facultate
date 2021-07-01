@@ -1,0 +1,185 @@
+-- EXAMEN
+
+-- MANOLACHE ANDREI 344
+
+-- S I
+
+create table medic (
+    cod_medic number primary key,
+    nume varchar2(20),
+    prenume varchar2(20),
+    salariu number(5)
+);
+ 
+ create table pacient(
+     cod_pacient number primary key,
+     nume varchar2(25),
+     prenume varchar2(25),
+     varsta number(3)
+);
+      
+
+create table trateaza(
+  cod_pacient number references pacient(cod_pacient),
+  cod_medic number references  medic(cod_medic),
+  primary key(cod_pacient, cod_medic)
+);
+
+--S II
+--a) Cheia primara este un camp al tabelei care asigura unicitatea fiecarei tuplu al tabelei
+--   Cheia externa face referire, intr-un tabel A, la cheia primara din alt tabel B
+
+-- Ex cheie primara: cod_medic este cheie primara in tabela medic. Astfel, fiecare 'record' de medic are un id unic. De ex, un sigur medic are cod_medic = 1
+-- Ex cheie exerrna: cod_medic din tabela trateaza este cheie externa pt ca face referire la campul cod_medic (care este cheie primara)din tabela medic.
+
+--b)
+-- Deosebiri:
+-- Vectorii trebuie initializati cu o anumita dimensiune la declarare, dimensiune care ramane constanta 
+-- Tablourile imbricate nu au o dimensiune stabilita (pot fi extinse, dar in limita a 2GB)
+-- Vectorul este o structura "densa", tablourile imbricate nu 
+
+-- Asemnari:
+-- Vectorii si tablourile imbricate pot aparea in definirea tabelelor
+-- Amandoua pot fi definite in blocuri PL/SQL sau la nivel de schema
+
+--c)
+-- Cursorul este un pointer catre o zona de memorie privata si stocheaza informatii despre procesarea comenzilor SELECT si LMD
+-- Cursorul dinamic este o variabila cursor caruia ii se pot asocia diferite interograri cu mentiunea ca coloanele returnate de fiecare query 
+-- corespund declaratiei variabiliei cursor 
+-- Cursorul predefinit nu poate fi denumit, nu e controlat de utilizator. E creat automat care are loc o comanda si tot automat 
+-- se face OPEN, FETCH si CLOSE
+-- Cel explicit e definitde utilizator, trebuie pus OPEN, FETCH CLOSE (daca nu e ciclu cursor cu subcereri)
+
+--d)
+-- Stim ca functiile pl/sql pot sa apara intr-o clauza WHERE/ GROUP BY/ HAVING, dar subprogramele nu.
+-- Sa se returneze medicul cu cei mai multi pacienti. Calcularea medicului cu cei mai multi pacienti se va face intr-o functie.
+-- nu se poate folosi procedura pt ca ne aflam intr-un query select
+
+--e)
+-- Deosebiri
+-- Triggerii la nivel de tabel sunt executati o singura data (fiind triggeri de instructiune), indiferent de numarul de linii afectate
+-- La nivel de sintaxa, diferenta este ca triggerii la nivel de comanda nu au "FOR EACH ROW", cei la nivel de linie au aceasta parte
+-- Conceptul de mutating table poate aparea la triggerii la nivel de linie, la nivel de tabel nu
+
+-- Asemanari
+-- Amandoi pot fi inainte sau dupa (BEFORE / AFTER) de comanda declansatoare
+-- Se activeaza automat de comenzi LMD
+-- 
+
+-- S III
+--1a) Relatia one-to-many: medic->trateaza. Un medic poate trata mai mult pacienti
+CREATE OR REPLACE TYPE vect_pacienti AS VARRAY(100) OF NUMBER;
+/
+
+CREATE OR REPLACE TYPE t_pacienti IS TABLE OF NUMBER;
+/
+
+CREATE TABLE medic_vect(
+    cod_medic number primary key,
+    lista_pacienti vect_pacienti
+);    
+
+CREATE TABLE medic_nested(
+    cod_medic number primary key,
+    lista_pacienti t_pacienti
+)NESTED TABLE lista_pacienti STORE AS tab_pacienti;
+    
+    
+-- b)
+CREATE OR REPLACE PROCEDURE medic_insert(v_cod_medic NUMBER) IS
+v_vect vect_pacienti;
+BEGIN
+    SELECT cod_pacient BULK COLLECT INTO v_vect
+    FROM trateaza
+    WHERE cod_medic = v_cod_medic;
+    
+    INSERT INTO medic_vect
+    VALUES(v_cod_medic, v_vect);
+END;
+/
+
+-- c)
+CREATE OR REPLACE PROCEDURE medic_insert_into_second(v_cod_medic NUMBER) IS
+v_vect vect_pacienti := vect_pacienti();
+v_nested t_pacienti := t_pacienti();
+v_aux NUMBER;
+
+BEGIN
+    For c_medic in (SELECT * FROM medic_vect) LOOP
+        SELECT cod_medic BULK COLLECT INTO v_vect
+        FROM medic_vect
+        WHERE cod_medic = c_medic.cod_medic;
+        
+        FOR i in v_vect.FIRST .. (v_vect.LAST - 1) LOOP
+            FOR j in (i + 1) .. v_vect.LAST LOOP
+                if(v_vect(i) > v_vect(j)) THEN
+                    v_aux := v_vect(i);
+                    v_vect(i) := v_vect(j);
+                    v_vect(j) := v_aux;
+                END IF;    
+            END LOOP;
+        END LOOP;
+        
+-- TODO INSERT into nested table      
+--        INSERT INTO medic_nested
+--        VALUES(v_cod_medic, v_vect);
+
+    END LOOP;
+END;
+/
+
+--d)
+DECLARE 
+    v_opt NUMBER := &p_opt;
+BEGIN
+    if(v_opt = 1)
+        THEN 
+            FOR c_medic IN (SELECT * FROM medic_nested) LOOP
+                FOR c_pac IN (SELECT * FROM TABLE (   
+                                                    SELECT lista_pacienti
+                                                    FROM medic_nested
+                                                    WHERE c_medic.cod_medic = cod_medic
+                                                  )
+                              ) LOOP
+                    DBMS_OUTPUT.PUT_LINE('Doctorul cu codul ' || c_medic.cod_medic || ' trateaza pacientul cu codul ' || c_pac.column_value);     
+                END LOOP;              
+            END LOOP;
+      ELSE
+         FOR c_medic IN (SELECT * FROM medic_vect) LOOP
+                FOR c_pac IN (SELECT * FROM TABLE (   
+                                                    SELECT lista_pacienti
+                                                    FROM medic_vect
+                                                    WHERE c_medic.cod_medic = cod_medic
+                                                  )
+                              ) LOOP
+                    DBMS_OUTPUT.PUT_LINE('Doctorul cu codul ' || c_medic.cod_medic || ' trateaza pacientul cu codul ' || c_pac.column_value);     
+                END LOOP;              
+            END LOOP;
+        END IF;        
+END;
+/
+
+-- ex 2) Sa se verifice ca nu exista 2 medici cu acelasi cod_medic (aceeasi PK)
+CREATE OR REPLACE TRIGGER trig_asigura_integritate
+FOR INSERT OR UPDATE ON medic_vect
+COMPOUND TRIGGER 
+    TYPE t_cod_medic IS TABLE OF NUMBER INDEX BY PLS_INTEGER;
+    v_cod_medic t_cod_medic;
+BEFORE STATEMENT IS
+BEGIN
+    -- memoreaza medicii existenti deja
+    FOR c_medic IN (SELECT * FROM medic_vect) LOOP
+        v_cod_medic(c_medic.cod_medic) := 1;
+    END LOOP;
+END BEFORE STATEMENT;    
+
+BEFORE EACH ROW IS
+BEGIN
+    IF(v_cod_medic.EXISTS(:NEW.cod_medic))
+        THEN RAISE_APPLICATION_ERROR(-20001, 'Medicul cu acest cod exista deja!');
+    END IF;    
+END BEFORE EACH ROW;   
+END trig_asigura_integritate;
+/
+
+

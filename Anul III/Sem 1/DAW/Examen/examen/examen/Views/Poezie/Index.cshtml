@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Poezii";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (ViewBag.list.Count != 0)
+{
+    foreach (var poezie in ViewBag.list)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Label("Poezie", "Poezie:")
+                <br />
+                <p>@poezie.Titlu</p>
+
+                @Html.Label("Autor", "Autor:")
+                <br />
+                <p>@poezie.Autor</p>
+
+                @Html.Label("NrStrofe", "Numar de strofe:")
+                <br />
+                <p>@poezie.NrStrofe</p>
+
+                @Html.Label("Volum", "Volumul de poezii:")
+                <br />
+                <p>@poezie.Volum.Denumire</p>
+
+
+                @using (Html.BeginForm(actionName: "Edit", controllerName: "Poezie", method: FormMethod.Get, routeValues: new { id = poezie.Id }))
+                {
+                    <button type="submit" class="btn btn-primary">Editeaza</button>
+                }
+             <br />
+                @using (Html.BeginForm(actionName: "Delete", controllerName: "Poezie", method: FormMethod.Post, routeValues: new { id = poezie.Id }))
+                {
+                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                <button class="btn btn-primary " type="submit">Sterge</button>
+                 }
+
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Nu exista poezii!</p>
+}
+<br />

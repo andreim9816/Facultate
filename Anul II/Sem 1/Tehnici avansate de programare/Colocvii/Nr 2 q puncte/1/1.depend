@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1578505641 source:d:\andrei\facultate\an 2\tehnici avansate de programare\colocvii\nr 2 q puncte\1\main.cpp
+	<iostream>
+	<vector>
+	<fstream>
+

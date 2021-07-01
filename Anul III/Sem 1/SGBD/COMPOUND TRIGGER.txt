@@ -1,0 +1,22 @@
+CREATE OR REPLACE TRIGGER trig8
+FOR UPDATE OF salary ON emp_ama
+COMPOUND TRIGGER
+
+    v_min_salary NUMBER;
+    v_max_salary NUMBER;
+    v_avg_salary NUMBER;
+
+BEFORE STATEMENT IS
+BEGIN
+    SELECT MIN(salary), AVG(salary), MAX(salary) INTO v_min_salary, v_avg_salary, v_max_salary FROM emp_ama;
+END BEFORE STATEMENT;
+
+BEFORE EACH ROW IS
+BEGIN
+    IF(:OLD.salary = v_min_salary AND :NEW.salary > v_avg_salary) OR (:OLD.salary = v_max_salary AND :NEW.salary < v_avg_salary)
+        THEN RAISE_APPLICATION_ERROR(-20001, 'Nu!');
+    END IF;    
+END BEFORE EACH ROW;    
+
+END trig8;
+/

@@ -1,0 +1,69 @@
+-- Partial 2. 
+
+
+set serveroutput on;
+select * from subiecte;
+--Manolache Andrei 344
+-- nr 132
+
+-- !!!!!!!!!!! E GRESIT, NU AM REZOLVAT CE SE CEREA !!!!!!!!!!!
+-- ex 1
+-- Implementati un trigger astfel incat, daca se sterge un produs din tabela "Produs", atunci se va sterge si stocul lui pt toate magazinele.
+-- Apare constrangerea de FK in tabela "Stoc" (este PK in "Produs")
+
+CREATE OR REPLACE TRIGGER trig1
+BEFORE
+    DELETE ON produs
+    FOR EACH ROW
+BEGIN
+    
+    DELETE FROM stoc
+    WHERE cod_produs = :OLD.id_produs;
+    
+END trig1;
+/
+
+delete from produs where id_produs <= 2;
+
+-- ex 2
+
+
+
+CREATE OR REPLACE TRIGGER trig2
+FOR INSERT OR UPDATE ON stoc
+COMPOUND TRIGGER
+    TYPE t_magazin_id IS TABLE OF magazin.id_magazin%TYPE INDEX BY BINARY_INTEGER;
+    v_magazin t_magazin_id;
+    k NUMBER := 0; -- counter for array
+    v_count NUMBER; -- variable for INSERT INTO
+BEFORE EACH ROW IS
+BEGIN
+-- tine minte fiecare mazin nou caci aici poate aparea problema
+   k := k + 1;
+   v_magazin(k) := :NEW.cod_magazin;
+END BEFORE EACH ROW;    
+AFTER STATEMENT IS
+BEGIN
+    FOR i in 1 .. k LOOP
+        FOR c in ( -- itereaza prin fiecare rezultat, nu trebuie sa existe un "count" mai mare ca 1
+                    SELECT COUNT(*) total INTO v_count
+                    FROM stoc s
+                    JOIN produs p ON (s.cod_produs = p.id_produs)
+                    JOIN categorie c ON (p.cod_categorie = c.id_categorie)
+                    JOIN producator prod ON (p.cod_producator = prod.id_producator)
+                    WHERE v_magazin(i) = cod_magazin
+                    GROUP BY id_producator, cod_categorie -- grupeaza dupa producator si categorie
+                  ) LOOP
+              
+                  IF (c.total > 1)
+                    THEN RAISE_APPLICATION_ERROR(-20001, 'Nu exista un stoc de produse (pt un magazin) de o anumita categorie de la un singur producator!');
+                  END IF;
+        END LOOP;          
+    END LOOP;
+END AFTER STATEMENT;
+END trig2;
+
+-- verificare
+INSERT INTO stoc
+VALUES(13, 1, 's2', 200, 1);
+

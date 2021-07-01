@@ -1,0 +1,20 @@
+p:not(title)
+{
+    background-color: green;
+}
+
+p.c1:nth-of-type(odd) b
+{
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}
+p.c2:nth-of-type(odd) b
+{
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}
+
+div:hover *
+{
+    border: 2px green dotted;
+}

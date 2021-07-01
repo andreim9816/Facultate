@@ -1,0 +1,103 @@
+
+1.
+Scrieti o functie care pentru un sir de caractere sa afiseze lista de sufixe.
+
+Ex: f “caractere” = [ “caractere”, “aractere”,”ractere”,”actere”,”ctere”,”tere”,”ere”,”re”,”e”,””]
+
+(nu conteaza ordinea in care sunt afisate)
+
+Puteti folosi doar recursie si functii din categoria A
+
+Pentru punctaj maxim trebuie sa scrieti prototipurile functiilor.
+
+ f :: [Char] -> [[Char]] -- pt cazul de fata in care apelam pe char-uri
+f [] = [[]]
+f (x:xs) = (x:xs) : (f xs)
+
+2. 
+Sa se scrie o functie care pentru doua liste, x si y, calculeaza suma produselor xi^2 * yi^2 cu xi din x si yi din y. Daca listele au lungimi diferite, functia va arunca o eroare.
+
+ f [1,2,3,4] [5,6,7,8] == (1^2 * 5^2)  + (2^2*6^2) + (3^2*7^2) + (4^2 * 8^2)
+
+Rezolvati aceasta problema folosind functii de nivel inalt (fara recursie si descrieri de liste, fara functia sum)
+
+Pentru punctaj maxim trebuie sa scrieti prototipurile functiilor.
+
+f :: Num p => [p] -> [p] -> p
+f list1 list2 = 
+    if length list1 /= length list2
+        then error "lungimi diferite!"
+    else
+       let rez = zip list1 list2 in
+       foldr (+) 0 (map(\(x,y) -> x ^ 2 + y ^ 2) rez)
+    
+
+3, 
+Se dau urmatoarele tipuri de date reprezentand dictionare. Un dictionar poate fi format dintr-o intrare (cu titlu si definitie) sau o lista de dictionare (continand un titlu si lista de dictionare). 
+
+type Name = String
+
+type Def = String
+
+data Dictionar = I Name Def
+
+     | Ld Name [Dictionar]
+
+   deriving Show
+
+ 
+
+d1 = Ld "animal"[Ld "mamifer"[I "elefant" "acesta e un elefant", I "caine" "acesta este un caine", I "pisica" "aceasta este o pisica"], I "animale domestice" "definitie"]
+
+d2 = Ld "Animal"[Ld "Mamifer"[I "Elefant" "acesta e un elefant",I "caIne" "acesta este un caine",I "piSIca" "aceasta este o pisica"],I "animale domestice" "definitie"]
+
+d3 = Ld "animal"[Ld "mamifer"[I "elefant" "Acesta e un Elefant", I "caine" "acesta este un caine", I "pisica" "aceasta este o pisica"], I "animale domestice" "definitie"]
+
+d4 = Ld "animal"[Ld "mamifer"[I "pisica" "aceasta este o pisica",I "elefant" "acesta e un elefant", I "caine" "acesta este un caine"], I "animale domestice" "definitie"]
+
+a) Sa se scrie o functie care primeste ca parametru un dictionar si intoarce numarul  intrarilor din acesta. 
+
+nrIntrari d1 = 4
+
+b) Sa se instantieze clasa Eq asfel incat sa se verifice egalitatea intre doua dictionare, comparand componentele lor in ordinea in care apar. Titlurile intrarilor sunt verificate fara a tine cont de litere mici sau mari. 
+
+I "caine" "animal" == I "CaiNe" "animal"   = True
+
+I "Caine" "Animal" == I "Caine" "animal"  = False
+
+d1== d2 = True 
+
+d1== d3 = False
+
+d1== d4 = False
+
+
+
+-- a)
+ 
+-- functie care pt o lista, verifica de cate ori se gaseste intrare
+nrILista :: Num a => [Dictionar] -> a
+nrILista [] = 0
+nrILista ( (I _ _ ) : t) = 1 + (nrILista t) -- daca avem Intrare, adaugam 1 si mergem mai departe
+nrILista ( h : t) = (func1 h) + (nrILista t) -- nu avem intrare, vedem cate intrari sunt pt Ld si cautam in continaure in lista
+
+func1 :: Num a => Dictionar -> a
+func1 (I _ _) = 1
+func1(Ld _ []) = 0
+func1 (Ld _ (  (Ld _ list2 ) : t) ) = -- daca avem tot Ld Name [Dictionar] si nu I Name Def 
+    let rez1 = nrILista t in -- calculeaza pt restul listei rezultatul
+    let rez2 = nrILista list2 in
+    rez1 + rez2 -- aduna rezultatele
+func1(Ld _ list) = nrILista list -- daca headul este I Name Def, atunci aflam cate astfel de intrari sunt in lista
+ 
+-- b)
+ 
+instance Eq Dictionar where
+    (Ld tip1 []) == (Ld tip2 []) = ((map toUpper tip1) == (map toUpper tip2)) -- listele sunt goale, validam doar tipul
+    (Ld _ []) == (Ld _ [_]) = False -- o lista e goala, celalata nu e
+    (Ld _ [_]) == (Ld _ []) = False -- o lista e goala, celalata nu e
+    (Ld _ _) == (I _ _) = False -- comparam constructori diferiti
+    (I _ _ ) == (Ld _ _) = False -- comparam constructori diferiti
+    (I tip1 def1) == (I tip2 def2) = (map toUpper tip1) == (map toUpper tip2) && (def1 == def2) -- not caseSenstitive + egalitate caseSensitive pe Def
+    (Ld tip1 (h1:t1)) == (Ld tip2 (h2:t2)) =(h1 == h2) && (map toUpper tip1) == (map toUpper tip2)  && (Ld tip1 t1) == (Ld tip2 t2)  -- verificam Name, primul element din lista si apelam mai departe pe tailuri
+   

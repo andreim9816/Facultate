@@ -1,0 +1,326 @@
+1. O statie client ruleaza un subprogram stocat care interogheaza o tabela a bazei de date si intoarce
+informatii. Care sunt pasii parcursi de sistem pentru executia ascestui subprogram si obtinerea rezul-
+tatului dorit (procese, memorare, fisiere)?
+
+2. Ce presupune procedeul bulk bind. Dati un exemplu de optimizare folosind acest procedeu
+
+Procedeul bulk collect implica doar doua comutari intre cele doua motoare: 
+- motorul PL/SQL comunica motorului SQL sa obtina mai multe linii odata si sa le plaseze intr-o colectie;
+- motorul SQL regaseste toate liniile si le incarca in colectie, dupa care preda controlul motorului PL/SQL.
+Procedeul bulk bind permite transferul liniilor din colectie printr-o singura operatie.
+
+Ex; 
+TYPE t_employee employees%ROWTYPE;
+v_table_employees IS TABLE OF t_employee;
+select * from employees bulk collect into v_table_employees;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Care sunt pasii executati cand un trigger apeleaza o procedura stocata?
+
+
+
+4. Ce este un SGBD? Dati 2 exemple
+
+Sistemul de gestiune a bazei de date (SGBD) este un ansamblu de programe, care servesc
+ca interfaţă între baza de date şi utilizator pt creare, interogare, stergere, modificare a datelor. 
+ex. Oracle, IDMS, Access
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Componentele structurii logice a bazei de date ORacle
+
+Structura logica ale unei baze de date este formata din 
+- tabelele spatiu (tablespaces)
+- schema obiectelor bazei de date
+- blocurile de date
+- extensiile si segmentele.
+
+Tabelele spatiu sunt unitatile logice de memorie in care este impartita o baza de date si pot fi
+tabele spatiu de sistem si tabele spatiu de utilizator. Din punct de vedere al accesibilitatii aceste
+pot fi on line si offline.
+
+Fisierele de date sunt structurile de memorie specifice unui sistem de operare pe care rezida
+tabelele spatiu ale unei baze de date.
+
+Schema este o colectie de obiecte, iar schema de obiecte este o structura logic ace se refera direct
+la datele unei baze de date(tabele, views, secvente, procedures, indexes
+cluestere si link-uri de baza de date)
+
+Blocurile de date, extensiile si segmentele sunt elemente de control eficient al spatiului de
+memorie externa pe disc aferent unei baze de date.
+Blocul de date este unitatea de memorie cea mai mica manipulate de SGBD Oracle, iar marimea
+acestuia masurata in bytes se defineste la momentul creerii bazei de date.
+
+CEVA DE INSTANTA ORACLE
+
+Instanta Oracle este combinatia logica dintre structurile de memorie interna (SGA – system global
+area, PGA – program global area) si procesele Oracle de baza activate la momentul pornirii unei
+baze de date.
+1) SGA este o regiune partajabila de memorie care contine datele si informatiile necesare unei
+instante Oracle si contine:
+-Database buffer cache (contine blocurile cele mai recent utilizate pentru a reduce utilizarea
+discului)
+-Redo log buffer(contine datele despre blocurile modificate)
+-Shared Pool(pentru prelucrarea instructiunilor SQL)
+-Cursorii folositi pentru manipularea instructiunilor unui limbaj gazda folosind facilitate
+ORACLE CALL INTERFACE
+
+2) PGA este o zona de memorie care contine datele si informatiile de control ale unui process
+server
+Procesul= mechanism al sistemului de operare care poate executa o serie de instrunctiuni. Un server
+Oracle are 2 tipuri de procese: utilizator si oracle
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Relatiile dintre baza de date, spatiile tabel  si fisierele de date
+
+R: O baza de date contine unul sau mai multe spatii tabel. Fiecare spatiu tabel contine unul sau mai multe fisiere numite fisiere de date
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7. Ce se întâmplă atunci când este apelată pentru prima dată o construcție a pachetului? 
+
+Atunci când este referenţiat un pachet (când este apelată pentru prima dată o construcţie a pachetului), întregul pachet este încărcat în SGA, zona globală a sistemului, 
+şi este pregătit pentru execuţie. Plasarea pachetului în SGA (zona globala sistem) reprezintă avantajul vitezei de execuţie, deoarece server-ul nu mai trebuie să aducă 
+informaţia despre pachet de pe disc, aceasta fiind deja în memorie. Prin urmare, apeluri ulterioare ale unor construcţii din acelaşi pachet, nu solicită operaţii I/O de pe disc.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8. Prezentați avantajele grupării funcțiilor și procedurilor în pachete.
+- o procedura / functie dintr-un pachet, o data ce pachetul a fost compilat, este permanenta in sensul ca poate fi invocata intr-un script iSQL*Plus, un subprogram PL/SQL
+sau un trigger (spre deosebire de o procedura locala care este temporara)
+
+- procedurile locale sunt compilate de feicare data cand este executat blocul respectiv, cele stocate in pachete o singura data la compilarea pachetului (care ramane in SGA 
+din momentul in care a fost compilat)
+
+- procedurile si functiile stocate in pachet pot fi apelate din orice bloc de catre utilizatorul care are acces la ele, in schimb cele locale doar in blocul de care apartin
+
+- pentru claritate: putem grupa intr-un pachet mai multe functii / proceduri care au un comportament similar (ex pachet cu constante si functii specifice aceluiasi domeniu)
+
+9. Prezentați pe scurt tipurile de date colecție.
+
+vezi 13 
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+10. Modul de executie al unui trigger
+
+Un trigger (declansator) este un bloc PL/SQL cu nume, stocat in baza de date (independent), care se
+executa automat ori de cate ori are loc evenimentul „declansator“ de care este asociat.
+Evenimentul declansator poate consta din:
+
+o modificarea unui tabel sau a unei vizualizari;
+o actiuni sistem;
+o actiuni utilizator.
+
+Un trigger poate fi asociat cu un eveniment care are loc asupra unui tabel, unei vizualizari, unei
+scheme sau unei baze de date.
+Fata de subprogramele stocate trigger-ii:
+- pot fi activati sau dezactivati;
+- nu pot fi invocati explicit;
+- nu pot contine comenzile LCD COMMIT, SAVEPOINT sau ROLLBACK.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11. Modul de executie al unui cursor
+
+Un cursor este un pointer catre o zona de memorie (care stocheaza informatii pana la momentul
+incheierii acesteia), despre procesarea unei comenzi SELECT sau LMD.
+Categorii:
+- implicite (construite si gestionate automat de PL/SQL de fiecare data cand este rulata o
+comanda SELECT sau LMD, se inchide automat, valorile ramanand disponibile pana cand este rulata
+o alta comanda SELECT sau LMD)
+- explicite (contruite si gestionate de catre utilizator specificate printr-un nume, asociat cu o
+comanda SELECT care de obicei intoarce mai multe linii. Proces: se deschis cursoarele (OPEN), se
+incarca liniile cursorului in variabile cu comanda FETCH sau FOR LOOP, apoi se inchide cursorul
+(CLOSE) )
+Cursor parametrizat: se realizeaza asemanator cu apelul unei functii, specificand lista parametrilor
+actuali ai cursorului ( asocierea dintre parametrii formali si cei actuali facandu-se prin pozitie si nu)
+Cursor dinamic: cursor a carui comanda SQL este cunoscuta la momentul compilarii blocului
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12. Tipuri de date
+
+Tipul de date este o multime de valori predefinite sau definita de utilizator. Constantele, variabilele si
+parametrii trebuie sa aiba specificat un tip de date, determinand formatul de stocare, valorile si
+operatiile permise.
+1. Scalare (stocheaza o singura valoare care nu poate avea componente interne)
+2. Compuse(stocheaza mai multe valori care pot avea componente interne ce pot fi accesate
+individual)
+
+Subtipul este un tip de date care reprezinta o submultime a unui alt tip de date denumit tip de baza,
+acesta permite aceleasi operatii ca si tipul de baza.
+
+Tipul de date inregistrare se defineste in 2 pasi: se defineste un tip RECORD si se declara variabilele
+de acest tip.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+13. Colectii
+
+Colectii:
+- Tablouri indexate (vectori asociativi) – similari cu tabelele de dispersie
+- Tablouri imbricate – similari cu multimile (sets, multisets)
+- Vectori cu dimensiune variabila
+
+Declarare: se defineste un tip de colectie, se declara o variabila de acel tip
+O colectie are o singura dimensiune. Pentru a modela o colectie multidimensionala se defineste o
+colectie ale carei elemente sunt direct sau indirect colectii (multilevel collections). o Numarul
+nivelurilor de imbricare este limitat doar de capacitatea de stocare a sistemului. Colectii pe mai
+multe niveluri permise: o vectori de vectori; o vectori de tablouri imbricate; o tablouri imbricate de
+tablouri imbricate; o tablouri imbricate de vectori; o tablouri imbricate sau vectori de un tip definit de
+utilizator care are un atribut de tip tablou imbricat sau vector. Pot fi utilizate ca tipuri de date pentru
+definirea: o coloanelor unui tabel relational; o variabilelor PL/SQL; o atributelor unui obiect intr-un
+tabel obiect.
+
+Tablouri indexate = multimi de perechi cheie-valoare, cu cheie unica si utilizata pentru a putea localiza
+valoarea asociata. Atunci cand este creat un tablou indexat care nu are inca elemente, acesta este vid.
+Nu este initializat automat (atomic) null, ca in cazul celorlalte tipuri de colectii. Atunci cand o valoare
+este asociata pentru prima oara unei chei, cheia este adaugata in tablou. Tablourile indexate folosesc
+spatiu de stocare temporar. Nu au constructori
+
+Tablouri imbricate = este tip al unei coloane care stocheaza un numar nespecificat de linii, in nicio
+ordine particulara (stocheaza o multime de valori). o Atunci cand tabloul imbricat din baza de date
+este preluat de o variabila PL/SQL, sistemul atribuie liniilor indecsi consecutivi (incepand cu valoarea
+1). Astfel, se permite accesarea liniilor folosind indecsii, in mod asemanator cu vectorii. o Indecsii si
+ordinea liniilor dintr-un tablou imbricat ar putea sa nu ramana stabile in timp ce tabloul este stocat sau
+regasit din baza de date. Numarul maxim de linii este dat de capacitatea maxima 2 GB. Initial,
+tabloul este dens, dar in urma prelucrarii este posibil sa nu mai aiba indici consecutivi. Initializarea se
+realizeaza cu ajutorul unui constructor
+
+Vectori = Se utilizeaza in special pentru modelarea relatiilor one-to-many, atunci cand numarul maxim
+de elemente copil este cunoscut si ordinea elementelor este importanta. Reprezinta structuri dense.
+o Fiecare element are un index care precizeaza pozitia sa in vector (primul index are valoarea 1). o
+Indexul este utilizat pentru accesarea elementelor din vector. Vectorii: o fata de tablourile imbricate
+au o dimensiune maxima specificata la declarare; o pot fi stocati in baza de date; o pot fi prelucrati
+direct in instructiuni SQL; o trebuie initializati si extinsi pentru a li se adauga elemente.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+14. Subprograme ( functii + proceduri)
+
+Subprograme: proceduri si functii PL/SQL. Sunt blocuri cu nume, au structura similara blocurilor fara
+nume, sectiune declarativa sau de tratare a exceptiilor este optionala, cea executabila este insa
+obligatorie. Tipuri:
+- locale (definite in partea declarativa a unui bloc sa a unui alt subprogram)
+- Independente (stocate in baze de date si considerate drept obiecte ale acesteia)
+- Impachetate (definite intr-un pachet)
+Avantaje: codul e usor de intretinut, reutilizabil, asigura siguranta datelor si integritatea lor,
+imbunatatesc performata
+
+Atunci cand este apelat un subprogram stocat, server-ul Oracle parcurge etapele:
+Verifica daca utilizatorul are privilegiul de executie asupra subprogramului.
+Verifica daca p-code-ul subprogramului este in shared pool. Daca este prezent va fi executat, altfel va
+fi incarcat de pe disc in database buffer cache.
+Verifica daca starea subprogramului este VALID sau INVALID. Starea unui subprogram este
+INVALID, fie pentru ca au fost detectate erori la compilarea acestuia, fie pentru ca structura unui
+obiect s-a schimbat de cand subprogramul a fost executat ultima oara. Daca starea subprogramului este
+INVALID, atunci este recompilat automat. Daca nu a fost detectata nicio eroare, atunci va fi executata
+noua versiune a subprogramului.
+
+Daca subprogramul apartine unui pachet atunci toate subprogramele pachetului sunt de asemenea
+incarcate in database buffer cache (daca acestea nu erau deja acolo). Daca pachetul este activat pentru
+prima oara intr-o sesiune, atunci server-ul va executa blocul de initializare al pachetului.
+
+Procedura = bloc PL/SQL cu nume care poate accepta parametrii, utilizate pentru a realiza anumite
+actiuni. Procedurile stocate pot fi apelate:
+- din corpul altei proceduri sau al unui declansator;
+- interactiv, de utilizator folosind un utilitar Oracle (de exemplu, SQL*Plus);
+- explicit, dintr-o aplicatie (de exemplu, Oracle Forms sau un precompilator).
+
+Parametrii formali ai unei proceduri pot fi: parametri de intrare (IN), parametri de iesire (OUT), de
+intrare/iesire (IN OUT).
+
+Functie = este un bloc PL/SQL cu nume care trebuie sa intoarca un rezultat (o singura valoare).
+Functiile independente sunt compilate si stocate in baza de date ca obiecte ale schemei. Clauza
+RETURN este utilizata in locul parametrilor de tip OUT. O functie trebuie sa contina clauza RETURN
+in antet si cel putin o comanda RETURN in partea executabila. In interiorul functiei trebuie sa apara
+RETURN expresie, unde expresie este valoarea rezultatului furnizat de functie. Intr-o functie pot sa
+apara mai multe comenzi RETURN, dar numai una din acestea va fi executata, deoarece dupa ce
+valoarea este intoarsa, procesarea blocului inceteaza.
+Atunci cand un subprogram este compilat, in dictionarul datelor se vor inregistra informatii despre
+toate obiectele referite
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+15. Pachete 
+
+Un pachet (package) permite incapsularea intr-o unitate logica a: constantelor si variabilelor; tipurilor
+si exceptiilor; cursoarelor; procedurilor si functiilor.
+
+Pachetele sunt: unitati de program compilate; obiecte ale bazei de date care grupeaza tipuri, obiecte si
+subprograme PL/SQL avand o legatura logica intre ele.
+
+Atunci cand este referentiat un pachet (atunci cand este apelata pentru prima data o constructie a
+pachetului), intregul pachet este incarcat in SGA (zona globala sistem) si este pregatit pentru executie.
+Plasarea pachetului in SGA reprezinta avantajul vitezei de executie, deoarece server-ul nu mai trebuie
+sa aduca informatia despre pachet de pe disc, aceasta fiind deja in memorie.
+
+Definirea unui pachet se realizeaza in doua etape: crearea specificatiei pachetului si crearea corpului
+acestuia. Pachetul este instantiat cand este apelat prima data.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+16. Care sunt pasii realizati de ORacle pt a executa o comanda SQL?
+
+17. Diferenta in SQL si PL/SQL?
+SQL:
+- este limbajul utilizat pentru a accesa o baza de date relationala, inclusiv Oracle.
+- poate fi utilizat de fiecare instrument Oracle,cand accesul la baza de date este necesar.
+
+PLSQL:
+- Se caracterizeaza printr-o structura de bloc in care sunt integrate
+comenzile ce urmeaza a fi prelucrate. Mentenanta codului este mult
+mai usoar pe o astfel de structura.
+- Integreaza facilitatile unui limbaj procedural peste SQL
+- Ofera facilitatile unui limbaj procedural: variabile, constante, structuri pt controlul executiei (case, if for loop while), faciltati pt stocarea si reutilizarea codului
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+18. Descrieti modalitatea de functionare a zonei globale de memorie (SGA) in contextul dependentelor
+
+SGA este o regiune partajabila de memorie care contine datele si informatiile necesare unei
+instante Oracle si contine:
+-Database buffer cache (contine blocurile cele mai recent utilizate pentru a reduce utilizarea
+discului)
+-Redo log buffer(contine datele despre blocurile modificate)
+-Shared Pool(pentru prelucrarea instructiunilor SQL)
+-Cursorii folositi pentru manipularea instructiunilor unui limbaj gazda folosind facilitate
+ORACLE CALL INTERFACE
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+19. Comentati modulele TIMESTAMP si SIGNATURE
+
+Dependentele la distanta pot fi manipulate folosind modelul timestamp (implicit) sau modelul
+signature.
+Modelul timestamp realizeaza compararea momentelor ultimei modificari a celor doua obiecte
+analizate. Daca un obiect (referit) are momentul ultimei modificari mai recent decat cel al obiectului
+dependent, atunci obiectul dependent va fi recompilat.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+20. Ce este o instanta? Care sunt componentele unei instante? Cum se
+porneste o instanta? Cum se acceseaza o instanta? (ATENTIE! Nu trebuie
+scris nimic de baza de date, ci de INSTANTA)
+
+Instanta Oracle este combinatia logica dintre structurile de memorie interna (SGA – system global
+area, PGA – program global area) si procesele Oracle de baza activate la momentul pornirii unei
+baze de date.
+1) SGA este o regiune partajabila de memorie care contine datele si informatiile necesare unei
+instante Oracle si contine:
+-Database buffer cache (contine blocurile cele mai recent utilizate pentru a reduce utilizarea
+discului)
+-Redo log buffer(contine datele despre blocurile modificate)
+-Shared Pool(pentru prelucrarea instructiunilor SQL)
+-Cursorii folositi pentru manipularea instructiunilor unui limbaj gazda folosind facilitate
+ORACLE CALL INTERFACE
+2) PGA este o zona de memorie care contine datele si informatiile de control ale unui process
+server
+Procesul= mechanism al sistemului de operare care poate executa o serie de instrunctiuni. Un server
+Oracle are 2 tipuri de procese: utilizator si oracle
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+21. Cum se comporta procesul SERVER cand executa o comanda LMD.

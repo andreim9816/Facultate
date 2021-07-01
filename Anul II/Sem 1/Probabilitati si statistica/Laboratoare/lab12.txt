@@ -1,0 +1,15 @@
+## STATISTICA DESCRIPTIVA
+# functia "sort" sorteaza in mod implcit crescator
+
+y <- c(2,3,5,7,23,49,50) 
+ym <- mean(y) # media
+
+ymed <- median(y) # mediana este 7 
+
+# Daca am imparti vectorul y in 2 subgrupe? prima cuartila este mediana vectorului 
+#(2,3,5), a doua cuartile este mediana vectorului (7) si 49 este cuartila a 3a
+
+q1 <- quantile(y, 1/4) #imaprte in 4 quartile
+q3 <- quantile(y, 3/4)
+q2 <- quantile(y, 1/2)
+quantile(y,3/49) # 6,12 % din valorile mele sunt mai mici sau egale cu 2.36347

@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <style>
+         
+
+                .celula > div:hover
+                {
+                    background-color: blue;
+                               
+                }
+                .celula > div 
+                {
+                    
+                    transition: background-color 1s;
+                }
+               
+            @media screen and (min-width : 900px)
+            {
+                #parinte
+                {
+                    width : 800px;
+                    height : 800px;
+                    border: 1px solid black ;
+
+                }
+
+                .celula
+                {
+                    background-color: pink;
+                    width: 100px;
+                    height: 100px;
+                }
+
+                .celula > div:nth-child(even)
+                {
+                    border: 1px solid purple;
+                }
+
+                .celula >div:nth-child(odd)
+                {
+                    border: 1px solid red;
+                }
+
+            }
+
+            @media screen and (max-width : 899px)
+            {
+                .celula
+                {
+                    display: none;
+                }
+
+                #parinte
+                {
+                    background-color: green;
+                    width : 100%;
+                }
+            }
+        </style>
+
+        <script>
+
+            window.onload = subpct1;
+            function subpct1()
+            {
+                let myDiv = document.createElement('DIV');
+                myDiv.setAttribute('id' , 'parinte');
+                myDiv.setAttribute('style' , 'height:100px');
+
+                myDiv.setAttribute('onclick' , 'genereazaTimeout()');
+
+
+                document.getElementsByTagName('body')[0].appendChild(myDiv);   
+                
+                let radioGroup = document.createElement('DIV');
+                radioGroup.setAttribute('id' , 'radioGroup');
+              
+                document.getElementById('parinte').appendChild(radioGroup);
+
+                let i;
+
+                for(i = 4 ; i <= 8 ; i++)
+                {
+                    let radioButton = document.createElement('INPUT');
+                    radioButton.setAttribute('type' , 'radio');
+                    radioButton.setAttribute('name' , 'grupRadio');
+                    radioButton.setAttribute('style','display:block');
+                    radioButton.setAttribute('value' , i);
+                                       
+                    document.getElementById('radioGroup').appendChild(radioButton);
+
+                    if(i === 6 && localStorage.getItem('N') == null)
+                        radioButton.checked = true;
+                    
+                    let valueN = parseInt(localStorage.getItem('N'));
+                     
+                    if(i == valueN)
+                        radioButton.checked = true;
+
+                    radioButton.setAttribute('onclick' , 'subpct2(this)');
+                //    radioButton.addEventListener('click' , subpct2(this)); nu merge
+                 //   radioButton.onclick = subpct2(this); nu merge
+
+                }
+            }
+
+            function subpct2(event)
+            {
+                localStorage.setItem('N' , event.value);
+                document.getElementById('parinte').removeChild(document.getElementById('radioGroup'));
+            }
+
+            function genereazaTimeout()
+            {
+                setTimeout(genereaza, 2000);
+            }
+
+            function genereaza()
+            {
+                let i,j, N = localStorage.getItem('N');
+                let parinte = document.getElementById('parinte');
+                for(i = 0 ; i < N ; i++)
+                {
+                    for(j = 0 ; j < N ; j++)
+                    {
+                        let miniDiv = document.createElement('DIV');
+                        miniDiv.setAttribute('class','celula');
+                        miniDiv.setAttribute('style','display:inline-block');
+                        miniDiv.setAttribute('id', '(' + i + ',' + j +')');
+
+                        miniDiv.setAttribute('ondblclick' , 'afisareCoord(event,this)');
+
+                        parinte.appendChild(miniDiv);
+                    }
+                    parinte.appendChild(document.createElement('BR'));
+                }
+            }
+
+            function afisareCoord(e,t)
+            {
+               t.innerText = t.id;
+               e.stopImmediatePropagation();
+            }
+        </script>
+    </head>
+
+   
+</html>

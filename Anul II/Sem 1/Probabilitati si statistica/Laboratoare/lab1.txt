@@ -1,0 +1,22 @@
+5-1+10
+7*10/2
+exp(-2.19)
+pi
+a=(1+sqrt(5)/2)/2
+
+10/2
+10%/%2
+-2%%3
+?mean
+
+x <- "curs de probabilitati si statistica"
+typeof(x)
+
+y <- 1:10
+
+x <- c("Sandra","Andrei")
+y <- 9:29
+?help
+
+z <- seq(1,10,0.01)
+plot(z)

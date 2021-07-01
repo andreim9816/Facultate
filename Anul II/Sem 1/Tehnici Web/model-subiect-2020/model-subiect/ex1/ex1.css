@@ -1,0 +1,39 @@
+html{
+	font-size:10px;
+}
+
+section{
+	border:1px solid black;
+	margin-bottom:5px;
+}
+
+p{
+	margin:0;
+}
+
+li p
+{
+	color:green;
+}
+
+p#xyz~.ceva, p#xyz~* .ceva
+{
+	font-size:2em;
+}
+
+p:after
+{
+	width:10px;
+	height:10px;
+	background-color: blue;
+	content:" ";
+	display: inline-block;
+}
+
+li:nth-of-type(even){
+	
+	transition:background 2s linear;
+}
+li:nth-of-type(even):hover{
+	background:red;
+}

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Poezii care au in denumirea titlului stringul " + ViewBag.cuvant;
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@if (ViewBag.list.Count != 0)
+{
+    foreach (var poezie in ViewBag.list)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Label("Poezie", "Poezie:")
+                <br />
+                <p>@poezie.Titlu</p>
+
+                @Html.Label("Autor", "Autor:")
+                <br />
+                <p>@poezie.Autor</p>
+
+                @Html.Label("NrStrofe", "Numar de strofe:")
+                <br />
+                <p>@poezie.NrStrofe</p>
+
+                @Html.Label("Volum", "Volumul de poezii:")
+                <br />
+                <p>@poezie.Volum.Denumire</p>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>Nu exista poezii cu substringul respectiv!</p>
+}
+<br />
+

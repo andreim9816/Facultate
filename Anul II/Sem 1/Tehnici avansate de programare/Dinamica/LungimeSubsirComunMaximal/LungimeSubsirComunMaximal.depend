@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1578566413 source:d:\andrei\facultate\an 2\tehnici avansate de programare\dinamica\ lungimesubsircomunmaximal\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+

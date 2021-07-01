@@ -1,0 +1,238 @@
+<html>
+
+<head>
+
+
+</head>
+
+<body>
+    <style>
+        @media screen  and (min-width: 800px)
+        {
+            #parinte
+            {
+                margin: auto;
+                width: 600px;
+                height: 600px;
+                background-color: green;
+                border: 2px solid black;
+
+           }
+
+           .selectat
+           {
+               outline-color: red;
+               outline-style: solid;
+           }
+
+           .patrat
+           {
+               height:30px;
+               width:30px;
+               border: 1px solid blue;
+           }
+
+           .patrat:nth-child(odd)
+           {
+              background-color: yellow;
+           }
+
+           .patrat:nth-child(even)
+           {
+               background-color: orange;
+           }
+
+        }
+
+        @media screen and (max-width: 799px)
+        {
+            #parinte
+            {
+                width:50%;
+            }
+
+            .patrat
+            { 
+                background-color: grey;
+                height:50px;
+                width: 100%;
+                display: block;
+            }
+
+            body 
+            {
+                animation-name: culoare;
+                animation-duration: 2s;
+                animation-iteration-count: infinite;
+            };
+        }
+
+        @keyframes culoare
+        {
+            0%
+            {
+                background-color: white;
+            }
+
+            50%
+            {
+                background-color: pink;
+            }
+
+            100%
+            {
+                background-color: white;           
+            }
+        }
+
+    </style>
+
+    <script>
+
+        let theBody ;
+        var cifraApasata = false;
+        var litereApasate = 0;
+        var vt;
+        var ok = 0;
+        window.onload = function()
+        {
+            
+            theBody = document.getElementsByTagName('body')[0];
+            let mySelect = document.createElement('SELECT');
+             mySelect.setAttribute('id','myselect');
+             theBody.appendChild(mySelect);
+            let i;           
+            for(i = 4 ; i <= 10 ; i+=2)
+            {
+                let myOption = document.createElement('OPTION');
+                myOption.setAttribute('value' , i);
+                myOption.innerText = i;
+          
+                let N = localStorage.getItem('N');
+
+                if(N != null && parseInt(N) === i) 
+                     myOption.selected = true;
+                else if ( i === 10 && N == null)
+                    myOption.selected = true;
+                
+                mySelect.appendChild(myOption);
+            }
+            
+            mySelect.addEventListener('change' , pct1);
+
+            let litere = document.createElement('DIV');
+            litere.setAttribute('id' , 'litere');
+            theBody.appendChild(litere);
+
+            theBody.onkeypress = function(event)
+            {
+                if(cifraApasata == false)
+                {
+                    if(event.keyCode >= 97 && event.keyCode <= 122)
+                        {
+                            litere.innerText += event.key;
+                            litereApasate +=1;
+                        }
+                    else if(event.keyCode >= 48 && event.keyCode <=57)
+                            {
+                                cifraApasata = true;
+                                if(ok == 0)
+                                {
+                                    vt = setInterval(stergeLitere,1000);
+                                    ok = 1;
+                                }
+                            }
+                }
+
+            }
+
+            
+        }
+            function stergeLitere()
+            {
+                myDiv = document.getElementById('litere');
+                myDiv.innerText = myDiv.innerText.substring(0 , myDiv.innerText.length -1);
+                litereApasate -=1;
+                if(litere == 0)
+                    clearInterval(vt);
+            }
+
+            function pct1()
+            {                
+                let mySelect = document.getElementById('myselect');
+                let selectedValue = mySelect.options[mySelect.selectedIndex].value;
+                let myDiv = document.createElement('DIV');
+                myDiv.setAttribute('id','parinte');
+                document.getElementsByTagName('BODY')[0].appendChild(myDiv);
+                
+                localStorage.setItem('N' , selectedValue);
+                pct2();
+                document.getElementsByTagName('BODY')[0].removeChild(mySelect);
+            }
+
+            function pct2()
+            {
+                setTimeout(genereazaPatrate , 1500);
+            }
+            
+            function genereazaPatrate()
+            {
+                let i;
+                let N = parseInt(localStorage.getItem('N'));
+                for( i = 0 ; i < N ; i++)
+                 {
+                     let patrat = document.createElement("DIV");
+                     patrat.setAttribute("class" , "patrat");
+                     patrat.setAttribute('id', i);
+
+                     patrat.addEventListener("mouseover",() =>
+                      {
+                          pct31(patrat.getAttribute('id'));
+                      });
+                     patrat.addEventListener("mouseout",() =>
+                     {
+                         pct32(patrat.getAttribute('id'));
+                    });
+
+                     patrat.style.marginLeft = i * 30 + "px";
+                     patrat.style.width = "30px";
+                     patrat.style.height = "30px";
+                     patrat.innerText = i;
+
+                     document.getElementById("parinte").appendChild(patrat);
+                 }
+            }
+
+            function getRandomColor() 
+            {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                for (let i = 0; i < 6; i++) 
+                    color+= letters[Math.floor(Math.random() * 16)];
+                
+                return color;
+            }
+
+            var lastColor = "";
+
+            function pct31(index)
+            {    
+                console.log(index);
+                let patrat = document.getElementById(index);
+                lastColor = patrat.style.backgroundColor;
+              
+                patrat.style.backgroundColor = getRandomColor();
+                patrat.classList.add('selectat');
+            }
+
+            function pct32(index)
+            {
+                let patrat = document.getElementById(index);
+                patrat.style.backgroundColor = lastColor;
+                patrat.classList.remove('selectat');
+            }
+            
+    </script>
+</body>
+
+</html>

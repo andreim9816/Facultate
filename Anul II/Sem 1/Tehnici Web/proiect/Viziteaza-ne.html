@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+ <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+   
+        <!-- <link rel="stylesheet" type="text/css" href="css/reset.css">  Se activeaza user stylesheet agent si strica pe acolo -->
+        
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <script type="text/javascript" src="javascript.js"></script>
+            <title>
+            Teatrul Odeon
+        </title>
+
+    </head>
+
+
+    <body>
+        
+        <header>
+             <nav class="BaraSus">
+                    <ul id="list" >
+                        <li class="logo" > <img class="logo"  src="images/logo.jpg" alt="imagine logo lipsa" />  </li>
+                        <li >  
+                        <ul class="listaButoane"> 
+                                <li class="linknav"> <a  href="Acasa.html" style="text-decoration:none">Acasa</a></li>
+                                <li class="linknav"> <a  href="Despre.html" style="text-decoration:none" >Despre</a></li>
+                                <li class="linknav"> <a  href="Galerie.html" style="text-decoration:none">Galerie</a></li>
+                                <li class="linknav"> <a  href="Rezerva.html" style="text-decoration:none">Rezerva</a>  </li>
+                                <li class="dropdownButton"> 
+                                    <div class="linknav" style="text-decoration:none">
+                                          Contact
+                                    </div>                                      
+                                        <div class="dropdown-content">
+                                            <a href="Viziteaza-ne.html" >Viziteaza-ne</a>
+                                            <a href="CumAjung.html">Cum ajung?</a>
+                                        </div> 
+                                </li> 
+                         </ul>
+                        </li>
+                    </ul>
+              </nav>    
+        </header>
+
+        <div class="Vizita">
+                
+            <div class="Info">
+                <h2>Rezervari telefonice:</h2>
+                <p>Tel. +40738 823 583</p>
+                <br>
+ 
+                <hr>
+                <h2>Program casierie </h2>
+                <p>luni – duminica, orele 11.30– 19.00 cu pauza intre 14.30 - 15.00</p>
+                <br>
+                <hr>
+                <h2>Adresa</h2>
+                <p>Calea Victoriei 40-42, Bucuresti 010062</p>
+                
+                <p>Email: office@teatrul-odeon.ro </p>
+                <br>
+                <br>
+                <hr>
+                <h2>Suport bilete online</h2>
+                 bileteonline@teatrul-odeon.ro
+                <br>
+                 Tel. +4021 311 17 45
+                 <br> <br>
+            </div>
+                 <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11395.467619512145!2d26.0985991!3d44.4358923!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x4da426f836c3e5b0!2sTeatrul%20Odeon!5e0!3m2!1sro!2sro!4v1573063644181!5m2!1sro!2sro" allowfullscreen=""></iframe>
+         
+        </div>
+ 
+        <footer>
+                <div class="SocialMedia"> 
+                    
+                     <div class="Text+Imagine">
+                        <p style="display: inline;">Apreciaza-ne pe Facebook</p>
+                     <a target="_blank" href="https://www.facebook.com/teatrul.odeon/">
+                        <img src="images/logo_fb.png" alt="poza fb lipsa" width="17" height="17" style="display: inline;">
+                     </a>
+                    </div>
+                   
+                    <div class="Text+Imagine">
+                        <p style="display: inline;">Aboneaza-te pe Youtube</p>
+                     <a target="_blank" href=" https://www.youtube.com/user/TeatrulOdeon">
+                         <img src="images/logo_youtube" alt="poza fb lipsa" width="17" height="17" style="display: inline;">
+                     </a>
+                     </div>
+                     
+                     <div class="Text+Imagine">
+                            <p style="display: inline;">Urmareste-ne pe Twitter</p>
+                         <a target="_blank" href="https://twitter.com/odeontheatrero">
+                             <img src="images/logo_twitter.png" alt="poza fb lipsa" width="17" height="17" style="display: inline;">
+                         </a>
+                         <select id = "selectLang" style = "display:block;" >
+                             <option>Romana</option>
+                             <option>Engleza</option>
+                         </select>
+                     </div>   
+     
+                </div>
+                 
+                <div class="NewsLetter">
+                    Vrei sa afli mai multe?
+                    <br>
+                    <form>
+                    Nume prenume: <input type="text" name="Name" required ><br>
+                    Adresa de mail: <input type="text" name="Mail" required ><br>
+                    <input type="button" id = "submit" onclick ="Submit()" value = "Abonare">
+                    </form>
+    
+               </div>
+     
+             </footer>
+         </body>    
+     </html>

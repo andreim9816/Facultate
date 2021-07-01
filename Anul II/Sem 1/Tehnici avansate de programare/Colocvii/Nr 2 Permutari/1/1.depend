@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1578496974 source:d:\andrei\facultate\an 2\tehnici avansate de programare\colocvii\nr 2 permutari\1\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+
