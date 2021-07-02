@@ -1,0 +1,60 @@
+1. Care este iesirea unei retele neuronale cu 3 unitati ascunse si o unitate de iesire cu activari de tip ReLU pentru intrarea x = [1, 2], daca ponderile sunt W1 = [-0.5, 3, -2; 2, -1, 0], B1 = [0, 1, -1], W2 = [-1; 3; 2], B2 = [2]?
+A. 6
+B. 0
+C. 2
+D. 4.5
+
+2. Data fiind o retea neuronala feed-forward cu 3 inputuri, 1 strat ascuns de dimensiune 5 si 2 perceptroni pe stratul de iesire, cati parametri antrenabili are reteaua?
+A. 37
+B. 40
+C. 32
+D. 42
+
+3. Care sunt valorile urmatoarelor exemple de antrenare dupa aplicarea normalizarii L1: E_1 = [6, -9, 1], E_2 = [3, 5, 8] ?
+A. E1 = [0.375, 0.5625, -0.0625], E2 = [0.2875, 1.3125, 2.5]
+B. E1 = [0.5, 0.5, 0.0], E2 = [0.1875, 0.3125, 0.5]
+C. E1 = [0.375, -0.5625, 0.0625], E2 = [0.1875, 0.3125, 0.5]
+D. E1 = [0.6, 0.3, 0.6], E2 = [0.2, 0.3, 0.5]
+
+4. Fiind data urmatoarea multime de antrenare cu etichetele corespunzatoare: X_train = ((1,0),(1,1),(1,2),(2,1),(0,1),(-1,1),(-1,-1),(-1,2)) Y_train = (1,5,4,3,2,3,3,2), cati clasificatori sunt antrenati pentru un SVM folosind abordarea ONE vs ONE?
+A. 10
+B. 4
+C. 5
+D. 6
+
+5. Care este scufundarea asociata functie nucleu liniare?
+A. k(x,y) = <x,y>, unde <,> denote produsul scalar
+B. f(x) = sqrt(x)
+C. f(x) = x
+D. Nu exista
+
+6. Calculati costul pentru Regresia Ridge avand ponderi=[4, 8], alpha=0.1, y_true=[10, 1, 9, 4], y_pred=[9, 3, 6, 7].
+A. 36.89
+B. 36.00
+C. 23.89
+D. 23.00
+
+7. Care dintre punctele urmatoare, alaturi de etichetele corespunzatoare, pot fi discriminate corect de un perceptron?
+A. X = ((1,1),(1,2),(1,3),(-1,1),(-1,-1),(-2,-1)) Y = (1,1,1,1,-1,-1)
+B. X = ((1,1),(1,2),(2,2),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+C. X = ((-1,1),(-1,2),(1,3),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+D. X = ((1,1),(1,3),(2,3),(2,1),(-1,2),(3,2)) Y = (1,1,1,-1,-1,-1)
+
+8. Daca datele sunt impartite in 5 clase si folosim un SVM pentru antrenare, cate clasificatoare binare vor fi antrenate prin metoda one-vs-one?
+A. 5
+B. 20
+C. 10
+D. 25
+
+9. In ce scenariu nu este masurarea acuratetii suficienta pentru o evaluare corecta a modelului?
+A. Atunci cand setul de date nu este balansat
+B. Atunci cand sunt 3 clase in setul de date
+C. Cand setul de date este balansat dar datele de antrenare si testare vin din surse diferite
+D. Atunci cand setul de date este format din fisiere audio
+
+10. Care dintre punctele urmatoare, alaturi de etichetele corespunzatoare, pot fi discriminate corect de un perceptron?
+A. X = ((1,1),(1,2),(1,3),(-1,1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+B. X = ((1,1),(1,2),(2,2),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+C. X = ((-1,1),(-1,2),(1,3),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+D. X = ((1,1),(1,3),(2,3),(2,1),(2,2),(3,2)) Y = (1,1,1,-1,-1,-1)
+

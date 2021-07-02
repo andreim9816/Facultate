@@ -1,0 +1,60 @@
+import numpy as np
+
+class Knn_classifier:
+    def __init__(self, train_images, train_labels):
+        self.train_images = train_images
+        self.train_labels = train_labels
+
+    def classify_image(self , test_image , num_neighbours = 3 , metric = 'l2'):
+        if (metric == 'l2'):
+            distances = np.sqrt(np.sum((self.train_images - test_image) ** 2 , axis = 1))
+        elif (metric == 'l1'):
+            distances = np.sum(abs(self.train_images - test_image) , axis = 1)
+
+        sort_index = np.argsort(distances); # argsort - luam indecsii, sortam dupa distante
+        sort_index = sort_index[:num_neighbours]
+        nearest_labels = self.train_labels[sort_index]
+        hist = np.bincount(nearest_labels) # numara aparitiile intr-un int
+        return np.argmax(hist)
+
+    def classify_images(self , test_images , num_neighbours = 3 , metric = 'l2'):
+        num_imgs = test_images.shape[0]
+        predicted_labels = np.zeros((num_imgs),np.int)
+        for i in range(num_imgs):
+            predicted_labels[i] = self.classify_image(test_images[1,:] , num_neighbours = num_neighbours , metric = metric)
+        return predicted_labels
+
+def accuracy_score(y_true , y_pred):
+    return (y_pred == y_true).mean()
+
+train_images = np.loadtxt('train_images.txt') # incercam imaginile
+train_labels = np.loadtxt('train_labels.txt').astype(int) # incarcam etichetele
+test_images = np.loadtxt('test_images.txt') # incarcam imaginile
+test_labels = np.loadtxt('test_labels.txt').astype(int)
+
+classifier = Knn_classifier(train_images, train_labels)
+predicted_labels = classifier.classify_images(test_images, 3 , metric = 'l2')
+print(predicted_labels)
+print(accuracy_score(test_labels , predicted_labels))
+
+
+# 4 a
+
+max_num_neighbors = 9
+num_neighbors = [i for i in range(1, max_num_neighbors, 2)]
+accuracy = np.zeros((len(num_neighbors)))
+
+for n in range(len(num_neighbors)):
+    predicted_labels = classifier.classify_images(test_images, num_neighbors = num_neighbors[n], metric='l2')
+    accuracy[n] = accuracy_score(test_labels, predicted_labels)
+
+np.savetxt('acuratete_l2.txt', accuracy)
+# Ploteaza punctele
+plt.plot(num_neighbors, accuracy)
+
+# Adauga etichete pentru fiecare axa
+plt.xlabel('number of neighbors')
+plt.ylabel('accuracy')
+
+# Afiseaza figura
+plt.show()

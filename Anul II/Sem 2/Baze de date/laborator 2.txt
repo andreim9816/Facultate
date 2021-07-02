@@ -1,0 +1,11 @@
+DESC jobs;
+
+SELECT e.last_name, e.job_id , j.job_title , d.department_name , e.salary
+FROM jobs j
+JOIN employees e ON ( e.job_id = j.job_id)
+JOIN departments d ON (e.department_id = d.department_id);
+
+/* ex 27  */
+SELECT e1.first_name AS "Angajat",e1.hire_date AS "Data_ang" ,e2.first_name AS "Manager", e2.hire_date AS "Data_mgr"
+FROM employees e1
+JOIN employees e2 ON(e1.manager_id = e2.employee_id AND e1.hire_date <e2.hire_date);

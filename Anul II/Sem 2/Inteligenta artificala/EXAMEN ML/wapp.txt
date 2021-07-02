@@ -1,0 +1,162 @@
+Ce tip de metrica poate obtine 100% acuratete pe datele de antrenare pentru urmatorul set de puncte 2D [([1, 1], 1), ([5, 5], 1), ([10, 10], 1), ([5, 4], 0), ([6, 5], 0), ([6, 4], 0)] considerand un clasificator KNN cu un singur vecin?
+A. L2
+B. Cosinus
+C. L1
+D. Niciunul dintre raspunsuri
+
+7. In cazul analizei liniar discriminante, hiperplanul pe care se proiecteaza punctele este:
+A. Paralel cu hiperplanul de separare, distanta fiind controlata prin bias
+B. Perpendicular pe hiperplanul de separare
+C. Orienta astfel incat punctele sa fie cat mai departate
+D. Orientat astfel incat punctele sa fie cat mai apropriate
+
+3. Cat este valoarea functiei de pierdere data de media patratelor erorilor daca etichetele corecte sunt y = [100, -25, 0.5] si etichetele prezise sunt y_hat = [101, -23, 0]?
+A. 1.16
+B. 1.1
+C. 1.75
+D. 1.7
+
+9. Ce activare aduce cea mai mare performanta in contextul unei probleme de clasificare cu doua clase si un clasificator format dintr-un singur neuron?
+A. ReLU
+B. Sigmoid
+C. Leaky ReLU
+D. Liniara
+
+2. Care dintre urmatoarele asigura media 0 pentru fiecare din trasaturile din setul de date? X reprezinta setul de date, X_i represinta setul de trasaturi i al tuturor exemplelor din setul de date iar x reprezinta un exemplu din setul de date.
+A. L1 Normalization ( x / sum |x_i| pentru fiecare exemplu x )
+B. Standard Normalization ( X_i / std(X_i) - mean(X_i) pentru fiecare trasatura i )
+C. Min-Max Scaling ( (X_i - min(X_i)) / (max(X_i) - min(X_i)) pentru fiecare trasatura i )
+D. L2 Normalization ( x / sqrt(sum x_i^2 ) pentru fiecare exemplu x )
+
+7. Care dintre urmatoarele functii nu este functie nucleu?
+A. K(x,y) = 5x - 2y
+B. K(x,y) = sum(sqrt(x_i·y_i)) + sum(min{x_i,y_i})
+C. K(x,y) = sum(min{x_i,y_i})
+D. K(x,y) = (x·y + 10)**5
+
+Care dintre punctele urmatoare, alaturi de etichetele corespunzatoare, pot fi discriminate corect de un perceptron?
+A. X = ((1,1),(1,2),(2,2),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+B. X = ((1,1),(1,2),(1,3),(-1,1),(-1,-1),(-2,-1)) Y = (1,1,1,1,-1,-1)
+C. X = ((-1,1),(-1,2),(1,3),(1,-1),(-1,-1),(-2,-1)) Y = (1,1,-1,1,-1,-1)
+D. X = ((1,1),(1,3),(2,3),(2,1),(-1,2),(3,2)) Y = (1,1,1,-1,-1,-1)
+
+9. Cand este mai eficient sa folosim reprezentarea duala a datelor?
+A. Cand avem o problema de clasificare cu foarte multe clase (mai mult de doua)
+B. Cand avem o problema de clasificare binara (cu doua clase)
+C. Cand numarul de trasaturi este mai mic decat numarul de exemple
+D. Cand numarul de trasaturi este mai mare decat numarul de exemple
+
+9. Ce tip de metrica poate obtine 100% acuratete pe datele de antrenare pentru urmatorul set de puncte 2D [([1, 1], 1), ([5, 5], 1), ([10, 10], 1), ([5, 4], 0), ([6, 5], 0), ([6, 4], 0)] considerand un clasificator KNN cu un singur vecin?
+A. L2
+B. Cosinus
+C. L1
+D. Niciunul dintre raspunsuri
+
+7. Pot fi folosite modelele de regresie pentru a face clasificare?
+A. Nu, pentru ca nu sunt facute pentru clasificare si nu pot si adaptate in niciun mod pentru astfel de probleme.
+B. Da, pot fi folosite aproape intotdeauna cu mici ajustari. 
+C. Da, dar doar daca setul de date este balansat.
+D. Nu, pentru ca seturile de date nu sunt suficient de mari in general.
+
+3. De ce este necesar setul de test?
+A. Pentru ca setul de antrenare nu este in general suficient de mare.
+B. Pentru ca testarea pe validare este neriguroasa din moment ce folosim acest set pentru determinarea hiperparametrilor.
+C. Pentru ca setul de test ajuta la obtinerea overfitting-ului.
+D. Pentru ca datele ar trebui intotdeauna impartite 70%-15%-15%.
+
+Care este scopul ratei de invatare in contextul retelelor neurale?
+A. Ajuta procesul de convergenta prin prevenirea pasilor mult prea mari care pot depasi minimul global
+B. Specifica rata de selectie pentru batch-uri, astfel ajutand procesul de invatare
+C. Este o foarte necesara initializare pentru bias-uri
+D. Favorizeaza depasirea exagerata a punctului de minim si reguleaza viteza de convergenta
+
+5. Fiind date etichitele (1, 2, 1, 1, 2, 1, 1, 1) si predictiile (1, 2, 1, 1, 2, 2, 1, 2), care sunt acuratetea si scorul f1?
+A. acc = 0.82 f1 = 0.66
+B. acc = 0.75 f1 = 0.75
+C. acc = 0.75 f1 = 0.8
+D. acc = 0.5 f1 = 0.66?
+
+8. Ce avantaj aduce folosirea bias-ului in contextului neuronului artificial?
+A. Nu aduce niciun avantaj
+B. Ajuta aducand constragerea de a trece prin origine a hiperplanelor determinate de neuroni
+C. Ajuta prin evitarea situatiilor in care toate hiperplanele determinate de neuroni trebuie sa treaca prin origine
+D. Ajuta semnificativ in contextul in care datele sunt debalansate inclinand (bias) decizia catre clasa defavorizata
+
+3. Care dintre urmatoarele nu constituie o functie de pierdere valida pentru o retea neurala antrenata prin metoda coborarii pe gradient?
+A. L2 Loss
+B. Cross Entropy
+C. L(output, label) = 0 daca output - label < 0, altfel 1
+D. Media partatelor erorilor
+
+
+1. Fie urmatoarele probabilitati pentru evenimentele A, B, P(A)=0.3 P(B)=0.5 P(A|B)=0.33, care este valoarea P(B|A)?
+A. 0.55
+B. 0.65
+C. 0.75
+D. 0.45
+
+2. Fiind data urmatoarea multime de antrenare cu etichetele corespunzatoare: X_train = ((1,0),(1,1),(1,2),(2,1),(0,1),(-1,1),(-1,-1),(-1,2)) Y_train = (1,5,4,3,2,3,3,2), cati clasificatori sunt antrenati pentru un SVM folosind abordarea ONE vs ALL?
+A. 5
+B. 4
+C. 6
+D. 10
+
+3. Care dintre urmatoarele asigura media 0 pentru fiecare din trasaturile din setul de date? X reprezinta setul de date, X_i represinta setul de trasaturi i al tuturor exemplelor din setul de date iar x reprezinta un exemplu din setul de date.
+A. L1 Normalization ( x / sum |x_i| pentru fiecare exemplu x )
+B. L2 Normalization ( x / sqrt(sum x_i^2 ) pentru fiecare exemplu x )
+C. Standard Normalization ( X_i / std(X_i) - mean(X_i) pentru fiecare trasatura i )
+D. Min-Max Scaling ( (X_i - min(X_i)) / (max(X_i) - min(X_i)) pentru fiecare trasatura i )
+
+4. Cate ponderi (inclusiv bias) are o retea neuronala cu configuratia 2-5-8-1 (primul numar este dimensiunea datelor de intrare, urmatoarele numere reprezinta numarul de neuroni de pe fiecare strat)?
+A. 58
+B. 74
+C. 72
+D. 76
+
+5. Care sunt punctele in care dreapta de separare a percetronului w = [2, -4], b = [-1] intersecteaza axele?
+A. (-1, 0) si (0, 0.5)
+B. (0, -1) si (0.5, 0)
+C. (0, 0.5) si (0.25, 0)
+D. (0.5, 0) si (0, -0.25)
+
+6. Care este rezultatul modelului "Masini cu vectori suport" pentru datele de intrare X = [0.5, -2, -5, 0.9], daca ponderile sunt W = [-2, -1.2, -3, 1.2] si bias-ul b = -0.5?
+A. 1
+B. -1
+C. 2
+D. 0
+
+7. Care este valoarea de iesire a perceptronului daca input=[2.4, 3.0], ponderi=[-0.5, 0.2], bias=0.0 (functia de activare - sign)?
+A. -1
+B. 0
+C. 1
+D. -0.6
+
+8. Care este precizia unui clasificator daca etichetele corecte sunt y = [1, 1, 1, 1, 0, 0, 0, 1] si cele prezise sunt y_hat = [1, 0, 0, 1, 0, 1, 1, 1]?
+A. 0.2
+B. 0.4
+C. 0.1
+D. 0.6
+
+9. Cum ajuta normalizarea in contextul unui clasificator KNN?
+A. Normalizarea creste performanta cand setul de date este balansat
+B. Normalizarea aduce trasaturi diferite pe aceesi scala astfel incat distantele L1/L2 dintre exemple sa nu fie impactate de variantele diversificate
+C. Normalizarea ajuta la reducerea zgomotului si asigura o convergenta mai inceata
+D. Normalizarea nu ajuta
+
+10. Care dintre urmatoarele afirmatii este gresita?
+A. Retele neuronale pot invata problema XOR
+B. Setarea parametrului C la o valoare prea mare in timpul antrenarii unui SVM poate conduce la supra-invatare
+C. Tangenta hiperbolica nu se satureaza
+D. Al doilea strat dintr-o retea neuronala nu poate primi date de intrare
+
+2. Fiind date etichetele y = [23, 14, 30, 45, 18, 31] si predictiile aferente p = [26, 20, 39, 38, 18, 33], care este masura Kendall Tau?
+A. 0.6
+B. 0.4
+C. 0.2
+D. 1.0
+
+1. Care este valoarea functiei de pierdere a unui model de regresie Ridge, daca etichetele prezise sunt y_hat = [-2, -3, -1], iar etichetele corecte sunt y = [-2, -3, -2.5], ponderile sunt W = [1, 0], bias = 5 si alpha = 1?
+A. 0.75
+B. 0.85
+C. 0.95
+D. 1.75

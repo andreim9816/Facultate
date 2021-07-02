@@ -1,0 +1,59 @@
+1. Care este dimensiunea activarii rezultate dupa aplicarea unui filtru de dimensiune 3, cu stride 2, pe o matrice de intrare de dimensiune 5?
+A. 2
+B. 3
+C. 4
+D. 5
+
+2. Fie f(x,y,z) = xy + 2z, care sunt valorile derivatelor partiale df/dx, df/dy, df/dz, pentru x = 3, y = 4, z = 3?
+A. df/dx = 4, df/dy = 3, df/dz = 1
+B. df/dx = -4, df/dy = -4, df/dz = 3
+C. df/dx = 3, df/dy = 4, df/dz = 2
+D. df/dx = 4, df/dy = 3, df/dz = 2
+
+3. Care este rezultatul in urma aplicarii functiei ReLU(x), unde x=-3.05?
+A. -3.05
+B. 0
+C. 3.05
+D. 3
+
+4. In ce scenariu nu este masurarea acuratetii suficienta pentru o evaluare corecta a modelului?
+A. Atunci cand setul de date este format din fisiere audio
+B. Atunci cand setul de date nu este balansat
+C. Atunci cand sunt 3 clase in setul de date
+D. Cand setul de date este balansat dar datele de antrenare si testare vin din surse diferite
+
+5. Fie urmatoarele probabilitati pentru evenimentele A, B, P(A)=0.3 P(B)=0.5 P(A|B)=0.33, care este valoarea P(B|A)?
+A. 0.55
+B. 0.75
+C. 0.65
+D. 0.45
+
+6. Cati vecini ar trebui considerati pentru a obtine cel mai bun rezultat posibil din partea unui clasificator bazat pe cei mai apropiati vecini?
+A. 3
+B. 5
+C. 1
+D. Depinde de datele problemei si ar trebui determinat prin validare
+
+7. Cati vecini ar trebui considerati pentru a obtine cel mai bun rezultat posibil din partea unui clasificator bazat pe cei mai apropiati vecini?
+A. 8
+B. 3
+C. Depinde de datele problemei si ar trebui determinat prin validare
+D. 5
+
+8. Calculati costul pentru Regresia Ridge avand ponderi=[4, 8], alpha=0.1, y_true=[10, 1, 9, 4], y_pred=[9, 3, 6, 7].
+A. 36.89
+B. 23.89
+C. 23.00
+D. 36.00
+
+9. Dupa 5 epoci de antrenare, avem urmatoarele pierderi pe setul de antrenare la fiecare epoca [1.12, 1.06, 0.99, 0.90, 0.70], si urmatoarele pierderi pe setul de validare la fiecare epoca [1.10, 1.06, 0.94, 0.88, 0.66]. Prezinta overfitting/underfitting aceste pierderi?
+A. Underfitting
+B. Prezinta si overfitting si underfitting
+C. Nu prezinta nici overfitting, nici underfitting
+D. Overffiting
+
+10. Fiind data urmatoarea multime de antrenare: X = ((0, 1), (0, 0), (-1, 0), (1, 1)), y = (-1, 1, 1, -1). Antrenati un perceptron folosind algoritmul Widrow-Hoff (fara amestecare) timp de 1 epoca, cu rata de invatare 0.5 Care sunt valorile ponderilor si biasului?
+A. w = [ -0.375 -0.5 ] b = 0.625
+B. w = [ 0.  -0.5 ] b = 0.25
+C. w = [ -0.375 -1.25 ] b = -0.125
+D. w = [ -0.75 -0.875 ] b = 0.25

@@ -1,0 +1,15 @@
+
+------------------ Concluzie -----------------------
+luiza  ^ aurel > costin ^ diana ^ alina
+Pentru euristica 1, timpul total a fost de 0.000000000000000 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+luiza  ^ aurel ^ george > diana ^ alina
+Pentru euristica 2, timpul total a fost de 0.000720262527466 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+luiza  v mihnea > razvan ^ simona ^ costin ^ diana ^ alina
+Pentru euristica 3, timpul total a fost de 0.000000000000000 secunde pana s-a ajung la concluzie
+

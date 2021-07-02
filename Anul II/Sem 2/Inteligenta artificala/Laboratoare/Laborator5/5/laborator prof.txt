@@ -1,0 +1,99 @@
+import numpy as np
+from sklearn import preprocessing
+import pdb
+
+class Bag_of_words:
+
+    def __init__(self):
+        self.vocabulary = {}
+        self.words = []
+        self.vocabulary_length = 0
+
+    def build_vocabulary(self, data):
+        for document in data:
+            for word in document:
+                # word = word.lower()
+                if word not in self.vocabulary.keys():
+                    self.vocabulary[word] = len(self.vocabulary)
+                    self.words.append(word)
+
+        self.vocabulary_length = len(self.vocabulary)
+        self.words = np.array(self.words)
+        
+    def get_features(self, data):
+        features = np.zeros((len(data), self.vocabulary_length))
+
+        for document_idx, document in enumerate(data):
+            for word in document:
+                if word in self.vocabulary.keys():
+                    features[document_idx, self.vocabulary[word]] += 1
+        return features
+
+
+# problema in versiunea de numpy pe care o am.
+# sursa: google!!!
+np_load_old = np.load
+np.load = lambda *a,**k: np_load_old(*a, allow_pickle=True, **k)
+
+# load data
+training_data = np.load('training_sentences.npy')
+training_labels = np.load('training_labels.npy')
+
+test_data = np.load('test_sentences.npy')
+test_labels = np.load('test_labels.npy')
+
+np.load = np_load_old
+
+bow_model = Bag_of_words()
+bow_model.build_vocabulary(training_data) 
+
+
+#2
+def normalize_data(train_data, test_data, type=None):
+    scaler = None
+    if type == 'standard':
+        scaler = preprocessing.StandardScaler()
+
+    elif type == 'min_max':
+        scaler = preprocessing.MinMaxScaler()
+
+    elif type == 'l1':
+        scaler = preprocessing.Normalizer(norm='l1')
+
+    elif type == 'l2':
+        scaler = preprocessing.Normalizer(norm='l2')
+
+    if scaler is not None:
+        scaler.fit(train_data)
+        scaled_train_data = scaler.transform(train_data)
+        scaled_test_data = scaler.transform(test_data) 
+        return (scaled_train_data, scaled_test_data)
+    else:
+        print("No scaling was performed. Raw data is returned.")
+        return (train_data, test_data)
+
+train_features = bow_model.get_features(training_data)
+test_features = bow_model.get_features(test_data) 
+scaled_train_data, scaled_test_data = normalize_data(train_features, test_features, type='l2')
+
+from sklearn import svm
+
+svm_model = svm.SVC(C=1, kernel='linear')
+svm_model.fit(scaled_train_data, training_labels)
+predicted_labels_svm = svm_model.predict(scaled_test_data)
+
+from sklearn.metrics import f1_score
+
+def compute_accuracy(gt_labels, predicted_labels):
+    accuracy = np.sum(predicted_labels == gt_labels) / len(predicted_labels)
+    return accuracy
+
+model_accuracy_svm = compute_accuracy(np.asarray(test_labels), predicted_labels_svm)
+print('f1 score', f1_score(np.asarray(test_labels), predicted_labels_svm))
+print("SVM model accuracy: ", model_accuracy_svm * 100)
+
+coefs = np.squeeze(np.array(svm_model.coef_))
+# pdb.set_trace()
+idx = np.argsort(coefs)  
+print('the first 10 revelant negative words are', bow_model.words[idx[:10]])
+print('the first 10 revelant positive words are', bow_model.words[idx[-10:]])

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../Lab4-6/8 puzzle/.idea/8 puzzle.iml" filepath="$PROJECT_DIR$/../../Lab4-6/8 puzzle/.idea/8 puzzle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Connect4.iml" filepath="$PROJECT_DIR$/.idea/Connect4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../Proiect/Prob4/.idea/Prob4.iml" filepath="$PROJECT_DIR$/../../Proiect/Prob4/.idea/Prob4.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Reversi/.idea/Reversi.iml" filepath="$PROJECT_DIR$/../Reversi/.idea/Reversi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../TicTacToe/.idea/TicTacToe.iml" filepath="$PROJECT_DIR$/../TicTacToe/.idea/TicTacToe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../sterge/.idea/sterge.iml" filepath="$PROJECT_DIR$/../sterge/.idea/sterge.iml" />
+    </modules>
+  </component>
+</project>

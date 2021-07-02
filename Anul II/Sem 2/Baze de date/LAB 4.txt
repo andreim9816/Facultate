@@ -1,0 +1,241 @@
+-- laborator 4
+
+-- 1) COUNT
+-- 2)
+
+
+/* ex 2 */
+
+SELECT MAX(salary) as "Maxim" , MIN(salary) as "Mini", SUM(salary)as "SUMA" , ROUND(AVG(salary) , 2) as "MEDIA"
+FROM employees;
+
+/* ex 3*/
+
+SELECT MAX(salary) as "Maxim" , MIN(salary) as "Mini", SUM(salary)as "SUMA" , ROUND(AVG(salary) , 2) as "MEDIA"
+FROM employees
+GROUP BY job_id; -- afiseaza pentru fiecare job
+
+/* ex 4 */
+
+-- cand aud "PENTRU FIECARE" ma gandesc la GROUP BY
+
+SELECT COUNT(employee_id) , job_id
+FROM employees
+GROUP BY job_id;
+
+
+/* ex 5 */
+SELECT SUM(COUNT(DISTINCT manager_id))
+FROM employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id;
+
+-- sau
+
+SELECT (COUNT(DISTINCT manager_id))
+FROM employees
+WHERE manager_id IS NOT NULL;
+
+/* ex 6 */
+
+SELECT MAX(salary) - MIN(salary) AS "diferenta"
+FROM employees;
+
+/* ex 7 */
+
+SELECT department_name , city , COUNT(employee_id), ROUND(AVG(salary) , 2)
+FROM employees
+JOIN departments USING (department_id)
+JOIN locations USING (location_id)
+GROUP BY department_name , city;
+
+/* ex 8 */
+
+SELECT employee_id , last_name , salary
+FROM employees
+WHERE salary > 
+( SELECT AVG(salary) 
+FROM employees)
+ORDER BY salary DESC;
+
+/* ex 9 */
+
+-- grupeaza liniile dupa manageri
+SELECT manager_id , MIN(salary)
+FROM employees 
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id
+HAVING MIN(salary) >= 3000;
+
+-- daca as vrea sa afisez si numele angajatului
+SELECT ang.employee_id , ang.last_name , ang2.manager_id, minim
+FROM (
+    SELECT manager_id , MIN(salary) AS minim
+    FROM employees 
+    WHERE manager_id IS NOT NULL
+    GROUP BY manager_id
+    HAVING MIN(salary) >= 3000
+) ang2
+JOIN employees ang ON ang.employee_id = ang2.manager_id;
+
+/* ex 10 */
+
+SELECT department_id, department_name, MAX(salary)
+FROM employees
+JOIN departments USING (department_id)
+GROUP BY department_id, department_name
+HAVING MAX(salary) > 3000;
+
+/* ex 11 */
+
+SELECT MIN(AVG(SALARY))
+FROM employees
+GROUP BY job_id;
+
+/* ex 12 */
+
+SELECT department_id , department_name , SUM(salary)
+FROM employees
+JOIN departments USING(department_id)
+GROUP BY department_name, department_id;
+
+/* ex 13 */
+
+SELECT ROUND(MAX(AVG(salary)),2)
+FROM employees
+GROUP BY department_id;
+
+SELECT MAX(ROUND(AVG(salary),2))
+FROM employees
+GROUP BY department_id;
+
+/* ex 14 */
+
+SELECT job_id , job_title , ROUND(AVG(salary),2)
+FROM employees 
+JOIN jobs USING(job_id)
+GROUP BY job_id, job_title
+HAVING ROUND(AVG(salary),2) = (
+    SELECT ROUND(MIN(AVG(salary)) ,2)
+    FROM employees
+    GROUP BY job_id
+);
+
+/* ex 15 */
+
+SELECT AVG(salary)
+FROM employees
+HAVING AVG(salary) > 2500;
+
+/* ex 16 */
+
+SELECT last_name, job_id, salary, DECODE(UPPER(job_id), 'IT_PROG', salary*1.2, 'SA_REP', salary*1.25, 'SA_MAN', salary*1.35, salary) "Salariu renegogiat" 
+FROM employees;
+
+SELECT last_name, job_id, salary,
+CASE UPPER(job_id) 
+WHEN  'IT_PROG' THEN salary*1.2
+WHEN 'SA_REP' THEN  salary*1.25
+WHEN  'SA_MAN' THEN salary*1.35
+ELSE salary
+END  "Salariu renegogiat" 
+FROM employees;
+
+/* ex17 */
+
+--var standard
+
+SELECT last_name, department_id, department_name 
+FROM employees 
+JOIN departments USING(department_id);
+
+--var cu clauza on
+
+SELECT last_name, e.department_id, department_name
+FROM employees e
+JOIN departments d ON(e.department_id = d.department_id);
+
+
+--var non-standard
+
+SELECT last_name, e.department_id, department_name
+FROM employees e, departments d
+WHERE e.department_id = d.department_id;
+
+/* ex 18 */
+
+SELECT job_title 
+FROM jobs 
+JOIN employees USING (job_id)
+WHERE department_id=30;
+
+/* ex 19 */
+
+SELECT last_name, department_name, city
+FROM employees 
+JOIN departments USING(department_id)
+JOIN locations USING(location_id)
+WHERE commission_pct
+ IS NOT NULL;
+
+/* ex 20 */
+
+SELECT COUNT(DISTINCT department_id) as "Numar de departamente"
+FROM employees
+WHERE department_id IN
+ (
+ SELECT department_id
+ FROM employees
+ GROUP BY department_id
+ HAVING COUNT(employee_id) >= 15
+ );
+                        
+/*ex 21.*/
+
+SELECT department_id , SUM(salary) "Suma totala salarii"
+FROM employees
+WHERE department_id <> 30 -- diferit de 30
+GROUP BY department_id
+HAVING COUNT(employee_id) >= 11
+ORDER BY 2; -- ordonez dupa a 2a 
+
+/* ex 22 */
+
+SELECT d.department_id , d.department_name , nr_angajati , medie_salariu , e.last_name , e.salary , e.job_id
+FROM (SELECT department_id , last_name , salary , job_id
+      FROM employees) e
+FULL OUTER JOIN 
+     (SELECT department_id , department_name , COUNT(employee_id) as nr_angajati , AVG(salary) as medie_salariu
+      FROM departments
+      FULL OUTER JOIN employees USING(department_id) 
+      GROUP BY department_id , department_name) d
+ON(e.department_id = d.department_id);
+
+/* ex 23*/
+
+SELECT DISTINCT department_name , city , job_title , salariu_total as TOTAL_SALARY
+FROM (
+      SELECT department_name ,department_id, city , job_id
+      FROM employees
+      JOIN departments USING(department_id
+     )
+JOIN locations USING(location_id))d
+JOIN (
+     SELECT job_id , department_id, SUM(salary) as salariu_total
+     FROM employees
+     GROUP BY  department_id , job_id
+     HAVING department_id > 80
+     ) j1
+ON(j.job_id = d.job_id AND j.department_id = d.department_id)
+JOIN jobs j2 ON(j1.job_id = j2.job_id);
+
+/* ex 24 */
+SELECT last_name , COUNT(employee_id) as "Numar joburi"
+FROM employees
+JOIN job_history USING(employee_id)
+GROUP BY last_name 
+HAVING COUNT(employee_id) > 1;
+
+/* ex 25*/
+SELECT AVG(DECODE(commission_pct , NULL , 0 , commission_pct))
+FROM employees;

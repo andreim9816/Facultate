@@ -1,0 +1,15 @@
+
+------------------ Concluzie -----------------------
+Lista open e vida, nu avem drum de la nodul start la nodul scop
+Pentru euristica 1, timpul total a fost de 0.000984430313110 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+Lista open e vida, nu avem drum de la nodul start la nodul scop
+Pentru euristica 2, timpul total a fost de 0.000996589660645 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+Lista open e vida, nu avem drum de la nodul start la nodul scop
+Pentru euristica 3, timpul total a fost de 0.000000000000000 secunde pana s-a ajung la concluzie
+

@@ -1,0 +1,60 @@
+1. Care este volumul de output al unui strat convolutional de input 15x15x3, avand 5 filtre de dimensiune 3, stride 1, padding 1?
+A. 15x15x5
+B. 4x4x8
+C. 7x7x6
+D. 8x8x5
+
+2. Care este acuratetea unui clasificator daca etichetele corecte sunt y = [8, 7, 4, 1, 0, 6, 3, 2] si cele prezise sunt y_hat = [5, 6, 6, 1, 0, 2, 2, 1]?
+A. 0.52
+B. 0.25
+C. 0.55
+D. 0.2
+
+3. Cum vor arata aceste date in urma aplicarii normalizarii L1 [-10, 20, 30]?
+A. [0.0, 0.5, 1.0]
+B. [-1, 2, 3]
+C. [10, 20, 30]
+D. [-0.16, 0.33, 0.5]
+
+4. Care este scufundarea asociata functie nucleu RBF?
+A. Nu exista
+B. f(x) = sqrt(x)
+C. k(x,y) = exp(- d(x,y) / (2 * sigma)), unde d(x,y) denote distanta Euclidiana
+D. f(x) = x
+
+5. Calculati costul pentru Regresia Ridge avand ponderi=[3, 2], alpha=0.1, y_true=[9, 2, 9, 5], y_pred=[9, 3, 6, 7].
+A. 36.23
+B. 14.36
+C. 14.00
+D. 36.00
+
+6. Avand urmatorul vocabular {0 - dogs, 1 - cats, 2 - candies, 3 - likes, 4 - she, 5 - he}. Care este reprezentarea "colectie de cuvinte" a propozitiei "she likes candies and vegetables."?
+A. [1, 0, 0, 1, 0, 0, 1, 1]
+B. [0, 0, 1, 1, 1, 0]
+C. [1, 1, 1, 1, 1, 1]
+D. [2, 0, 0, 1, 1, 0]
+
+7. Care este diferenta intre pierderile ce utilizeaza distanta L1 si pierderile ce utilizeaza distanta L2?
+A. Folosind distanta L1 poti evita blocarea intr-un minim local in contextul coborarii stocastice pe gradient in cazul retelelor neurale.
+B. Folosind distanta L2 poti evita blocarea intr-un minim local in contextul coborarii stocastice pe gradient in cazul retelelor neurale.
+C. Distanta L2 favorizeaza in general erorile mai mici chiar daca sunt in numar mai mare in locul erorilor mai mari in numar mai mic in timp de distanta L1 nu face o diferenta intre aceste doua cazuri
+D. Distanta L1 favorizeaza in general erorile mai mici chiar daca sunt in numar mai mare in locul erorilor mai mari in numar mai mic in timp de distanta L2 nu face o diferenta intre aceste doua cazuri
+
+8. Fiind data urmatoarea multime de antrenare, reprezentand inaltimea (in cm) a unei persoane si eticheta corespunzatoare (F-femeie, M-barbat): [(160, F), (175, M), (155, F), (172, F), (187, F), (180, M), (177, M), (190, M)], impartiti valorile continue (intaltimea) in urmatoarele intervale: (150-160, 161-170, 171-180, 181-190). Care este probabilitatea ca o persoana de 178cm inaltime sa fie femeie? Folositi Regula lui Bayes.
+A. 3/4
+B. 1/2
+C. 1/4
+D. 1/3
+
+9. Fie un perceptron cu urmatoerele ponderi w=[0.6, 0.2], urmatorii gradienti dw=[-3.6, -2.2], si rata de invatare 0.1. Care sunt valorile ponderilor dupa operatie de actualizare (algoritmul Widrow-Hoff)?
+A. [0.32, 0.46]
+B. [0.84, 0.52]
+C. [0.96, 0.22]
+D. [0.96, 0.44]
+
+10. Cati parametri antrenati (ponderi + bias) vom avea intr-o retea complet conectata cu dimesniunea de intrare = 4, dimensiunea stratului ascuns = 8, dimensiunea stratului de iesire = 1?
+A. 32
+B. 33
+C. 49
+D. 8
+

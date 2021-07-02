@@ -1,0 +1,16 @@
+ionel   alina    teo  eliza     carmen monica
+george  diana    bob  liber     nadia mihai
+aurel   costin   anda bogdan    dora marin
+luiza   simona   dana cristian  tamara dragos
+mihnea  razvan   radu patricia  gigel elena
+suparati
+luiza simona
+ionel alina
+bogdan cristian
+gigel tamara
+george ionel
+carmen monica
+nadia mihai
+nadia dora
+cristian patricia
+mesaj: luiza -> alina

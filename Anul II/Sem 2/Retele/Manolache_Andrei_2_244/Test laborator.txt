@@ -1,0 +1,12 @@
+﻿ETAPA 1 – Cablare fiecare LAN.  
+ETAPA 2: Subnetare.  
+ETAPA 3: Configurarea echipamentelor.  
+ETAPA 4: Asignarea adreselor IP optim, din adresa IP 129.211.153.140/9 conform cerințelor:  
+LAN Stanley1 – 4095 useri.  
+LAN Stanley2 – 2047 useri. FERMA DE SERVERE – DHCP, DNS, EMAIL,FTP, WEB.  
+LAN Stanley3 – 9200 useri.  
+Wi-FiStanley3 = WPA2 PERSONAL – PASS = Stanley129pa55  
+2 Laptopuri conectate la Wi-Fi. Lap2 permis dupa MAC.  
+ETAPA 5: Rutarea. TESTARE PING+SSH.  
+ETAPA 6. Toate echipamentele trebuie sa comunice intre ele. SERVICII ACTIVE.  
+ETAPA 7. Bonus pentru functionare complete a topologiei. RUTARE TOTALA +TESTE.  

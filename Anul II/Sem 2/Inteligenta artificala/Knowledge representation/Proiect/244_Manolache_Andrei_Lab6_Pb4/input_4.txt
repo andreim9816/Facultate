@@ -1,0 +1,32 @@
+ionel   alina      diandra liber    alex denisa
+george  diana      liber jerry      laura serban
+cela    costin     liber dora       gina catrinel
+luiza   simona     tamara dragos    dalia dorina
+mihnea  razvan     maria gabi       cristina liber
+teo     eliza      nadia mihai      adelin  edi
+bob     mary       adi mihaita      liber gica
+anda    bogdan     oana victor      horatiu ion
+dana    cristian   gigel elena      ilie lucian
+radu    patricia   marin marina     nelu octav
+carmen  monica     cosmin sergiu    sabin sorina
+suparati
+diana costin
+cela costin
+luiza mihnea
+teo bob
+bob mary
+anda bogdan
+cristian patricia
+patricia radu
+monica cosmin
+cosmin marin
+gigel elena
+oana victor
+adi mihaita
+gabi dragos
+marina nelu
+nelu ilie
+serban catrinel
+catrinel gina
+catrinel dorina
+mesaj: ionel -> denisa

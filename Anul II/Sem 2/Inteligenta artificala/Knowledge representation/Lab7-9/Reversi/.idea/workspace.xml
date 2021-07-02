@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="38818092-7a9d-42d4-a31c-f674f2497566" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1bqftKPulExN1IquDXtDCCybiop" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Proiect/Prob4" />
+  </component>
+  <component name="RunManager" selected="Python.244_Manolache_Andrei_Lab5_Pb3">
+    <configuration name="244_Manolache_Andrei_Lab5_Pb3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Reversi" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/244_Manolache_Andrei_Lab5_Pb3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Reversi" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Reversi" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Reversi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.244_Manolache_Andrei_Lab5_Pb3" />
+        <item itemvalue="Python.Reversi" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="38818092-7a9d-42d4-a31c-f674f2497566" name="Default Changelist" comment="" />
+      <created>1589749715033</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589749715033</updated>
+      <workItem from="1589749718936" duration="132000" />
+      <workItem from="1589805721895" duration="26000" />
+      <workItem from="1590335689877" duration="200000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="463" y="123" key="FileChooserDialogImpl" timestamp="1589805746781">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="463" y="123" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1589805746781" />
+    <state width="1323" height="65" key="GridCell.Tab.0.bottom" timestamp="1590335889662">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="65" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1590335889662" />
+    <state width="1323" height="65" key="GridCell.Tab.0.center" timestamp="1590335889661">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="65" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1590335889661" />
+    <state width="1323" height="65" key="GridCell.Tab.0.left" timestamp="1590335889661">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="65" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1590335889661" />
+    <state width="1323" height="65" key="GridCell.Tab.0.right" timestamp="1590335889662">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state width="1323" height="65" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1590335889662" />
+    <state x="378" y="192" key="com.intellij.ide.util.TipDialog" timestamp="1590335699288">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="378" y="192" key="com.intellij.ide.util.TipDialog/0.0.1366.738@0.0.1366.738" timestamp="1590335699288" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Reversi$244_Manolache_Andrei_Lab5_Pb3.coverage" NAME="244_Manolache_Andrei_Lab5_Pb3 Coverage Results" MODIFIED="1590335742902" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Reversi$Reversi.coverage" NAME="Reversi Coverage Results" MODIFIED="1590335724510" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

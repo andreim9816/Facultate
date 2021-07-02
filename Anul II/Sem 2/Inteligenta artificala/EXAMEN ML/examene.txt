@@ -1,0 +1,182 @@
+1. What advantage does using a bias value bring in the context of the artificial neuron?
+A. It significantly improves convergence time
+B. It prevents the neuron hyperplanes from being forced to go through the origin
+C. It significantly helps in the context of imbalanced data sets by provinding a bias towards the misrepresented class
+D. It does not bring any advantage
+
+2. Which of the following does not constitute a valid loss for a neural network trained with gradient descent?
+A. Cross Entropy
+B. MSE
+C. L2 Loss
+D. L1 Loss
+
+3. The training data set contains the following examples [(3, PASS), (2, PASS), (2, PASS), (4, PASS), (0, FAIL), (1, FAIL), (3, FAIL), (1, FAIL)], the first component being the number of hours of study and the second denoting wether the student passed the exam. What is the probability of passing the exam with 2 hours of study - P(PASS|2)?
+A. 25%
+B. 50%
+C. 75%
+D. 100%
+
+4. What is the dimension of the weights from the second layer of a neural network with the following configuration 4-6-2-1 (the first number is the input size, the other numbers represent the amount of neurons in each layer)?
+A. 6x2
+B. 6x1
+C. 4x6
+D. 2x1
+
+5. What is the output of the perceptron if input=[2.4, 3.0], weights=[-0.5, 0.2], bias=1.0 (activation function - sign)?
+A. 1
+B. 2.2
+C. 0
+D. -1
+
+6. What is the MSE for the following predicted labels y_pred = [0.1, 0.4, 0.7, 0.3] and truth labels=[1, 0, 1, 0]?
+A. 0.3315
+B. 0.1430
+C. 0.0715
+D. 0.2875
+
+7. What is the difference between using an L1 loss and an L2 loss?
+A. Using the L1 loss you can avoid getting stuck in a local minima when using stochastic gradient descent in the case of neural networks.
+B. The L2 loss generally favors having smaller errors instead of a having fewer but greater errors while the L1 loss does not differentiate between these cases.
+C. The L1 loss generally favors having smaller errors instead of a having fewer but greater errors while the L2 loss does not differentiate between these cases.
+D. Using the L2 loss you can avoid getting stuck in a local minima when using stochastic gradient descent in the case of neural networks.
+
+8. What is the resulting data after applying L1 normalization to this vector [10, 20, 30]?
+A. [0.0, 0.5, 1.0]
+B. [10, 20, 30]
+C. [0.16, 0.33, 0.5]
+D. [1, 2, 3]
+
+9. What is the f1-score of the classifier if the ground-truth labels are y = [0, 1, 1, 0, 0, 0, 1, 1] and the predicted labels are y_hat = [1, 0, 0, 0, 0, 1, 1, 1]?
+A. 0.7
+B. 0.5
+C. 0.6
+D. 0.4
+
+10. Which machine learning model can achieve the best performance in the context of an audio classification problem?
+A. Depends on problem details and should be determined by means of validation
+B. An SVM classifer
+C. A Neural Network with five layers
+D. A Neural Network with two layers
+
+
+ 1. Which of the following is a technique for using an SVM as a multi-class classifier?
+A. Split group classification
+B. One versus all
+C. All versus all
+D. N-way split
+
+2. What is the label of the test example t = [2, 3, 5] if you apply the k-nearest neighbors classifier with k = 1 and metric = L1 (Manhattan distance) given the training data X = [[1, 4, 1], [2, 4, 7], [2, 30, 5], [0, 1, 0]], Y = [1, 3, 2, 2]?
+A. 2
+B. 0
+C. 1
+D. 3
+
+3. If we have the following probabilities for events P(A)=0.5 P(B)=0.9 P(A|B)=0.3, what is the value of P(B|A)?
+A. 0.27
+B. 0.75
+C. 0.63
+D. 0.54
+
+4. Which of the following is a linear classifier?
+A. A two layer neural network with ReLU activations
+B. A 3-NN classifier
+C. An SVM with polynomial kernel
+D. A neuron with no activation
+
+5. How many learned parameters (weights + biases) will a network with input size = 2, hidden layer size = 5, output layer size = 1, have?
+A. 10
+B. 8
+C. 13
+D. 21
+
+6. If the data is split into 9 classes, and we want to train a SVM for classification. How many binary classifiers will be trained in the one-vs-one approach?
+A. 18
+B. 9
+C. 36
+D. 81
+
+7. In which scenario is measuring the accuracy of the model not enough to evaluate the model properly?
+A. When the dataset is imbalanced
+B. When the data set is balanced but the training set and test set come from different sources
+C. When there are 3 classes in the dataset
+D. When the data set is made out of audio samples
+
+8. What is the recall of the classifier if the ground-truth labels are y = [0, 1, 1, 0, 0, 0, 0, 1] and the predicted labels are y_hat = [1, 0, 0, 0, 0, 1, 1, 1]?
+A. 0.33
+B. 0.23
+C. 0.99
+D. 0.45
+
+9. Given the following vocabulary {0 - dogs, 1 - cats, 2 - candies, 3 - likes, 4 - she, 5 - he}. What is the bag of words (BOW) representation of the sentence "she likes dogs and horses."?
+A. [1, 0, 0, 1, 1, 0, 1, 1]
+B. [1, 0, 0, 1, 1, 0]
+C. [1, 0, 1, 1, 1, 0]
+D. [2, 0, 0, 1, 1, 0]
+
+10. Which of the following does not constitute a valid loss for a neural network trained with gradient descent?
+A. L1 Loss
+B. Cross Entropy
+C. MSE
+D. L2 Loss
+
+
+
+ 1. If the data is split into 9 classes, and we want to train a SVM for classification. How many binary classifiers will be trained in the one-vs-one approach?
+A. 18
+B. 36
+C. 9
+D. 81
+
+2. Which of the following neuron activation is the result of the tanh activation function?
+A. [1.01, 0.11, 0.2]
+B. [-1.2, 0.11, 1.2]
+C. [0.9, 0.11, -1.1]
+D. [0.99, 0.05, 0.99]
+
+3. Calculate the cost for the Ridge Regression having weights=[3, 2], alpha=0.1, y_true=[10, 1, 9, 4], y_pred=[9, 3, 6, 7].
+A. 36.23
+B. 23.36
+C. 23.00
+D. 0.10
+
+4. Which of the following is equivalent to a single artificial neuron without activation?
+A. A KNN classifier with 3 neighbors
+B. A Naive Bayes classifier
+C. A neural network with no activations
+D. An SVM with polynomial kernel
+
+5. After training for 5 epochs, we have the following training losses for each epoch [0.60, 0.48, 0.30, 0.28, 0.26], and the following validation losses for each epoch [0.55, 0.43, 0.27, 0.27, 0.25]. Is the model overfitted, underfitted, both, or neither?
+A. Neither
+B. Overffiting
+C. Both
+D. Underfitting
+
+6. What is the output of neural network with 3 hidden units and 1 output unit having ReLU activations for the input x = [1, -2], if the weights are W1 = [-0.5, 3, -2; 2, -1, 0], B1 = [0, 1, -1], W2 = [-1; -1; 2], B2 = [2]?
+A. 1
+B. 4.5
+C. 0
+D. 8
+
+7. What is the value of PReLU(x) - parametric ReLU, where alpha=0.1 and x=-0.2?
+A. -1
+B. 0
+C. 0.002
+D. -0.02
+
+8. If the current weights of a perceptron are [0.2, 0.4], their gradients are=[-2.4, -1.2], and the learning rate is 0.1. What are the weights after the weights update operation?
+A. [0.52, 0.44]
+B. [0.44, 0.52]
+C. [0.44, 0.44]
+D. [0.52, 0.52]
+
+9. Which of the following is a linear classifier?
+A. A two layer neural network with ReLU activations
+B. A 3-NN classifier
+C. A neuron with no activation
+D. An SVM with polynomial kernel
+
+10. What is the output of SVM classifier for the input X = [0.1, -2, -5], if the weights are W = [-2, -1.2, -3] and the bias is b = 0.5?
+A. 2
+B. 0
+C. 1
+D. -1

@@ -1,0 +1,15 @@
+
+------------------ Concluzie -----------------------
+ionel  v george v cela v luiza > simona v razvan v eliza v mary v bogdan v cristian < dana v radu v carmen > monica ^ patricia >> marin > marina v sergiu >> sabin > sorina ^ octav ^ lucian ^ ion ^ gica ^ edi < adelin ^ cristina ^ dalia ^ gina ^ laura > serban ^ denisa
+Pentru euristica 1, timpul total a fost de 0.000997543334961 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+ionel  v george v cela v luiza > simona v razvan v eliza v mary v bogdan v cristian < dana v radu v carmen > monica ^ patricia >> marin > marina v sergiu >> sabin ^ nelu > octav ^ lucian ^ ion ^ gica ^ edi < adelin ^ cristina ^ dalia ^ gina ^ laura > serban ^ denisa
+Pentru euristica 2, timpul total a fost de 0.002041578292847 secunde pana s-a ajung la concluzie
+
+
+------------------ Concluzie -----------------------
+ionel  v george v cela v luiza > simona v razvan v eliza v mary v bogdan v cristian < dana v radu v carmen > monica ^ patricia >> marin > marina v sergiu >> sabin > sorina ^ octav ^ lucian ^ ion ^ gica ^ edi < adelin ^ cristina ^ dalia ^ gina ^ laura > serban ^ denisa
+Pentru euristica 3, timpul total a fost de 0.002043485641479 secunde pana s-a ajung la concluzie
+

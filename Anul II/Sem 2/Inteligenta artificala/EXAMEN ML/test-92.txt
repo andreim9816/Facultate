@@ -1,0 +1,60 @@
+1. Cate ponderi (inclusiv bias) are o retea neuronala cu configuratia 2-5-8-1 (primul numar este dimensiunea datelor de intrare, urmatoarele numere reprezinta numarul de neuroni de pe fiecare strat)?
+A. 76
+B. 58
+C. 74
+D. 72
+
+2. Care sunt valorile urmatoarelor exemple de antrenare dupa aplicarea normalizarii L2: E_1 = [3, 5, -1], E_2 = [-2, 2, 4] (trunchiate la 2 zecimale)?
+A. E1 = [0.52, 0.52, 0], E2 = [0.52, 0.52, 0]
+B. E1 = [0.30, 0.37, 0.70], E2 = [0.30, 0, 0.70]
+C. E1 = [1, 0, 0], E2 = [1, 0, 0]
+D. E1 = [0.50, 0.84, -0.16], E2 = [-0.40, 0.40, 0.81]
+
+3. Care dintre urmatoarele activari ale neuronilor este rezultatul functiei de activare softmax?
+A. [0.8, 0.1, 0.11]
+B. [0.9, 0.1, 0.0]
+C. [0.9, 0.1, 0.01]
+D. [0.9, 0.11, 0.0]
+
+4. Dupa 5 epoci de antrenare, avem urmatoarele pierderi pe setul de antrenare la fiecare epoca [1.12, 1.06, 0.99, 0.90, 0.70], si urmatoarele pierderi pe setul de validare la fiecare epoca [1.10, 1.06, 0.94, 0.88, 0.66]. Prezinta overfitting/underfitting aceste pierderi?
+A. Underfitting
+B. Overffiting
+C. Prezinta si overfitting si underfitting
+D. Nu prezinta nici overfitting, nici underfitting
+
+5. Cat este valoarea functiei de pierdere data de media patratelor erorilor daca etichetele corecte sunt y = [100, -25, 0.5] si etichetele prezise sunt y_hat = [101, -23, 0]?
+A. 1.1
+B. 1.75
+C. 1.7
+D. 1.16
+
+6. La ce ajuta adaugarea umei componente de momentum in algoritmul coborarii pe gradient?
+A. Determina convegenta catre minimul global
+B. Aduce o convergenta mai rapida catre un minim local
+C. Permite regularizarea modelului
+D. Permite utilizarea unei arhitecturi mai adanci
+
+7. Fiind data urmatoarea multime de antrenare: X = ((0, 1), (0, 0), (1, 0), (1, 1)), y = (-1, 1, 1, -1). Antrenati un perceptron folosind algoritmul Widrow-Hoff (fara amestecare) timp de 1 epoca, cu rata de invatare 0.5 Care sunt valorile ponderilor si biasului?
+A. w = [ -0.375 -1.25 ] b = -0.125
+B. w = [ 0.  -0.5 ] b = 0.25
+C. w = [ 0.375 -0.5 ] b = 0.625
+D. w = [ 0.5 -0.25 ] b = 0.75
+
+8. Fie f(x,y,z) = xy + 2z, care sunt valorile derivatelor partiale df/dx, df/dy, df/dz, pentru x = 1, y = 2, z = 3?
+A. df/dx = 2, df/dy = 1, df/dz = 2
+B. df/dx = 2, df/dy = 1, df/dz = 3
+C. df/dx = 4, df/dy = 2, df/dz = 1
+D. df/dx = 1, df/dy = 2, df/dz = 1
+
+9. Care dintre urmatoarele nu constituie o functie de pierdere valida pentru o retea neurala antrenata prin metoda coborarii pe gradient?
+A. Media partatelor erorilor
+B. L(output, label) = 0 daca output - label < 0, altfel 1
+C. Cross Entropy
+D. L2 Loss
+
+10. Daca datele sunt impartite in 5 clase si folosim un SVM pentru antrenare, cate clasificatoare binare vor fi antrenate prin metoda one-vs-one?
+A. 5
+B. 25
+C. 10
+D. 20
+

@@ -1,0 +1,263 @@
+# MANOLACHE ANDREI
+# GRUPA 244
+
+/* ex 1 */
+
+-- varianta 1 --
+
+SELECT e.last_name, TO_CHAR(e.hire_date,'month yyyy')
+FROM employees e
+JOIN employees g ON(e.department_id = g.department_id and initcap(g.last_name) LIKE 'Gates' and LOWER(e.last_name) LIKE '%a%' and lower(e.last_name) NOT LIKE 'gates');
+
+/* ex 2 */
+
+SELECT DISTINCT e.last_name ,  e.employee_id , d.department_id , d.department_name
+FROM employees e
+JOIN departments d ON(e.department_id = d.department_id)
+JOIN employees e2 ON ( e2.department_id = d.department_id AND UPPER(e2.last_name) LIKE '%T%')
+order by 1;
+
+/* ex 3 */
+
+SELECT e.first_name , e.last_name , e.salary , j.job_title , l.city , c.country_name
+FROM jobs j
+JOIN employees e ON (e.job_id = j.job_id)
+JOIN departments d ON(d.department_id = e.department_id)
+JOIN locations l ON(l.location_id = d.location_id)
+JOIN countries c ON(c.country_id = l.country_id)
+JOIN employees e2 ON(e.manager_id = e2.employee_id AND UPPER(e2.last_name) LIKE 'KING')
+
+/* ex 4 */
+-- seteaza numarul maxim de caractere pe o linie / numarul maxim de linii pe o pagina --
+SET PAGESIZE 120 ;
+SET LINESIZE 120 ;
+
+/* ex 5 */
+
+SELECT d.department_id , d.department_name , e.last_name , j.job_title , '$' || e.salary || '.00'
+FROM jobs j
+JOIN employees e ON (j.job_id = e.job_id)
+JOIN departments d ON (e.department_id = d.department_id AND LOWER (d.department_name) LIKE '%ti%')
+ORDER BY 2,3;
+
+/* ex 6 */
+
+SELECT e.last_name , e.department_id , d.department_name , l.city , j.job_title
+FROM jobs j
+JOIN employees e ON (e.job_id = j.job_id)
+JOIN departments d ON (e.department_id = d.department_id)
+JOIN locations l ON ( lower(l.city) LIKE 'oxford' AND d.location_id = l.location_id);
+
+/* ex 7 */
+
+SELECT DISTINCT e.last_name ,  e.employee_id , e.salary
+FROM jobs j
+JOIN employees e ON (j.job_id = e.job_id AND e.salary > (SELECT AVG(salary) FROM employees e2 WHERE e2.job_id = j.job_id))
+JOIN departments d ON ( e.department_id = d.department_id)
+JOIN employees e2 ON (d.department_id = e2.department_id AND LOWER(e2.last_name) LIKE '%t%');
+
+/* ex 8 */
+
+SELECT e.last_name , d.department_name
+FROM departments d 
+RIGHT JOIN employees e ON (d.department_id = e.department_id);
+
+SELECT e.last_name , d.department_name
+FROM employees e 
+LEFT JOIN departments d ON (d.department_id = e.department_id);
+
+/* ex 9 */
+
+SELECT e.last_name , d.department_name
+FROM departments d 
+LEFT JOIN employees e ON (d.department_id = e.department_id);
+
+SELECT e.last_name , d.department_name 
+FROM employees e
+RIGHT JOIN departments d ON (d.department_id = e.department_id);
+
+/* ex 10 */
+
+-- combinam problemele 8 si 9 
+
+SELECT e.last_name , d.department_name
+FROM departments d 
+RIGHT JOIN employees e ON (d.department_id = e.department_id)
+
+UNION
+
+SELECT e.last_name , d.department_name
+FROM employees e 
+LEFT JOIN departments d ON (d.department_id = e.department_id);
+
+-- var 2
+
+SELECT DISTINCT e.last_name , d.department_name
+FROM employees e
+FULL JOIN departments d ON (d.department_id = e.department_id);
+
+
+/* ex 11 */
+
+-- ordonare crescator dupa id 
+SELECT department_id
+FROM departments
+WHERE LOWER(department_id) LIKE '%re%'
+UNION 
+SELECT d.department_name
+FROM employees e
+JOIN departments d ON (e.department_id = d.department_id AND e.job_id = 'SA_REP'); 
+
+/* ex 12 */
+
+-- daca inlocuim UNION cu UNION ALL, atunci se vor duplica campuri
+
+/* ex 13 */
+
+-- varianta 1 
+SELECT department_id as "cod departament"
+FROM departments
+MINUS
+SELECT department_id
+FROM employees;
+
+-- varianta 2. Se foloseste NVL pentru a ca department_id poate fi NULL
+
+SELECT department_id
+FROM departments
+WHERE department_id NOT IN (SELECT DISTINCT NVL(department_id,0) FROM employees);
+
+/* ex 14 */
+
+SELECT department_id
+FROM departments
+WHERE LOWER(department_name) LIKE '%re%'
+INTERSECT
+SELECT d.department_id
+FROM employees e
+JOIN departments d ON (e.department_id = d.department_id AND UPPER(e.job_id) = 'HR_REP'); 
+
+/* ex 15 */
+
+SELECT employee_id, job_id, last_name
+FROM employees
+WHERE (job_id, salary)
+IN (SELECT job_id, salary
+FROM employees
+WHERE salary > 3000
+UNION
+SELECT job_id, (min_salary+max_salary)/2
+FROM jobs);
+
+/* ex 16 */
+
+SELECT last_name, hire_date
+FROM employees
+WHERE hire_date > 
+(SELECT hire_date
+FROM employees
+WHERE INITCAP(last_name)='Gates');
+
+/* ex 17 */
+
+SELECT last_name, salary
+FROM employees
+WHERE department_id IN -- in multimea colegilor lui gates
+(SELECT department_id
+FROM employees
+WHERE LOWER(last_name)='gates')
+AND LOWER(last_name) <> 'gates'; -- dar fara gates
+
+/* ex 18 */
+
+SELECT last_name , salary
+FROM employees
+WHERE manager_id =
+(SELECT employee_id 
+FROM employees
+WHERE manager_id IS NULL);
+
+/* ex 19 */
+
+SELECT last_name , department_id , salary
+FROM employees 
+WHERE department_id IN
+
+(SELECT department_id
+FROM employees
+WHERE commission_pct >= 0)
+
+AND salary IN
+(SELECT salary
+FROM employees
+WHERE commission_pct >=0);
+
+/* ex 20 */
+    
+SELECT DISTINCT e1.employee_id , e1.last_name , e1.salary
+FROM employees e1
+WHERE e1.salary > (SELECT AVG(salary) 
+                    FROM employees
+                    WHERE e1.job_id = job_id
+                  )
+AND department_id IN (SELECT d.department_id
+                      FROM departments d
+                      JOIN employees e ON (d.department_id = e.department_id AND UPPER(e.last_name) LIKE '%T%')
+                     );
+    
+/* ex 21 */
+
+SELECT last_name
+FROM employees
+WHERE salary > ALL(
+    SELECT salary
+    FROM employees
+    WHERE UPPER(job_id) LIKE '%CLERK%')
+ORDER BY salary DESC;
+
+-- varianta 2, cu ANY nu e ok ( exista o valoare care sa satisfaca conditia)
+
+SELECT last_name
+FROM employees
+WHERE salary > ANY(
+    SELECT salary
+    FROM employees
+    WHERE UPPER(job_id) LIKE '%CLERK%')
+ORDER BY salary DESC;
+
+/* ex 22 */
+
+SELECT e.last_name , d.department_name , e.salary
+FROM employees e
+JOIN departments d ON (d.department_id = e.department_id AND e.commission_pct IS NULL AND e.manager_id IN (
+    SELECT manager_id 
+    FROM employees
+    WHERE commission_pct >= 0)
+);
+
+/* ex 23 */
+
+SELECT last_name , department_id , salary , job_id , commission_pct
+FROM employees 
+WHERE salary IN (
+        SELECT e.salary
+        FROM employees e
+        JOIN departments d ON(e.department_id = d.department_id)
+        JOIN locations loc ON(loc.location_id = d.location_id AND UPPER(loc.city) LIKE 'OXFORD'))
+        
+AND commission_pct IN (
+        SELECT e.commission_pct
+        FROM employees e
+        JOIN departments d ON(e.department_id = d.department_id)
+        JOIN locations loc ON(loc.location_id = d.location_id AND UPPER(loc.city) LIKE 'OXFORD')
+        WHERE e.salary = salary);
+
+/* ex 24 */
+
+SELECT last_name , department_id , job_id
+FROM employees
+WHERE department_id = (
+SELECT d.department_id 
+FROM departments d
+JOIN locations l ON(d.location_id = l.location_id AND LOWER(l.city) LIKE 'toronto'));
+

@@ -1,0 +1,93 @@
+import numpy as np
+from skimage import io
+
+"""
+vect = np.array([ [1,2,3,4,5] , [6,7,8,9,10] , [11,12,13,14,15]])
+slice = vect[0:2 , 1:4]
+
+print(np.ravel(slice))
+
+array_to_slice = np.array([[30 , 31 , 32 , 33 , 34 ] , [74 , 75 , 76 ,77 , 78] , [ 120 , 121 , 122 , 123 , 124]])
+print(array_to_slice[[0,2], [1,1]])
+
+x = np.array([[1 , 2 ] , [ 3 , 4]])
+print(np.sum(x , axis = 1))
+
+y = np.array([[[1, 2, 3, 4], [5, 6, 7, 8]], [[1, 2, 3, 4], [5, 6, 7, 8]], [[1, 2, 3, 4], [5, 6, 7, 8]]])
+
+print(np.mean(y , axis = 2))
+
+"""
+
+#a) Salveaza pozele intr-un array, intoarce array-ul
+def salveazaPoze():
+    array = np.zeros((9 , 400 , 600)) # dimensiunea. Un vector cu 9 elemente, fiecare cu 400 x 600 elemente
+    for index in range(0 , 9):
+        image = np.load("images/car_" + str(index) + ".npy")
+        array[index] = image
+    return (array)
+
+#b) Calculeaza suma pixelilor tutoror pozelor
+def calculeazaSumaToatePoze(array):
+    return np.sum(array)
+
+#c) Calculeaza suma pixelilor fiecarei poze
+def calculeazaSuma(array):
+    sumArray = np.zeros(9)
+    for index in range(0 , 9):
+        sumArray[index] = np.sum(array[index] , axis = (0 , 1))
+    return sumArray
+#d) Afiseaza indexul imaginii cu suma maxima
+def indexMaxim(array):
+    return np.argmax(array)
+
+#e) Calculati imaginea medie si afisati-o
+def calcImagineMedie(array):
+    return np.mean(array , axis = 0)
+
+# f) Calculati deviatia standard a imaginilor
+def calcDevStd(array):
+   return np.std(array)
+
+# g) Normalizati imaginile
+def normalImag(array):
+    imagMedie = calcImagineMedie(array)
+    return (array - imagMedie) / calcDevStd(array)
+
+# h) Decupati fiecare imagine, afisati liniile 200 -> 300, coloanele 280 -> 400
+def afisImaginiTaiate(array):
+    for imag in array:
+        io.imshow(imag[200 : 301][280 : 401].astype(np.uint8))
+        io.show()
+
+vectorPoze = salveazaPoze()
+vectorSume = calculeazaSuma(vectorPoze)
+
+# vectorul de poze
+print(vectorPoze)
+
+# afiseaza suma totala a pixelilor
+print(calculeazaSumaToatePoze(vectorSume))
+
+# afiseaza suma toatala de pixeli pentru fiecare imagine
+print(vectorSume)
+
+# afiseaza indexul cu suma maxima
+print(indexMaxim(vectorSume))
+
+# afiseaza imaginea medie
+mean_image = calcImagineMedie(vectorPoze)
+print(mean_image)
+io.imshow(mean_image.astype(np.uint8))
+io.show()
+
+# afiseaza devStandard
+print(calcDevStd(vectorPoze))
+
+# afiseaza imaginile normalizate
+images_norm = normalImag(vectorPoze)
+for i in images_norm:
+    io.imshow(i.astype(np.uint8))
+    io.show()
+# afiseaza imaginile taiate
+afisImaginiTaiate(vectorPoze)
