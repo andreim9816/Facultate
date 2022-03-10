@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1544725021 source:d:\andrei\facultate\pp\test laborator 2017\subiect_test_laborator_radu_1\2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

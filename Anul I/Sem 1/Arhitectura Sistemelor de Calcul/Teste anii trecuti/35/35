@@ -1,0 +1,64 @@
+.data
+v: .word -2 -4423 -1
+lung: .word 3
+afisDa: .asciiz "Exista"
+afisNu: .asciiz "Nu exista"
+.text
+main:
+subu $sp,$sp,8
+la $t0,v
+sw $t0,0($sp)
+lw $t0,lung
+sw $t0,4($sp)
+li $v0,0 # ok=0 initial
+jal functie
+
+addi $sp,$sp,8
+
+beq $v0,1 Da
+
+Nu:
+la $a0,afisNu
+li $v0,4
+syscall
+
+li $v0,10
+syscall
+
+
+Da:
+la $a0,afisDa
+li $v0,4
+syscall
+
+li $v0,10
+syscall
+
+functie:
+
+subu $sp,$sp,4
+sw $fp,0($sp)
+addi $fp,$sp,0
+
+lw $t0,4($fp) # adresa
+lw $t1,8($fp) # lungimea
+mul $t1,$t1,4
+add $t2,$t0,$t1 # adresa ultimului element
+
+for:
+bge $t0,$t2 iesire
+lw $t3,0($t0) # elementul
+bltz $t3 merge
+li $v0,1
+
+merge:
+addi $t0,$t0,4
+j for
+
+iesire:
+
+lw $fp,0($sp)
+addi $sp,$sp,4
+
+jr $ra
+

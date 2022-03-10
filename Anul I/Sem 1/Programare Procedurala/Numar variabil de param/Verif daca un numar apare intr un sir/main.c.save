@@ -1,0 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdarg.h>
+
+int verif(int x,...)
+{
+    int i;
+    
+}
+
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}

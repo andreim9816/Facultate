@@ -1,0 +1,3 @@
+Se da un word cu initializare. Sa se scrie o functie care ca primeste ca parametru n si returneaza
+in $v0 suma bitilor. Daca suma <=8, se afiseaza "inferior", altfel "superior". Se shifteaza de 32
+de ori la stanga cu un bit si se face AND cu 0x01

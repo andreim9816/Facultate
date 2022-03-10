@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1557771886 source:d:\andrei\facultate\sem ii\poo\proiect 3\main.cpp
+	<iostream>
+	<cstring>
+	<stdexcept>
+

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1542295897 source:d:\andrei\facultate\asd\lab\6.2\main.cpp
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<time.h>
+

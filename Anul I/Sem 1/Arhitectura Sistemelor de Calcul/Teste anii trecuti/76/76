@@ -1,0 +1,58 @@
+.data
+v: .byte 0x4b 0x4c 0x4d 0x4e
+lung: .word 4
+d: .asciiz "d"
+e: .asciiz "e"
+.text
+main:
+li $t0,0
+lw $t1,lung
+
+for:
+bge $t0,$t1 iesire
+lb $t2,v($t0)
+sub $sp,$sp,4
+sb $t2,0($sp)
+jal functie
+addi $sp,$sp,4
+
+beq $t2,$v0 sari
+li $v0,4
+la $a0,e
+syscall
+j increment
+
+sari:
+li $v0,4
+la $a0,d
+syscall
+
+increment:
+addi $t0,$t0,1
+j for
+
+iesire:
+li $v0,10
+syscall
+
+functie:
+subi $sp,$sp,12
+sw $fp,0($sp)
+addiu $fp,$sp,0
+
+sw $s0,4($fp)
+sw $s1,8($fp)
+lb $t2,12($fp)
+
+and $s0,$t2,0xaa
+and $s1,$t2,0x55
+
+srl $s0,$s0,1
+sll $s1,$s1,1
+or $v0,$s0,$s1
+
+lw $s0,4($fp)
+lw $s1,8($fp)
+lw $fp,0($fp)
+
+jr $ra

@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1549049528 source:d:\andrei\facultate\pp\numar variabil de param\concaterneaza siruri o parcurgere\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdarg.h>
+

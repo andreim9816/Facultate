@@ -1,0 +1,58 @@
+.data
+sir: .asciiz "abecedar"
+lung: .word 8
+
+.text
+main:
+subu $sp,$sp,8
+lw $t0,lung
+sw $t0,0($sp)
+la $t0,sir
+sw $t0,4($sp)
+
+jal functie
+
+addu $sp,$sp,8
+
+li $v0,4
+la $a0,sir
+syscall
+
+li $v0,10
+syscall
+
+functie:
+
+subu $sp,$sp,12
+sw $fp,0($sp)
+addu $fp,$sp,0
+sw $s0,4($fp)
+sw $s1,8($fp)
+
+lw $s0,16($fp)
+lw $t0,12($fp)
+addu $s1,$s0,$t0
+subi $s1,$s1,1
+
+for:
+bge $s0,$s1,iesire
+
+lb $t0,0($s0)
+lb $t1,0($s1)
+
+sb $t1,0($s0)
+sb $t0,0($s1)
+
+addi $s0,$s0,1
+subi $s1,$s1,1
+
+j for
+
+iesire:
+lw $s0,4($fp)
+lw $s1,8($fp)
+
+lw $fp,0($fp)
+addu $sp,$sp,12 
+
+jr $ra

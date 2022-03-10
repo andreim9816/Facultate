@@ -1,0 +1,45 @@
+.data
+sir: .asciiz "21499029"
+noua: .byte '9'
+.text
+main:
+subu $sp,$sp,4
+la $t0,sir
+sw $t0,0($sp)
+
+jal functie
+
+addi $sp,$sp,4
+li $v0,4
+la $a0,sir
+syscall
+
+li $v0,10
+syscall
+
+functie:
+sub $sp,$sp,4
+sw $fp,0($sp)
+addi $fp,$sp,0
+
+lw $t0,4($fp) # adresa
+lb $t1,0($t0) # primul caracter
+lb $t2,noua
+li $t3,'0'
+
+for:
+bne $t1,$t2 iesire
+sb $t3,0($t0)
+addi $t0,$t0,1
+lb $t1,0($t0)
+
+j for
+
+iesire:
+beq $t1,$zero sari
+addi $t1,$t1,1
+sb $t1,0($t0)
+
+sari:
+lw $fp,0($fp)
+jr $ra

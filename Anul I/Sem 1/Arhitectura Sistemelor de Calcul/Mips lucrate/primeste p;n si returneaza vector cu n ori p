@@ -1,0 +1,71 @@
+.data
+  s: .space 40  # buffer sufucient cat sa incapa un vector de 10 word-uri
+.text
+main:
+    # incarc parametrii actuali p=7, n=8
+  subu $sp,$sp,8
+  li $t0,7
+  sw $t0,0($sp)
+  li $t0,8
+  sw $t0,4($sp)
+    # acum stiva este $sp:(7)(8)  (contine parametrii actuali)
+  jal f
+    # acum stiva este $sp:(7)(7)(7)(7)(7)(7)(7)(7)  (contine val. returnata)
+    # descarc valoarea returnata si o recuperez in bufferul s
+  la $t0,s
+  li $s0,8
+  et1:
+    beqz $s0,et2
+    lw $t1,0($sp)
+    addu $sp,$sp,4
+    sw $t1,0($t0)
+    addu $t0,$t0,4
+    subu $s0,$s0,1
+    b et1
+  et2:
+    # acum de la adr.lui s s-au stocat 8 worduri egale cu 7, iar stiva e vida
+li $v0,10
+syscall
+f:  # la intrarea in apel stiva este $sp:(p)(n)
+    # aloc un cadru de apel in care salvez $s0, $fp
+  subu $sp,$sp,8
+  sw $s0,0($sp)
+  sw $fp,4($sp)
+  addiu $fp,$sp,4
+    # acum stiva este $sp:($s0 v)$fp:($fp v)(p)(n)
+    # acum deplasez cadrul de apel si parametrii actuali(in total 4 word-uri)
+    #   cu n-2 word-uri la stanga; translatez corespunzator si $sp, $fp
+  lw $t0,8($fp)    # $t0 = n
+  subu $t0,$t0, 2     # $t0 = n-2
+  sll $t0,$t0,2    # $t0 = 4*(n-2)  (distanta in octeti a deplasarii)
+  subu $fp,$fp,$t0 # actualizam $fp
+  move $t1,$sp     # indice sursa
+  subu $sp,$sp,$t0 # actualizam $sp
+  move $t0,$sp     # indice destinatie
+  li $s0,4         # nr. de word-uri ce trebuie deplasate
+  f_et1:
+    lw $t2,0($t1)
+    sw $t2,0($t0)
+    addu $t1,$t1,4
+    addu $t0,$t0,4
+    subu $s0,$s0,1
+    bgtz $s0,f_et1
+   # acum stiva este $sp:($s0 v)$fp:($fp v)(p)(n)()()()()()()
+   # construim valoarea returnata:
+  lw $t0,8($fp)    # $t0 = n
+  sll $t0,$t0,2    # $t0 = 4*n
+  addu $t0,$fp,$t0 # stiva este $sp:($s0 v)$fp:($fp v)(p)(n)()()()()()$t0:()
+  lw $s0,8($fp)    # $s0 = n
+  lw $t1,4($fp)    # $t1 = p
+  f_et2:
+    sw $t1,0($t0)
+    subu $t0,$t0,4
+    subu $s0,$s0,1
+    bgtz $s0,f_et2
+   # acum stiva este $sp:($s0 v)$fp:$t0:($fp v)(7)(7)(7)(7)(7)(7)(7)(7)
+   # restauram $s0, $fp
+  lw $s0,-4($fp)
+  lw $fp,0($fp)
+  addu $sp,$sp,8
+   # acum stiva este $sp:(7)(7)(7)(7)(7)(7)(7)(7)
+jr $ra

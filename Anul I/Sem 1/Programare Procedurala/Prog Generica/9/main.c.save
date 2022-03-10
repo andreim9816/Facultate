@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <stdlib.h>
+int maxim(int *v,int n)
+{
+    if(n==1)
+        return v[0];
+    else 
+    {
+        int x=maxim(v,n-)
+    }
+}
+int main()
+{
+    printf("Hello world!\n");
+    return 0;
+}

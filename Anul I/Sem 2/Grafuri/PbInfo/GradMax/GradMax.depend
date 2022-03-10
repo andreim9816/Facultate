@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1555510744 source:d:\andrei\facultate\sem ii\grafuri\pbinfo\gradmax\main.cpp
+	<iostream>
+	<fstream>
+	<set>
+	<vector>
+

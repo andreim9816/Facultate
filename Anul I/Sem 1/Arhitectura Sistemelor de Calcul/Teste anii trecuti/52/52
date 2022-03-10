@@ -1,0 +1,53 @@
+.data
+sir: .asciiz "01010011"
+unu: .byte '1'
+.text
+main:
+subi $sp,$sp,4
+la $t0,sir
+sw $t0,0($sp)
+
+jal functie
+
+addi $sp,$sp,4
+
+move $a0,$v0
+li $v0,1
+syscall
+li $v0,10
+syscall
+
+functie:
+
+subu $sp,$sp,4
+sw $fp,0($sp)
+addiu $fp,$sp,0
+
+lw $t0,4($fp) #adresa
+lb $t4,0($t0)
+li $t1,0 # b=0
+addi $t2,$t0,8
+lb $t3,unu
+
+for:
+bge $t0,$t2 iesire
+sll $t1,$t1,1
+bne $t4, $t3 continuare
+
+sau_logic:
+or $t1,$t1,0x01
+
+continuare:
+addi $t0,$t0,1
+lb $t4,0($t0)
+
+j for
+
+iesire:
+
+move $v0,$t1
+
+lw $fp,0($fp)
+addi $sp,$sp,4
+
+jr $ra

@@ -1,0 +1,22 @@
+#include<iostream>
+#include<cstdio>
+using namespace std;
+class A
+{
+    
+public:
+int a1, a2, a3;
+virtual void Set() = 0;
+};
+class B: A
+{
+public:
+int a1, a2, a3;
+void Set(){};
+}
+
+ main()
+{
+B b;
+}
+

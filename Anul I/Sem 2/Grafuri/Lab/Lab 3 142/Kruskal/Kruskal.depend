@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1554292558 source:d:\andrei\facultate\sem ii\grafuri\lab\lab 3 142\kruskal\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<list>
+	<algorithm>
+

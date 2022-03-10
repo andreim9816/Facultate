@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1558615369 source:d:\andrei\facultate\sem ii\poo\colocvii\2016 toamna v1\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<sstream>
+

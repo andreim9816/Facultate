@@ -1,0 +1,6 @@
+Andrei 4000
+Diana 5000
+Cozma 1000
+AndreiMM 5000
+NUME 10
+3002.000000

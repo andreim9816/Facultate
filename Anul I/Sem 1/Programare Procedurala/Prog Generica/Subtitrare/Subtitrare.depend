@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1549147651 source:d:\andrei\facultate\pp\prog generica\subtitrare\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

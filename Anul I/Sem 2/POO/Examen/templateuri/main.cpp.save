@@ -1,0 +1,22 @@
+#include<iostream>
+using namespace std;
+
+
+class cls
+{public:
+    int vi;
+
+    cls(int v=37) : vi(v){}
+    int& f() const;
+};
+int& cls :: f() const
+{
+    return c.vi;
+}
+
+int main()
+{
+  const  cls d(15);
+    f(d)=8;
+    cout<<f(d);
+return 0; }

@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1540210354 source:c:\users\student\desktop\lab3\1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cod.h"
+
+1540210368 c:\users\student\desktop\lab3\1\cod.h
+
+1540235634 source:d:\andrei\facultate\pp\lab\lab3\1\main.c
+	<stdio.h>
+	<stdlib.h>
+	"cod.h"
+
+1540235474 d:\andrei\facultate\pp\lab\lab3\1\cod.h
+

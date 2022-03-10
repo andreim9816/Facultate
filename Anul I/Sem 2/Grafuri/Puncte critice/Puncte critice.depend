@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1558391758 source:d:\andrei\facultate\sem ii\grafuri\puncte critice\main.cpp
+	<fstream>
+	<iostream>
+	<list>
+

@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1557520912 source:d:\andrei\facultate\sem ii\grafuri\lab\lab1\c 2\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+

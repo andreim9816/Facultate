@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1544564978 source:c:\users\andrei\desktop\2 de la pp corectat\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

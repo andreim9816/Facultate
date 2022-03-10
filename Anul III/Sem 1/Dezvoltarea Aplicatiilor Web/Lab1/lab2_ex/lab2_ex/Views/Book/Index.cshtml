@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Books saved";
+}
+<h2>@ViewBag.Title</h2>
+@if (ViewBag.Books != null)
+{
+    foreach (var book in ViewBag.Books)
+    {
+    <div class="panel panel-default">
+        <div class="panel-body">
+            @Html.Label("Title", "Title:")
+            <br />
+            <p>@book.Title</p>
+            @Html.Label("Author", "Author:")
+            <br />
+            <p>@book.Author</p>
+
+            @using (Html.BeginForm(actionName: "Details", controllerName: "Book", method: FormMethod.Get, routeValues: new { id = book.BookId }))
+            {
+                <button style="margin-right:5px" class="btn btn-primary col-lg-1" type="submit">
+                    Details
+                </button>
+            }
+
+            @Html.HttpMethodOverride(HttpVerbs.Put)
+            @using (Html.BeginForm(actionName: "Edit", controllerName: "Book", method: FormMethod.Get, routeValues: new { id = book.BookId, bookRequest = book }))
+            {
+                <button style="margin-left:5px" class="btn btn-primary col-lg-1" type="submit">
+                    Edit
+                </button>
+            }
+        </div>
+    </div>
+    }
+}
+else
+{
+    @Html.Display("No books to show!")
+}
+
+@Html.ActionLink("Add book", "New")

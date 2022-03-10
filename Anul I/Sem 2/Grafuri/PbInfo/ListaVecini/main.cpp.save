@@ -1,0 +1,41 @@
+#include <iostream>
+#include<fstream>
+#include<set>
+#include<list>
+
+using namespace std;
+
+ifstream fin("listavecini.in");
+ofstream fout("listavecini.out");
+
+int n;
+set <int>E[101];
+
+void citire()
+{
+    fin>>n;
+    int x,y,i;
+    while(fin>>x>>y)
+    {
+        E[x].insert(y);
+        E[y].insert(x);
+    }
+}
+
+void afis_vecini(int x)
+{
+    int i;
+    cout<<E[x].size()<<" ";
+
+    for(auto i=E[x].begin();)
+        cout<<E[i]<<" ";
+    cout<<'\n';
+}
+
+int main()
+{
+    citire();
+    for(int i=1;i<=n;i++)
+        afis_vecini(i);
+    return 0;
+}

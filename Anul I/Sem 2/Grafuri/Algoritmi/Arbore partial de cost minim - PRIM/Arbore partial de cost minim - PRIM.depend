@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1558560110 source:d:\andrei\facultate\sem ii\grafuri\arbore partial de cost minim - prim\main.cpp
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+
+1558742430 source:d:\andrei\facultate\sem ii\grafuri\algoritmi\arbore partial de cost minim - prim\main.cpp
+	<iostream>
+	<vector>
+	<set>
+	<fstream>
+

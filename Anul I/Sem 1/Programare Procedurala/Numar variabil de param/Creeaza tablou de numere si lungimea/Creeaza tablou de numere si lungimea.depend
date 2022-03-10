@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1549054850 source:d:\andrei\facultate\pp\numar variabil de param\creeaza tablou de numere si lungimea\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+

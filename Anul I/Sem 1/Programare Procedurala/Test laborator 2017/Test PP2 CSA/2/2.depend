@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1544642097 source:d:\andrei\facultate\pp\test laborator 2017\test pp2 csa\2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+

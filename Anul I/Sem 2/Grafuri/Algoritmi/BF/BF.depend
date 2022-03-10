@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1555505535 source:d:\andrei\facultate\sem ii\grafuri\bf\main.cpp
+	<iostream>
+	<vector>
+	<queue>
+	<fstream>
+

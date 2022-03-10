@@ -19,8 +19,8 @@ char path[] = "D:\\Andrei\\Facultate\\AN 2\\Geometrie computationala\\Proiect\\P
 ifstream fin(path);
 
 // struct to memorize the point's coordinates
-struct Point{
-    double x , y;
+struct Point {
+    double x, y;
 };
 
 // array of points, stored in counter-clockwise order
@@ -29,30 +29,26 @@ Point newPoint; // the new point that will be added
 
 int vSize; // size of the v vector
 
-void read(vector <Point> &v , int &n , Point &a)
-{
+void read(vector <Point> &v, int &n, Point &a) {
     //read the number of vertex and the vertices
-    if(!fin)
-    {
-        cout<<"Cannot open file\n";
+    if (!fin) {
+        cout << "Cannot open file\n";
         exit(1);
     }
-    fin>>n;
+    fin >> n;
     v.resize(n);
-    for(int i = 0 ; i < n ; i++)
-        fin>>v[i].x>>v[i].y;
+    for (int i = 0; i < n; i++)
+        fin >> v[i].x >> v[i].y;
 
 }
 
 
-double distance(Point A , Point B)
-{
+double distance(Point A, Point B) {
     //calculate the square of the distance
     return (A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y);
 }
 
-int orientation(Point p, Point q, Point r)
-{
+int orientation(Point p, Point q, Point r) {
     // The function returns following values
     // 0 --> p, q and r are colinear
     // 1 --> Clockwise
@@ -62,7 +58,7 @@ int orientation(Point p, Point q, Point r)
               (q.x - p.x) * (r.y - q.y);
 
     if (val == 0) return 0;  // colinear
-    return (val > 0)? 1: -1; // clock or counterclock wise
+    return (val > 0) ? 1 : -1; // clock or counterclock wise
 }
 
 /*
@@ -89,56 +85,50 @@ int findIndexOfMinDistance(vector <Point> v , int vSize , Point newPoint)
 
 
 // prints the points
-void printVector(vector <Point> v , int vSize)
-{
-    for(int i = 0 ; i < vSize ; i++)
-        cout<<"("<<v[i].x<<","<<v[i].y<<")  ";
+void printVector(vector <Point> v, int vSize) {
+    for (int i = 0; i < vSize; i++)
+        cout << "(" << v[i].x << "," << v[i].y << ")  ";
 }
 
 // Returns true if the point p lies inside the polygon[] with n vertices
-bool isInside(vector <Point> v , int vSize, Point newPoint)
-{
+bool isInside(vector <Point> v, int vSize, Point newPoint) {
     // There must be at least 3 vertices in polygon[]
-    if (vSize < 3)  return false;
+    if (vSize < 3) return false;
 
-    for(int i = 0 ; i < vSize ; i++)
-        {
-            if(newPoint.x == v[i].x && newPoint.y == v[i].y) //we consider that a vertex of the polygon is inside it
-                return true;
-            //we say that a point is inside a polygon
-            //if  p is always on the left side of an edge
-            if(orientation(newPoint , v[i] , v[(i + 1) % vSize]) >= 0) //clockwise order. pi is not on the left side of edge vi v(i+1)%n
-                return false;                               //so newPoint is not inside the polygon
-        }
+    for (int i = 0; i < vSize; i++) {
+        if (newPoint.x == v[i].x && newPoint.y == v[i].y) //we consider that a vertex of the polygon is inside it
+            return true;
+        //we say that a point is inside a polygon
+        //if  p is always on the left side of an edge
+        if (orientation(newPoint, v[i], v[(i + 1) % vSize]) >=
+            0) //clockwise order. pi is not on the left side of edge vi v(i+1)%n
+            return false;                               //so newPoint is not inside the polygon
+    }
     return true;
 }
 
 
-void addPointToConvexHull(vector <Point> &v , int &vSize , Point newPoint)
-{
+void addPointToConvexHull(vector <Point> &v, int &vSize, Point newPoint) {
     // function that adds a point (if it's not inside the convexHull) to the convex Hull, maintaining the
     // points in the counter-clockwise order
 
     // if the point is inside the convex Hull, nothing happens
-    if(isInside(v, vSize, newPoint))
-    {
-      cout<<"Point (" << newPoint.x << "," << newPoint.y <<") is inside\n\n";
-      return ;
-    }
-    else cout<<"Point (" << newPoint.x << "," << newPoint.y <<") was added to the convex hull\n";
+    if (isInside(v, vSize, newPoint)) {
+        cout << "Point (" << newPoint.x << "," << newPoint.y << ") is inside\n\n";
+        return;
+    } else cout << "Point (" << newPoint.x << "," << newPoint.y << ") was added to the convex hull\n";
 
     int upper = 0; // the upper tangent point from newPoint to the convex hull
     int lower = 0; // the lower tangent point from newPoint to the convex hull
 
-    for(int i = 1 ; i < vSize ; i++)
-    {
-        int test1 = orientation(newPoint , v[i - 1] , v[i]);
-        int test2 = orientation(newPoint , v[i] , v[(i + 1) % vSize]);
+    for (int i = 1; i < vSize; i++) {
+        int test1 = orientation(newPoint, v[i - 1], v[i]);
+        int test2 = orientation(newPoint, v[i], v[(i + 1) % vSize]);
 
-        if(test1 >= 0 && test2 < 0)
+        if (test1 >= 0 && test2 < 0)
             upper = i;
 
-        if(test1 < 0 && test2 >= 0)
+        if (test1 < 0 && test2 >= 0)
             lower = i;
     }
 
@@ -156,24 +146,23 @@ void addPointToConvexHull(vector <Point> &v , int &vSize , Point newPoint)
     aux.push_back(newPoint); // the point will be the last one in the new convex hull
     v.clear();
 
-    for (int i = 0 ; i < aux.size() ; i++)
+    for (int i = 0; i < aux.size(); i++)
         v.push_back(aux[i]);
     vSize = aux.size();
 
-    cout<<"The new convex hull (displayed in counter-clockwise order): \n";
+    cout << "The new convex hull (displayed in counter-clockwise order): \n";
     printVector(v, vSize);
-    cout<<"\n\n";
+    cout << "\n\n";
 }
 
-void display()
-{
+void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     // prints the polygon
     glBegin(GL_POLYGON);
-    for(int i = 0 ; i < vSize ;i++)
-        glVertex2f(v[i].x , v[i].y);
+    for (int i = 0; i < vSize; i++)
+        glVertex2f(v[i].x, v[i].y);
     glEnd();
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -186,31 +175,30 @@ void reshape(GLsizei width, GLsizei height) {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);  // To operate on the Projection matrix
     glLoadIdentity();             // Reset the projection matrix
-    gluOrtho2D(-width/ 2.0, width/ 2.0,-height / 2.0 ,height / 2.0); // compute the window's size to the those dimensions
+    gluOrtho2D(-width / 2.0, width / 2.0, -height / 2.0,
+               height / 2.0); // compute the window's size to the those dimensions
 }
 
-void mouseClick(int button, int state, int x, int y)
-{
-    if(button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) //if the left button is pressed
+void mouseClick(int button, int state, int x, int y) {
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) //if the left button is pressed
     {
         double windowHeightSize = glutGet(GLUT_WINDOW_HEIGHT); // gets the window's dimensions
         double windowWidthSize = glutGet(GLUT_WINDOW_WIDTH);
 
         // computes the coordinates of the point, converted for the window's size
-        newPoint.x = x - (double)windowWidthSize /2.0;
-        newPoint.y = (double)windowHeightSize /2.0- y;
+        newPoint.x = x - (double) windowWidthSize / 2.0;
+        newPoint.y = (double) windowHeightSize / 2.0 - y;
 
         addPointToConvexHull(v, vSize, newPoint);
         display();
     }
 }
 
-int main(int argc,char** argv)
-{
+int main(int argc, char **argv) {
     read(v, vSize, newPoint); // reads the convex hull
     glutInit(&argc, argv);
-    glutInitWindowSize(800 , 600); // sets the window with the default 800 x 600 dimensions
-    glutInitWindowPosition(50 , 50);//sets the position of the window in pixels from top left corner
+    glutInitWindowSize(800, 600); // sets the window with the default 800 x 600 dimensions
+    glutInitWindowPosition(50, 50);//sets the position of the window in pixels from top left corner
     glutCreateWindow("Adding a Point to a Convex Hull"); // creates the window
     glutDisplayFunc(display); // function that displays the window
     glutReshapeFunc(reshape); // function that reshapes the window

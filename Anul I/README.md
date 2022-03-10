@@ -1,1 +1,1 @@
-1st year projects i made for faculty
+1st year projects I made for faculty

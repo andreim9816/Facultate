@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1558882326 source:d:\andrei\facultate\sem ii\grafuri\colocvii 2\2014 13 vara\main.cpp
+	<iostream>
+	<cstring>
+	<vector>
+	<fstream>
+

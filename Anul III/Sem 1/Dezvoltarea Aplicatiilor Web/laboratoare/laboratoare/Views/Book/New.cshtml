@@ -1,0 +1,32 @@
+﻿@model laboratoare.Models.Book
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Book", method: FormMethod.Post))
+{
+    @Html.Label("Title", "Title:")
+    <br />
+    @Html.TextBoxFor(book => book.Title, null, new { placeHolder = "Type in the book's title", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Title, "" /* validation message e cel din clasa model */, new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Author", "Author:")
+    <br />
+    @Html.TextBoxFor(book => book.Author, null, new { placeHolder = "Type in the book's author", @class = "form-control" })
+    @Html.ValidationMessageFor(b => b.Author, "" /* validation message e cel din clasa model */, new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Summary", "Summary:")
+    <br />
+    @* @Html.TextAreaFor(book => book.Summary, new { placeHolder = "Type in the book's Summary", @class = "form-control" }) *@
+    @Html.TextArea("Summary", null, new { placeHolder = "Type in book's summary", @class= "form-control", @rows = "10"})
+    @Html.ValidationMessageFor(b => b.Summary, "" /* validation message e cel din clasa model */, new { @class = "text-danger" })
+    <br />
+
+    <button class="btn btn-primary" type="submit">
+        Create
+    </button>
+}

@@ -1,0 +1,80 @@
+.data
+v: .word 1 2 1 1 1 1 1
+n: .word 7
+.text
+main:
+
+subi $sp,$sp,8
+la $t0,v
+sw $t0,0($sp)
+lw $t0,n
+sw $t0,4($sp)
+
+jal functie
+
+move $a0,$v0
+li $v0,1
+syscall
+
+li $v0,10
+syscall
+
+functie:
+
+subi $sp,$sp,12
+sw $fp,0($sp)
+addi $fp,$sp,0
+
+sw $s0, 4($fp)
+sw $s1, 8($fp)
+
+lw $s0,12($fp) # adresa initiala
+lw $t0,16($fp)
+mul $t0,$t0,4
+add $s1,$s0,$t0
+li $t0,2
+
+for:
+bge $s0,$s1 iesire
+lw $t1,0($s0)
+
+div $t1,$t0
+mfhi $t3 #restul
+
+bne $t3,$zero,continuare
+j iesire
+
+continuare:
+addi $s0,$s0,4
+
+j for
+
+iesire:
+
+for2:
+ble $s1,$s0,iesire2
+lw $t1,0($s1)
+div $t1,$t0
+mfhi $t3 # restul
+
+bne $t3,$zero,continuare2
+j iesire2
+
+continuare2:
+subi $s1,$s1,4
+
+j for2
+
+iesire2:
+
+beq $s1,$s0, eticheta
+sub $s1, $s1,$s0
+div $s1,$s1,4
+move $v0,$s1
+jr $ra
+
+eticheta:
+li $v0,-1
+lw $s1,8($fp)
+lw $s0,4($fp)
+jr $ra

@@ -1,0 +1,70 @@
+﻿@model laboratoare.Models.Book
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>ViewBag.Title</h2>
+
+@Html.Label("Author", "Author:")
+<br />
+<p>@Model.Author</p>
+
+@if (Model.Publisher != null)
+{
+    @Html.Label("Publisher", "Publisher:")
+    <br />
+    <p>@Model.Publisher.Name</p>
+}
+else
+{
+    <p>No publisher found!</p>
+}
+
+@if (Model.Publisher.ContactInfo != null)
+{
+    @Html.Label("ContactInfo", "Contact info:")
+    <br />
+    <p>@Model.Publisher.ContactInfo.PhoneNumber</p>
+}
+
+@if (Model.Genres.Count > 0)
+{
+    @Html.Label("Genres", "Genres:")
+    <br />
+    <ul>
+        @foreach (var genre in Model.Genres)
+        {
+            <li>@genre.Name</li>
+        }
+    </ul>
+}
+
+@Html.Label("Summary", "Summary:")
+<br />
+
+<div class="panel-body">
+    @if (Model.Summary.IsEmpty())
+    {
+        <p>This book has no summary to print</p>
+    }
+    else
+    {
+        <p>@Model.Summary</p>
+    }
+</div>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Book", method: FormMethod.Get, routeValues: new { id = Model.BookId }))
+{
+    <button class="btn btn col-lg-1" type="submit" style="margin-right:5px">
+        Update
+    </button>
+}
+
+@using (Html.BeginForm(actionName: "Delete", controllerName: "Book", method: FormMethod.Post, routeValues: new { id = Model.BookId }))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button class="btn btn col-lg-1" type="submit" style="margin-right:5px">
+        Delete
+    </button>
+}

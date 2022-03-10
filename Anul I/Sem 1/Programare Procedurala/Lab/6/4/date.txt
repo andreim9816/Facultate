@@ -1,0 +1,5 @@
+23 Manolache Andrei 8.500000 
+12 Hagi Gheorghe 4.000000 
+31 Gavril Florin 5.477000 
+12 Moldovanu Florin 10.000000 
+1 Abi Talent 1.001000 

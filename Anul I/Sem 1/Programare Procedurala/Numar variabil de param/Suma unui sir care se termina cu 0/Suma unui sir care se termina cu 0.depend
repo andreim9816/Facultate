@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1549047120 source:d:\andrei\facultate\pp\numar variabil de param\suma unui sir care se termina cu 0\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+

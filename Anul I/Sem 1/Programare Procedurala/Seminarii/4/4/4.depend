@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1544383857 source:d:\andrei\facultate\pp\seminar4\4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<math.h>
+

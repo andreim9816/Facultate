@@ -1,0 +1,49 @@
+.data
+sir: .space 28
+lit1: .byte 'a'
+lit2: .byte 'z'
+.text
+main:
+
+subu $sp,$sp,12
+la $t0,sir
+sw $t0,0($sp)
+lb $t0,lit1
+sb $t0,4($sp)
+lb $t0,lit2
+sb $t0,8($sp)
+
+jal functie
+
+addi $sp,$sp,12
+
+li $v0,4
+la $a0,sir
+syscall
+
+li $v0,10
+syscall
+
+functie:
+
+subu $sp,$sp,4
+sw $fp,0($sp)
+addi $fp,$sp,0
+
+lb $t0,8($fp) # litera 1
+lb $t1,12($fp) # litera 2
+lw $t2,4($fp) # adresa
+
+for:
+bgt $t0,$t1 iesire
+sb $t0,0($t2)
+addi $t0,$t0,1
+addi $t2,$t2,1
+j for
+
+iesire:
+
+sb $zero, 0($t2)
+lw $fp,0($fp)
+addiu $fp,$fp,4
+jr $ra

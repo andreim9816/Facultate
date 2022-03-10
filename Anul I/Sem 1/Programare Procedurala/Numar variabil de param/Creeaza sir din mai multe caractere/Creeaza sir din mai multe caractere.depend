@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1549053052 source:d:\andrei\facultate\pp\numar variabil de param\creeaza sir din mai multe caractere\main.c
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+

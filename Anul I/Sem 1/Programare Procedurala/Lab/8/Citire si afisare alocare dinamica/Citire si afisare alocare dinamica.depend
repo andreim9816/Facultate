@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1544123236 source:d:\andrei\facultate\pp\lab\lab8\citire si afisare alocare dinamica\main.c
+	<stdio.h>
+	<stdlib.h>
+

@@ -1,0 +1,70 @@
+.data
+p: .word 2 3 1
+a: .word -1
+n: .word 2
+mesajZero: .asciiz "zero"
+mesajDifZero: .asciiz "diferit de zero"
+.text
+main:
+
+subu $sp,$sp,12
+la $t0,p
+sw $t0,0($sp)
+lw $t0,a
+sw $t0,4($sp)
+lw $t0,n
+sw $t0,8($sp)
+
+jal functie
+
+addi $sp,$sp,12
+
+beqz $v0,rezZero
+li $v0,4
+la $a0,mesajDifZero
+syscall
+
+li $v0,10
+syscall
+
+rezZero:
+li $v0,4
+la $a0,mesajZero
+syscall
+
+li $v0,10
+syscall
+
+functie:
+
+sub $sp,$sp,4
+sw $fp,0($sp)
+addiu $fp,$sp,0
+
+lw $t0,4($fp) #adresa de inceput a vectorului
+lw $t1,12($fp) #nr de elemente
+lw $t3,8($fp) # t3=a
+
+mul $t1,$t1,4
+add $t1,$t0,$t1 #adresa ultimului coeficient
+
+lw $t2,0($t1) # v=p[n]
+subi $t1,$t1,4
+
+for:
+blt $t1,$t0 iesire
+
+lw $t4,0($t1) # $t4=p[i]
+mul $t2,$t2,$t3
+add $t2,$t2,$t4
+
+subi $t1,$t1,4
+j for
+
+iesire:
+
+move $v0,$t2
+lw $fp,0($fp)
+addi $sp,$sp,12
+
+jr $ra

@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1552285450 source:d:\andrei\facultate\lfa\afd\main.cpp
+	<iostream>
+	<cstring>
+	<fstream>
+
+1553514488 source:d:\andrei\facultate\sem ii\lfa\afn\main.cpp
+	<iostream>
+	<cstring>
+	<fstream>
+

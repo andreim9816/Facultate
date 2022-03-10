@@ -1,0 +1,61 @@
+.data
+n: .word 123
+.text
+main:
+
+subu $sp,$sp,4  # facem loc pe stiva
+lw $t0,n	
+sw $t0,0($sp)	# adaugam n pe stiva
+
+jal suma 	# suma cifrelor
+
+addi $sp,$sp,4 	
+
+sw $v0,n
+
+li $v0,1
+syscall
+
+li $v0,10
+syscall
+
+suma:
+
+subu $sp,$sp,8	# aloca spatiu pentru 2 elemente
+sw $fp,0($sp)	# memoreaza $fp
+sw $ra,4($sp)	# memoreaza $ra
+move $fp,$sp
+
+lw $t0,8($fp)	# numarul n in apelul curent
+beqz $t0,return0
+li $t3,10
+div $t0,$t3
+mflo $t2	# catul
+mfhi $t1	# restul
+
+subu $sp,$sp,8	# memoreaza n/10 si n%10
+sw $t1,4($sp)
+sw $t2,0($sp)
+
+jal suma	# recurenta
+
+lw $t0,-4($fp)
+add $v0,$t0,$v0	# se aduna suma(n/10) + n%10
+addi $sp,$sp,8 	# restauram stiva
+
+lw $ra,4($fp)
+lw $fp,0($fp)
+
+addi $sp,$sp,8
+
+jr $ra
+
+return0:
+
+li $v0,0
+
+lw $ra,4($fp)
+lw $fp,0($fp)
+
+addi $sp,$sp,8
+jr $ra

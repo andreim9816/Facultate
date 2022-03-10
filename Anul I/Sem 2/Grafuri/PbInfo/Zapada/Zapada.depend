@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1558717157 source:d:\andrei\facultate\sem ii\grafuri\ zapada\main.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<fstream>
+

@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include<stdarg.h>
+
+int suma(int x, ...) {
+    int i, s = 0, y;
+
+    if (x == 0)
+        return 0;
+
+    va_list lista;
+    va_start(lista, x);
+
+    do {
+        y = va_arg(lista,int);
+        s = s + y;
+    } while (y != 0);
+
+    va_end(lista); /// !!!!!!!!!!!!!!!!!!
+    return s;
+}
+
+int main() {
+    printf("%d ", suma(-1, 0));
+    return 0;
+}

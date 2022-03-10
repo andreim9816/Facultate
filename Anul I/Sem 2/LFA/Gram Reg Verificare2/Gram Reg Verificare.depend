@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1552774256 source:d:\andrei\facultate\sem ii\lfa\gram reg verificare\main.cpp
+	<iostream>
+	<fstream>
+	<cstring>
+	<cstdlib>
+

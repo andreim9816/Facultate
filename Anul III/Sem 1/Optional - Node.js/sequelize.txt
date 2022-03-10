@@ -1,0 +1,7 @@
+npx sequelize-cli init
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string ; creeaza modelul ce reprezinta entitatea de User; creeaza migratia
+npx sequelize-cli model:generate --name Account --attributes iban:string,cardType:string,cardNumber:string
+npx sequelize-cli db:migrate ; populeaza baza de date cu tabelul din migratie; NU FACE SEED, doar pune tabelul
+npx sequelize-cli db:migrate:undo ; face undo la ultima migratie; modifica tabelele / sterge-le
+npx sequelize-cli seed:generate --name creeaza-users ; genereaza seed
+npx sequelize-cli db:seed:all
