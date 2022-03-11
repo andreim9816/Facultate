@@ -1,0 +1,38 @@
+﻿@model Appointments_management_system.Models.Doctor
+@{
+    ViewBag.Title = "Dr. " + Model.LastName + " " + Model.FirstName;
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+
+<label style="margin-right:10px">Speciality: </label> @ViewBag.SpecialityName
+<br />
+
+@Html.LabelFor(d => d.Clinic.Name, "Clinic:", new { style = "margin-right:10px" })
+@Html.DisplayFor(d => d.Clinic.Name)
+<br />
+
+@Html.LabelFor(d => d.PhoneNumber, "Phone number:", new { style = "margin-right:10px" })
+@Html.DisplayFor(d => d.PhoneNumber)
+<br />
+
+@Html.LabelFor(d => d.Details, "Details:", new { style = "margin-right:10px" })
+@Html.DisplayFor(d => d.Details)
+<br />
+<br />
+
+@if (User.IsInRole("Admin"))
+{
+    using (Html.BeginForm(actionName: "Edit", controllerName: "Doctor", method: FormMethod.Get, routeValues: new { id = Model.DoctorId }))
+    {
+        <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Update</button>
+    }
+
+    using (Html.BeginForm(actionName: "Delete", controllerName: "Doctor", method: FormMethod.Post, routeValues: new { id = Model.DoctorId }))
+    {
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Delete</button>
+    }
+}

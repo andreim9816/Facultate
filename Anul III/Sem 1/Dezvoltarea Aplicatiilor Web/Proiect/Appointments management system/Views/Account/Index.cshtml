@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (ViewBag.users.Count == 0)
+{
+    <p>There are no users registred!</p>
+}
+else
+{
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var user in ViewBag.users)
+                {
+                    <tr>
+                        <td>@count</td>
+                        <td>@user.Email</td>
+                        <td>@Html.ActionLink("Details", "Details", "Account", new { id = user.Id}, null)</td>
+                    </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+}

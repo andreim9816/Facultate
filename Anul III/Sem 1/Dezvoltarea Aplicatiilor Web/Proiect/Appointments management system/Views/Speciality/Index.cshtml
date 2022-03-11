@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Specialities";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@if (ViewBag.Specialities.Count != 0)
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Update</th>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Remove</th>
+                }
+                <th>Clincs</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var speciality in ViewBag.Specialities)
+                {
+                    <tr>
+                        <td>@count</td>
+                        <td>@speciality.SpecialityName</td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @using (Html.BeginForm(actionName: "Edit", controllerName: "Speciality", method: FormMethod.Get, routeValues: new { id = speciality.SpecialityId }))
+                                {
+                                    @Html.HttpMethodOverride(HttpVerbs.Put)
+                                    <button type="submit" class="btn btn-link">Update</button>
+                                }
+                            </td>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                @using (Html.BeginForm(actionName: "Delete", controllerName: "Speciality", method: FormMethod.Post, routeValues: new { id = speciality.SpecialityId }))
+                                {
+                                    @Html.HttpMethodOverride(HttpVerbs.Delete)
+                                    <button type="submit" class="btn btn-link">Remove</button>
+                                }
+                            </td>
+                        }
+                        <td>
+                            @Html.ActionLink("Get Clinics", "Clinics", "Speciality", new { id = speciality.SpecialityId }, null)
+                        </td>
+                    </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+
+    if (User.IsInRole("Admin"))
+    {
+        using (Html.BeginForm(actionName: "New", controllerName: "Speciality", method: FormMethod.Get))
+        {
+            <button type="submit" class="btn btn-info" style="width:130px">Add speciality</button>
+        }
+    }
+}
+else
+{
+    <p>There are no specialities!</p>
+}

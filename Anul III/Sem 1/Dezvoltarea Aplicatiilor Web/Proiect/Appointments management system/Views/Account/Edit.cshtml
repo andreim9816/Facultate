@@ -1,0 +1,41 @@
+﻿@model Appointments_management_system.Models.ApplicationUser
+@{
+    ViewBag.Title = "Edit user";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Account", method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+
+
+    @Html.Label("Cnp", "CNP: ")
+    <br />
+    @Html.EditorFor(c => c.CNP, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(c => c.CNP, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("First name", "First name: ")
+    <br />
+    @Html.EditorFor(c => c.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(c => c.FirstName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Last name", "Last name: ")
+    <br />
+    @Html.EditorFor(c => c.LastName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(c => c.LastName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Email", "Email: ")
+    <br />
+    @Html.EditorFor(c => c.Email, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(c => c.Email, "", new { @class = "text-danger" })
+    <br />
+
+    <button class="btn btn-info" type="submit">
+        Update
+    </button>
+}

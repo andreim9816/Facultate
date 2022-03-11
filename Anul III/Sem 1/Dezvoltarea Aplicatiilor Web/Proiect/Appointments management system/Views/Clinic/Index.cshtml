@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Clinics";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (ViewBag.clinics.Count != 0)
+{
+    foreach (var clinic in ViewBag.Clinics)
+    {
+        <div class="panel panel-default">
+            <div class="panel-body">
+                @Html.Label("ClinicName", "Clinic:")
+                <br />
+                <p>@clinic.Name</p>
+
+                @Html.Label("Phone", "Phone Number:")
+                <br />
+                <p>@clinic.PhoneNumber</p>
+
+                @using (Html.BeginForm(actionName: "Details", controllerName: "Clinic", method: FormMethod.Get, routeValues: new { id = clinic.ClinicId }))
+                {
+                    <button class=" btn btn-info">Details</button>
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>There are no clincs!</p>
+}
+<br />
+
+@if (User.IsInRole("Admin"))
+{
+    using (Html.BeginForm(actionName: "New", controllerName: "Clinic", method: FormMethod.Get))
+    {
+        <button class="btn btn-info">New clinic</button>
+    }
+}

@@ -1,0 +1,24 @@
+﻿@model Appointments_management_system.Models.Speciality
+@{
+    ViewBag.Title = "Update speciality";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Speciality", method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(s => s.SpecialityId)
+    <br />
+    <br />
+
+    @Html.Label("Name", "Name: ")
+    <br />
+    @Html.EditorFor(s => s.SpecialityName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(s => s.SpecialityName, "", new { @class = "text-danger" })
+    <br />
+
+    <button class="btn btn-info" type="submit">
+        Update
+    </button>
+}

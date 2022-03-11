@@ -1,0 +1,24 @@
+﻿@model Appointments_management_system.Models.Speciality
+@{
+    ViewBag.Title = "New Speciality";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Speciality", method: FormMethod.Post))
+{
+    @Html.Label("Speciality Name", "Name: ")
+    <br />
+
+    @Html.TextBoxFor(c => c.SpecialityName, null, new { placeHolder = "Type in the speciality's name", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.SpecialityName, "", new { @class = "text-danger" })
+    <br />
+    <br />
+    <button class="btn btn-info" type="submit">
+        Create
+    </button>
+}
+
+

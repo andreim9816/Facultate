@@ -1,0 +1,60 @@
+﻿@model Appointments_management_system.Models.ClinicAddressViewModel
+@{
+    ViewBag.Title = "New clinic";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+<br />
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Clinic", method: FormMethod.Post))
+{
+    @Html.Label("Name", "Name: ")
+    <br />
+
+    @Html.TextBoxFor(c => c.Name, null, new { placeHolder = "Type in the clinic's name", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.Name, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Phone", "Phone Number: ")
+    <br />
+    @Html.TextBoxFor(c => c.PhoneNumber, null, new { placeHolder = "Type in the clinic's phone", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.PhoneNumber, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Street", "Street: ")
+    <br />
+    @Html.TextBoxFor(c => c.Street, null, new { placeHolder = "Type in the street name", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.Street, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("No", "No: ")
+    <br />
+    @Html.TextBoxFor(c => c.No, null, new { placeHolder = "Type in the street number", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.No, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("City", "City: ")
+    <br />
+    @Html.TextBoxFor(c => c.City, null, new { placeHolder = "Type in the city", @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.City, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(b => b.SpecialityList, "Choose speciality:")
+    <br />
+    for (int i = 0; i < Model.SpecialityList.Count(); i++)
+    {
+        @Html.HiddenFor(b => b.SpecialityList[i].Id)
+        @Html.HiddenFor(b => b.SpecialityList[i].Name)
+        @Html.CheckBoxFor(b => b.SpecialityList[i].IsChecked)
+        @Html.DisplayFor(b => b.SpecialityList[i].Name)
+        <br />
+    }
+    <br />
+
+    <button class="btn btn-info" type="submit">
+        Create
+    </button>
+}
+

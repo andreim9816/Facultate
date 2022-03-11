@@ -1,0 +1,83 @@
+﻿@model Appointments_management_system.Models.Clinic
+@{
+    ViewBag.Title = "Details for " + Model.Name + " clinic";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+
+@Html.LabelFor(c => c.PhoneNumber, "Phone Number:", new { style = "margin-right:10px" })
+@Html.DisplayFor(c => c.PhoneNumber)
+<br />
+
+@Html.LabelFor(c => c.Address.Street, "Street:", new { style = "margin-right:10px" })
+@Html.DisplayFor(c => c.Address.Street)
+<br />
+
+@Html.LabelFor(c => c.Address.No, "No:", new { style = "margin-right:10px" })
+@if (@Model.Address.No != null)
+{
+    @Html.DisplayFor(c => c.Address.No)
+}
+else
+{
+    <p>No number provided</p>
+}
+<br />
+
+@Html.LabelFor(c => c.Address.City, "City:", new { style = "margin-right:10px" })
+@Html.DisplayFor(c => c.Address.City)
+<br />
+<br />
+
+@if (Model.Specialities.ToList().Count == 0)
+{
+    <p>This clinic has no specialities!</p>
+}
+else
+{
+
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Speciality</th>
+                <th>Doctors</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var speciality in Model.Specialities)
+                {
+                    <tr>
+                        <td>@count</td>
+                        <td>@speciality.SpecialityName</td>
+
+                        <td>
+                            @Html.ActionLink("See doctors", "DoctorsFilter", "Doctor", new { SpecialityId = speciality.SpecialityId, ClinicId = Model.ClinicId }, null)
+                        </td>
+                    </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+}
+
+
+@if (User.IsInRole("Admin"))
+{
+
+    using (Html.BeginForm(actionName: "Edit", controllerName: "Clinic", method: FormMethod.Get, routeValues: new { id = Model.ClinicId }))
+    {
+        <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Update</button>
+    }
+
+    using (Html.BeginForm(actionName: "Delete", controllerName: "Clinic", method: FormMethod.Post, routeValues: new { id = Model.ClinicId }))
+    {
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Delete</button>
+    }
+}

@@ -1,0 +1,108 @@
+﻿@model Appointments_management_system.Models.AppointmentRequestModel
+@{
+    ViewBag.Title = "Edit an appoitment for dr " + Model.DoctorLastName + " " + Model.DoctorFirstName;
+}
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+@Html.Label("Clinic", "Clinic:")
+@Html.DisplayFor(obj => obj.ClinicName)
+<br />
+
+@Html.Label("City", "City:")
+@Html.DisplayFor(obj => obj.City)
+<br />
+<br />
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Appointment", method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(m => m.AppointmentId)
+    @Html.HiddenFor(m => m.DoctorFirstName)
+    @Html.HiddenFor(m => m.DoctorLastName)
+    @Html.HiddenFor(m => m.City)
+    @Html.HiddenFor(m => m.ClinicName)
+    @Html.HiddenFor(m => m.DoctorId)
+
+
+    @Html.Label("Date", "Change the date:")
+    <br />
+    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "datepicker form-control" } })
+    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Hour", "Pick an hour:")
+    @Html.DropDownListFor(mv => mv.ChosenAppointmentHour, Model.AppointmentHours, new { @class = "form-control" })
+    <br />
+
+    @Html.Label("Details", "Details:")
+    <br />
+    @Html.TextAreaFor(model => model.Details, new { @class = "form-control", @rows = 3 })
+    @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+    <br />
+
+    <button class="btn btn-info" type="submit">
+        Edit
+    </button>
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $('.datepicker').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true,
+                minDate: new Date(),
+                defaultDate: new Date(21, 1, 1),
+            }).on('change', function (e) {
+                let datetime = $(".datepicker").datepicker("getDate").toDateString();
+                $.ajax({
+                    url: '@Url.Action("GetAllAvailableHoursForEdit", "Appointment")',
+                    type: 'GET',
+                    data: { date: datetime, doctorId: @Model.DoctorId, appointmentId: @Model.AppointmentId},
+                    success: function (data) {
+@*                        console.log(data);*@
+                        $("#ChosenAppointmentHour").empty();
+
+                        $(data).each(function () {
+                           @* console.log(this);*@
+                            $("#ChosenAppointmentHour").append($("<option></option>").val(this).html(this));
+                        });
+
+                    }
+                })
+            })
+
+            $('.datepicker').ready(function (e) {
+                let datetime = $(".datepicker").datepicker("getDate").toDateString();
+                $.ajax({
+                    url: '@Url.Action("GetAllAvailableHoursForEdit", "Appointment")',
+                    type: 'GET',
+                    data: { date: datetime, doctorId: @Model.DoctorId, appointmentId: @Model.AppointmentId},
+                    success: function (data) {
+                        console.log(data);
+                        console.log("READY");
+
+                        $("#ChosenAppointmentHour").empty();
+
+                        $(data).each(function () {
+
+                            var selectedHour = '@Html.Raw(Model.ChosenAppointmentHour)';
+                            console.log(selectedHour);
+                            if (selectedHour == this) {
+                                $("#ChosenAppointmentHour").append($("<option selected=true></option>").val(this).html(this));
+                            } else {
+                                $("#ChosenAppointmentHour").append($("<option></option>").val(this).html(this));
+                            }
+                        });
+
+                    }
+                })
+            });
+        });
+    </script>
+}

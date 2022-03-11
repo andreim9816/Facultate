@@ -1,0 +1,66 @@
+﻿@model Appointments_management_system.Models.Appointment
+@{
+    ViewBag.Title = "Appointment details";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@Html.Label("Clinic name", "Clinic name: ")
+@Html.DisplayFor(obj => obj.Doctor.Clinic.Name)
+<br />
+
+@Html.Label("Speciality", "Speciality: ")
+@ViewBag.SpecialityName
+<br />
+
+@Html.Label("Doctor", "Doctor: ") dr.
+@Html.DisplayFor(obj => obj.Doctor.LastName)
+@Html.DisplayFor(obj => obj.Doctor.FirstName)
+<br />
+
+@Html.Label("Date ", "Date: ") @Model.AppointmentDate.ToShortDateString()
+<br />
+
+@Html.Label("Hour ", "Hour: ")
+@Html.DisplayFor(obj => obj.AppointmentHour, "{0:dd/MM/yyyy}")
+<br />
+
+
+@Html.LabelFor(obj => obj.Details, "Details:")
+@Html.DisplayFor(obj => obj.Details)
+<br />
+
+<h3>Patient details</h3>
+
+
+@Html.LabelFor(obj => obj.ApplicationUser.CNP, "CNP")
+@Html.DisplayFor(obj => obj.ApplicationUser.CNP)
+<br />
+
+@Html.LabelFor(obj => obj.ApplicationUser.FirstName, "First Name:")
+@Html.DisplayFor(obj => obj.ApplicationUser.FirstName)
+<br />
+
+@Html.LabelFor(obj => obj.ApplicationUser.LastName, "Last Name:")
+@Html.DisplayFor(obj => obj.ApplicationUser.LastName)
+<br />
+
+@Html.LabelFor(obj => obj.ApplicationUser.Email, "Email:")
+@Html.DisplayFor(obj => obj.ApplicationUser.Email)
+<br />
+
+<br />
+<br />
+
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Appointment", method: FormMethod.Get, routeValues: new { id = Model.AppointmentId }))
+{
+    <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Update</button>
+}
+
+@using (Html.BeginForm(actionName: "Delete", controllerName: "Appointment", method: FormMethod.Post, routeValues: new { id = Model.AppointmentId }))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Delete)
+    <button style="margin-right:5px" class="btn btn-info col-lg-1" type="submit">Delete</button>
+}

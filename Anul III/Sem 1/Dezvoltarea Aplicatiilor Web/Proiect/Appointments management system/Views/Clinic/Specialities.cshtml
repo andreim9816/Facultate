@@ -1,0 +1,38 @@
+﻿@model Appointments_management_system.Models.Clinic
+
+@{
+    ViewBag.Title = "Specialities from the clinic " + Model.Name;
+}
+
+<h2> @ViewBag.Title </h2>
+<br/>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int count = 1;
+            foreach (var speciality in Model.Specialities)
+            {
+                <tr>
+                    <td>@count</td>
+                    <td>@speciality.SpecialityName</td>
+                    <td>
+                        @using (Html.BeginForm(actionName: "Doctors", controllerName: "Doctor", method: FormMethod.Get, routeValues: new { idClinic = Model.ClinicId, idSpeciality = speciality.SpecialityName }))
+                        {
+                            <button type="submit" class="btn btn-link col-lg-1">See doctors</button>
+                        }
+                    </td>
+                </tr>
+                count = count + 1;
+            }
+        }
+    </tbody>
+</table>
+

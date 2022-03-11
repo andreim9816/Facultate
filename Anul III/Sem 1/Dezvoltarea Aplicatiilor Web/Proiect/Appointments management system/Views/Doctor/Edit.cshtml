@@ -1,0 +1,95 @@
+﻿@model Appointments_management_system.Models.ClinicSpecialityDoctorViewModel
+@{
+    ViewBag.Title = "Update Dr. " + Model.LastName + " " + Model.FirstName;
+}
+
+<h2>@ViewBag.Title</h2>
+
+<br />
+<br />
+
+@using (Html.BeginForm(actionName: "Edit", controllerName: "Doctor", method: FormMethod.Post))
+{
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    @Html.HiddenFor(mv => mv.DoctorId)
+
+    @Html.Label("LastName", "Last name: ")
+    <br />
+    @Html.EditorFor(d => d.LastName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(d => d.LastName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("FirstName", "First name: ")
+    <br />
+    @Html.EditorFor(d => d.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(d => d.FirstName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("PhoneNumber", "Phone number: ")
+    <br />
+    @Html.EditorFor(d => d.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(d => d.PhoneNumber, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Details", "Details: ")
+    <br />
+    @Html.TextAreaFor(d => d.Details, new { @class = "form-control", @rows = 3 })
+    @Html.ValidationMessageFor(d => d.Details, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Speciality", "Speciality:")
+    @Html.DropDownListFor(mv => mv.ChosenSpecialityId, new SelectList(Model.SpecialityList, "Value", "Text"), new { @class = "form-control" })
+    <br />
+
+
+    @Html.Label("Clinic", "Clinic:")
+    @Html.DropDownListFor(mv => mv.ChosenClinicId, Model.ClinicList, new { @class = "form-control" })
+    <br />
+
+
+    <button class="btn btn-info" type="submit">
+        Update
+    </button>
+}
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $('#ChosenSpecialityId').on('change', function (e) {
+                let specialityId = $("#ChosenSpecialityId").val();
+                $.ajax({
+                    url: '@Url.Action("GetAllClinicsFromSpeciality", "Speciality")',
+                    type: 'GET',
+                    data: { id: specialityId },
+                    success: function (data) {
+                        $("#ChosenClinicId").empty();
+
+                        $(data).each(function () {
+                            $("#ChosenClinicId").append($("<option></option>").val(this.Value).html(this.Text));
+                        });
+                    }
+                });
+            });
+
+            $('#ChosenSpecialityId').ready(function (e) {
+                let specialityId = $("#ChosenSpecialityId").val();
+                $.ajax({
+                    url: '@Url.Action("GetAllClinicsFromSpeciality", "Speciality")',
+                    type: 'GET',
+                    data: { id: specialityId },
+                    success: function (data) {
+                        $("#ChosenClinicId").empty();
+
+                        $(data).each(function () {
+                            $("#ChosenClinicId").append($("<option></option>").val(this.Value).html(this.Text));
+                        });
+                    }
+                });
+            });
+
+        })
+    </script>
+}

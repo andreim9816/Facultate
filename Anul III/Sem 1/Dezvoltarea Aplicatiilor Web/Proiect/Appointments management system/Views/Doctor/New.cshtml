@@ -1,0 +1,74 @@
+﻿@model Appointments_management_system.Models.ClinicSpecialityDoctorViewModel
+@{
+    ViewBag.Title = "Add a doctor";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+
+@using (Html.BeginForm(actionName: "New", controllerName: "Doctor", method: FormMethod.Post))
+{
+    @Html.Label("LastName", "Last name:")
+    <br />
+    @Html.TextBoxFor(d => d.LastName, null, new { placeHolder = "Type in the doctor's last name", @class = "form-control" })
+    @Html.ValidationMessageFor(d => d.LastName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("FirstName", "First name:")
+    <br />
+    @Html.TextBoxFor(d => d.FirstName, null, new { placeHolder = "Type in the doctor's first name", @class = "form-control" })
+    @Html.ValidationMessageFor(d => d.FirstName, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("PhoneNumber", "Phone number: ")
+    <br />
+    @Html.TextBoxFor(d => d.PhoneNumber, null, new { placeHolder = "Type in the doctor's phone number", @class = "form-control" })
+    @Html.ValidationMessageFor(d => d.PhoneNumber, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Details", "Details: ")
+    <br />
+    @Html.TextAreaFor(d => d.Details, new { placeHolder = "Type in the doctor's details", @class = "form-control", @rows = 3 })
+    @Html.ValidationMessageFor(d => d.Details, "", new { @class = "text-danger" })
+    <br />
+
+    @Html.Label("Speciality", "Speciality:")
+    @Html.DropDownListFor(mv => mv.ChosenSpecialityId, new SelectList(Model.SpecialityList, "Value", "Text"), "Choose a Speciality", new { @class = "form-control" })
+    <br />
+
+    @Html.Label("Clinic", "Clinic:")
+    @Html.DropDownListFor(mv => mv.ChosenClinicId, Model.ClinicList, new { @class = "form-control" })
+    <br />
+
+    <button class="btn btn-info" type="submit">
+        Create
+    </button>
+}
+
+
+<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+@section scripts {
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(function () {
+            $('#ChosenSpecialityId')
+                .on('change', function (e) {
+                    let specialityId = $("#ChosenSpecialityId").val();
+                $.ajax({
+                    url: '@Url.Action("GetAllClinicsFromSpeciality", "Speciality")',
+                    type: 'GET',
+                    data: { id: specialityId },
+                    success: function (data) {
+                        $("#ChosenClinicId").empty();
+
+                        $(data).each(function () {
+                            $("#ChosenClinicId").append($("<option></option>").val(this.Value).html(this.Text));
+                        });
+                    }
+                })
+            })
+        });
+    </script>
+}

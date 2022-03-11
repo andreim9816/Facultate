@@ -1,0 +1,56 @@
+﻿@{
+    if(User.IsInRole("Admin"))
+    {
+        ViewBag.Title = "Appointments";
+    } else
+    {
+        ViewBag.Title = "My appointments";
+    }
+
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (ViewBag.appointmentList.Count != 0)
+{
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Clinic</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Hour</th>
+                <th>Edit</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var app in ViewBag.appointmentList)
+                {
+                        <tr>
+                            <td>@count</td>
+                            <td>@app.Doctor.Clinic.Name</td>
+                            <td>dr. @app.Doctor.LastName @app.Doctor.FirstName</td>
+                            <td>@app.AppointmentDate.ToShortDateString()</td>
+                            <td>@app.AppointmentHour</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "Appointment", new { id = app.AppointmentId }, null)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Appointment", new { id = app.AppointmentId }, null)
+                            </td>
+                        </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There are no appointments yet!</p>
+}

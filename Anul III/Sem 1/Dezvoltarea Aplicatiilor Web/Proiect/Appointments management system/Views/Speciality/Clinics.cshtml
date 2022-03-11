@@ -1,0 +1,44 @@
+﻿@model Appointments_management_system.Models.Speciality
+
+@{
+    ViewBag.Title = "GetClinics";
+}
+
+<h2>Clinics that have the speciality @Model.SpecialityName </h2>
+<br />
+
+@if (Model.Clinics.Count == 0)
+{
+    <p>There are no clinics!</p>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Doctors</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var clinic in Model.Clinics)
+                {
+                    <tr>
+                        <td>@count</td>
+                        <td>@clinic.Name</td>
+                        <td>@clinic.Address.City</td>
+                        <td>
+                            @Html.ActionLink("See doctors", "DoctorsFilter", "Doctor", new { SpecialityId = Model.SpecialityId, ClinicId = clinic.ClinicId }, null)
+                        </td>
+                    </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+}

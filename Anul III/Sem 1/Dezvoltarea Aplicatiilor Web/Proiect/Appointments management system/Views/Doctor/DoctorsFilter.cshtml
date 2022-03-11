@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Doctors from " + ViewBag.clinicName + " clinic and " + ViewBag.specialityName + " speciality";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+
+@if (ViewBag.doctorList.Count != 0)
+{
+    <table class="table table-striped table-hover ">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Last Name</th>
+                <th>First Name</th>
+                <th>Details</th>
+                @if (User.IsInRole("User"))
+                {
+                    <th>Appointment</th>
+                }
+                @if (User.IsInRole("Admin"))
+                {
+                    <th>Edit</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int count = 1;
+                foreach (var doctor in ViewBag.doctorList)
+                {
+                        <tr>
+                            <td>@count</td>
+                            <td>@doctor.LastName</td>
+                            <td>@doctor.FirstName</td>
+                            <td>
+                                @Html.ActionLink("Details", "Details", "Doctor", new { id = doctor.DoctorId }, null)
+                            </td>
+                            @if (User.IsInRole("User"))
+                            {
+                                <td>
+                                    @Html.ActionLink("Make an appointment", "New", "Appointment", new { id = doctor.DoctorId }, null)
+                                </td>
+                            }
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", "Doctor", new { id = doctor.DoctorId }, null)
+                                </td>
+                            }
+                        </tr>
+                    count = count + 1;
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There are no doctors!</p>
+}
